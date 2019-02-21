@@ -1,0 +1,8 @@
+package todoly.exceptions;
+
+@SuppressWarnings("serial")
+public class InvalidUserInputException extends Exception {
+	public InvalidUserInputException(String message) {
+		super(message);
+	}
+}
