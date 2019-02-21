@@ -2,7 +2,7 @@ package todoly.controllers;
 
 import java.util.HashMap;
 
-import todoly.Context;
+import todoly.enums.Context;
 import todoly.views.MainMenueView;
 
 public class MainMenueUseCaseController extends MenueUseCaseController {

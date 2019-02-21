@@ -13,6 +13,7 @@ public class MainMenueView extends View {
 	@Override
 	public void display() {
 		printErrorMessage();
+		System.out.println("################################################");
 		System.out.println(">> Welcome to ToDoLy");
 		System.out.println(">> You have "+taskAmount+" tasks todo and "+taskDoneAmount+" tasks are done!");
 		System.out.println(">> Pick an option:");

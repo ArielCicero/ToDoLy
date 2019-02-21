@@ -1,22 +1,22 @@
 package todoly.controllers;
 
-import todoly.Context;
+import todoly.enums.Context;
 import todoly.exceptions.InvalidUserInputException;
-import todoly.services.TaskServiceAPI;
+import todoly.interfaces.TaskManagerAPI;
 import todoly.views.View;
 
 public class MainController {
 	
-	private TaskServiceAPI taskServiceAPI;
+	private TaskManagerAPI taskService;
 	private View view;
 	private Context context = Context.MAIN_MENUE;
 	private UseCaseController useCaseController;
 
-	public MainController(TaskServiceAPI taskServiceAPI) {
-		this.taskServiceAPI = taskServiceAPI;
+	public MainController(TaskManagerAPI taskService) {
+		this.taskService = taskService;
 		useCaseController = new MainMenueUseCaseController(
-									taskServiceAPI.getTaskAmount(),
-									taskServiceAPI.getTaskDoneAmount()
+									taskService.getTaskAmount(),
+									taskService.getTaskDoneAmount()
 								);
 		view = useCaseController.getView();
 	}
@@ -45,20 +45,20 @@ public class MainController {
 		switch (context) {
 		case MAIN_MENUE:
 			useCaseController = new MainMenueUseCaseController(
-										taskServiceAPI.getTaskAmount(),
-										taskServiceAPI.getTaskDoneAmount()
+										taskService.getTaskAmount(),
+										taskService.getTaskDoneAmount()
 									);
 			break;
 		case LIST_TASKS:
 			useCaseController = new ListTasksMenueUseCaseController();
 			break;
-		case ORDER_BY_DATE:
-			useCaseController = new OrderByDateMenueUseCaseController();
+		case ORDER_BY_DUE_DATE:
+			useCaseController = new OrderByDueDateUseCaseController(taskService.listTasksByDueDate());
 			break;
 		case FILTER_BY_PROJECT:
-			useCaseController = new FilterByProjectMenueUseCaseController();
+			//useCaseController = new FilterByProjectUseCaseController();
 			break;
-		case NEW_TASK:
+		/*case NEW_TASK:
 			useCaseController = new NewTaskMenueUseCaseController();
 			break;
 		case EDIT_TASK:
@@ -75,11 +75,15 @@ public class MainController {
 			break;
 		case SAVE_AND_QUIT:
 			useCaseController = new SaveAndQuitUseCaseController();
-			break;
+			break;*/
 
 		default:
-			useCaseController = new MainMenueUseCaseController();
+			useCaseController = new MainMenueUseCaseController(
+										taskService.getTaskAmount(),
+										taskService.getTaskDoneAmount()
+									);
 		}
+		view = useCaseController.getView();
 	}
 
 	public void setErrorMessage(String string) {

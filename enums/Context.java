@@ -1,0 +1,14 @@
+package todoly.enums;
+
+public enum Context {
+	MAIN_MENUE,
+	LIST_TASKS,
+	ORDER_BY_DUE_DATE,
+	FILTER_BY_PROJECT,
+	NEW_TASK,
+	EDIT_TASK,
+	UPDATE_TASK,
+	MARK_TASK_AS_DONE,
+	REMOVE_TASK,
+	SAVE_AND_QUIT
+}

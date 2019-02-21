@@ -12,9 +12,9 @@ public abstract class View {
 	
 	public void printErrorMessage() {
 		if(errorMessage != null) {
-			System.out.println("**********************************************");
+			System.out.println("************************************************");
 			System.out.println(errorMessage);
-			System.out.println("**********************************************");
+			System.out.println("************************************************");
 		}
 	}
 

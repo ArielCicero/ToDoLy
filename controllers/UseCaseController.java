@@ -1,6 +1,6 @@
 package todoly.controllers;
 
-import todoly.Context;
+import todoly.enums.Context;
 import todoly.exceptions.InvalidUserInputException;
 import todoly.views.View;
 

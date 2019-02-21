@@ -3,7 +3,7 @@ package todoly.controllers;
 import java.util.Map;
 import java.util.Set;
 
-import todoly.Context;
+import todoly.enums.Context;
 import todoly.exceptions.InvalidUserInputException;
 
 abstract class MenueUseCaseController extends UseCaseController {
@@ -15,7 +15,7 @@ abstract class MenueUseCaseController extends UseCaseController {
 	public void ValidateUserInput(String input) throws InvalidUserInputException {
 		Set<String> options = validMenuOptions.keySet();
 		if(false == options.stream().anyMatch(input::equals)) {
-			throw new InvalidUserInputException("Invalid Input!!! the options are " + options);
+			throw new InvalidUserInputException("Invalid Input!!! The options are " + options);
 		}
 	}
 

@@ -1,62 +1,70 @@
 package todoly.services;
 
-import java.util.Collection;
+import java.util.List;
 
+import todoly.interfaces.RepositoryService;
+import todoly.interfaces.TaskManagerAPI;
+import todoly.model.Project;
 import todoly.model.Task;
 
-public class TaskService extends TaskServiceAPI {
+public class TaskService implements TaskManagerAPI {
+	
+	private RepositoryService repo;
+	
+	private List<Task> tasks;
+	private List<Project> projects;
 
 	public TaskService(RepositoryService repositoryService) {
-		super(repositoryService);
-		// TODO Auto-generated constructor stub
+		setRepository(repositoryService);
+	}
+	
+	@Override
+	public void setRepository(RepositoryService repositoryService) {
+		this.repo = repositoryService;
 	}
 
 	@Override
-	public Collection<Task> listTasks() {
-		// TODO Auto-generated method stub
+	public List<Task> listTasksByDueDate() {
+		//tasks = repo.
 		return null;
 	}
 
 	@Override
-	public Collection<Task> getProjectTasks(int projectId) {
-		// TODO Auto-generated method stub
+	public List<Task> getProjectTasks(int projectId) {
 		return null;
 	}
 
 	@Override
-	public void updateTask(int taskId) {
-		// TODO Auto-generated method stub
-
+	public void updateTask(int taskId, String description) {
 	}
 
 	@Override
 	public void markAsDone(int taskId) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void removeTask(int taskId) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public String getTaskAmount() {
-		// TODO Auto-generated method stub
-		return null;
+		// Harcoded for testing when developing
+		return "6";
 	}
 
 	@Override
 	public String getTaskDoneAmount() {
-		// TODO Auto-generated method stub
-		return null;
+		// Harcoded for testing when developing
+		return "2";
+	}
+
+	@Override
+	public void sort() {
+		//java.util.Collections.sort(List)
 	}
 
 }
