@@ -7,9 +7,9 @@ import todoly.model.Task;
 
 public interface RepositoryService {
     
-    List<Task> readTasks() throws RepositoryException;
+    List<Task> readTasks();
     
-    Task readTask(Integer id) throws RepositoryException;
+    Task readTask(Integer id);
     
     void createTask(Task task) throws RepositoryException;
     

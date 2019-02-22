@@ -22,12 +22,12 @@ public class FileRepositoryService implements RepositoryService {
 	}
 
 	@Override
-	public List<Task> readTasks() throws RepositoryException {
+	public List<Task> readTasks(){
 		return (List<Task>) tasks.values();
 	}
 	
 	@Override
-	public Task readTask(Integer id) throws RepositoryException {
+	public Task readTask(Integer id){
 		return tasks.get(id);
 	}
 

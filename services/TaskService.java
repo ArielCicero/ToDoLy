@@ -1,5 +1,6 @@
 package todoly.services;
 
+import java.util.Collections;
 import java.util.List;
 
 import todoly.interfaces.RepositoryService;
@@ -24,9 +25,11 @@ public class TaskService implements TaskManagerAPI {
 	}
 
 	@Override
-	public List<Task> listTasksByDueDate() {
-		//tasks = repo.
-		return null;
+	public List<Task> listTasksByDueDate(){
+		tasks = repo.readTasks();
+		if(tasks != null)
+			sort();
+		return tasks;
 	}
 
 	@Override
@@ -62,9 +65,10 @@ public class TaskService implements TaskManagerAPI {
 		return "2";
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void sort() {
-		//java.util.Collections.sort(List)
+		Collections.sort(tasks);
 	}
 
 }
