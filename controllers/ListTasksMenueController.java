@@ -5,9 +5,9 @@ import java.util.HashMap;
 import todoly.enums.Context;
 import todoly.views.ListTasksMenueView;
 
-public class ListTasksMenueUseCaseController extends UseCaseController {
+public class ListTasksMenueController extends ViewController {
 
-	ListTasksMenueUseCaseController() {
+	ListTasksMenueController() {
 		view = new ListTasksMenueView();
 		setvalidMenuOptions();
 	}

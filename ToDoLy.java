@@ -5,10 +5,10 @@ import java.util.Scanner;
 
 import todoly.controllers.MainController;
 import todoly.exceptions.InvalidUserInputException;
-import todoly.interfaces.RepositoryService;
-import todoly.interfaces.TaskManagerAPI;
+import todoly.interfaces.RepositoryInterface;
+import todoly.interfaces.ToDoLyInterface;
 import todoly.services.FileRepositoryService;
-import todoly.services.TaskService;
+import todoly.services.ToDoLyService;
 
 public class ToDoLy {
 	
@@ -18,8 +18,8 @@ public class ToDoLy {
 		
 		Path path = null;
 		
-		RepositoryService repositoryService = new FileRepositoryService(path);
-		TaskManagerAPI taskService = new TaskService(repositoryService);
+		RepositoryInterface repositoryInterface = new FileRepositoryService(path);
+		ToDoLyInterface taskService = new ToDoLyService(repositoryInterface);
 		MainController controller = new MainController(taskService);        
          
         while(controller.programIsRunning()) {

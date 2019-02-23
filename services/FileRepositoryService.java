@@ -1,19 +1,21 @@
 package todoly.services;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import todoly.exceptions.RepositoryException;
-import todoly.interfaces.RepositoryService;
+import todoly.interfaces.RepositoryInterface;
+import todoly.model.Project;
 import todoly.model.Task;
 
-public class FileRepositoryService implements RepositoryService {
+public class FileRepositoryService implements RepositoryInterface {
 	
 	private Path path;
-	private Map<Integer,Task> projects;
 	private Map<Integer,Task> tasks;
+	private Map<Integer,Project> projects;
 		
 	public FileRepositoryService(Path path) {
 		this.path = path;
@@ -22,17 +24,22 @@ public class FileRepositoryService implements RepositoryService {
 	}
 
 	@Override
-	public List<Task> readTasks(){
-		return (List<Task>) tasks.values();
+	public List<Task> listTasks(){
+		return new ArrayList<Task>(tasks.values());
 	}
 	
 	@Override
-	public Task readTask(Integer id){
+	public List<Project> listProjects() {
+		return new ArrayList<Project>(projects.values());
+	}
+	
+	@Override
+	public Task getTask(Integer id){
 		return tasks.get(id);
 	}
 
 	@Override
-	public void createTask(Task task) throws RepositoryException {
+	public void addTask(Task task) throws RepositoryException {
 		// TODO Auto-generated method stub
 
 	}
@@ -53,7 +60,5 @@ public class FileRepositoryService implements RepositoryService {
 	public void save() throws RepositoryException{
 		
 	}
-
-	
 
 }

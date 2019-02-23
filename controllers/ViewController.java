@@ -7,7 +7,7 @@ import todoly.enums.Context;
 import todoly.exceptions.InvalidUserInputException;
 import todoly.views.View;
 
-abstract class UseCaseController {
+abstract class ViewController {
 	protected View view;
 	protected Map<String,Context> validMenuOptions;
 	

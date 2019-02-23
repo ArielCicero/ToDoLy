@@ -2,23 +2,23 @@ package todoly.controllers;
 
 import todoly.enums.Context;
 import todoly.exceptions.InvalidUserInputException;
-import todoly.interfaces.TaskManagerAPI;
+import todoly.interfaces.ToDoLyInterface;
 import todoly.views.View;
 
 public class MainController {
 	
-	private TaskManagerAPI taskService;
+	private ToDoLyInterface taskService;
 	private View view;
 	private Context context = Context.MAIN_MENUE;
-	private UseCaseController useCaseController;
+	private ViewController viewController;
 
-	public MainController(TaskManagerAPI taskService) {
+	public MainController(ToDoLyInterface taskService) {
 		this.taskService = taskService;
-		useCaseController = new MainMenueUseCaseController(
+		viewController = new MainMenueController(
 									taskService.getTaskAmount(),
 									taskService.getTaskDoneAmount()
 								);
-		view = useCaseController.getView();
+		view = viewController.getView();
 	}
 
 	public boolean programIsRunning() {
@@ -30,7 +30,7 @@ public class MainController {
 	}
 	
 	public void ValidateUserInput(String input) throws InvalidUserInputException {
-		useCaseController.ValidateUserInput(input);
+		viewController.ValidateUserInput(input);
 	}
 
 	public void displayView() {
@@ -38,52 +38,55 @@ public class MainController {
 	}
 
 	public void updateContext(String input) {
-		context = useCaseController.getContext(input);
+		context = viewController.getContext(input);
 	}
 	
 	public void updateView() {
 		switch (context) {
 		case MAIN_MENUE:
-			useCaseController = new MainMenueUseCaseController(
+			viewController = new MainMenueController(
 										taskService.getTaskAmount(),
 										taskService.getTaskDoneAmount()
 									);
 			break;
-		case LIST_TASKS:
-			useCaseController = new ListTasksMenueUseCaseController();
+		case LIST_TASKS_MENU:
+			viewController = new ListTasksMenueController();
 			break;
 		case ORDER_BY_DUE_DATE:
-			useCaseController = new OrderByDueDateUseCaseController(taskService.listTasksByDueDate());
+			viewController = new OrderByDueDateController(taskService.listTasksByDueDate());
+			break;
+		case LIST_PROJECTS_MENU:
+			viewController = new ListProjectsMenuController(taskService.listProjects());
 			break;
 		case FILTER_BY_PROJECT:
-			//useCaseController = new FilterByProjectUseCaseController();
+			//viewController = new FilterByProjectController(taskService.getProjectTasks(projectId));
 			break;
 		/*case NEW_TASK:
-			useCaseController = new NewTaskMenueUseCaseController();
+			viewController = new NewTaskMenueController();
 			break;
-		case EDIT_TASK:
-			useCaseController = new EditTaskMenueUseCaseController();
+		case EDIT_TASK_MENU:
+			viewController = new EditTaskMenueController();
 			break;
 		case UPDATE_TASK:
-			useCaseController = new UpdateTaskMenueUseCaseController();
+			viewController = new UpdateTaskMenueController();
 			break;
 		case MARK_TASK_AS_DONE:
-			useCaseController = new MarkAsDoneMenueUseCaseController();
+			viewController = new MarkAsDoneMenueController();
 			break;
 		case REMOVE_TASK:
-			useCaseController = new RemoveTaskMenueUseCaseController();
+			viewController = new RemoveTaskMenueController();
 			break;
 		case SAVE_AND_QUIT:
-			useCaseController = new SaveAndQuitUseCaseController();
+			viewController = new SaveAndQuitController();
 			break;*/
 
 		default:
-			useCaseController = new MainMenueUseCaseController(
+			viewController = new MainMenueController(
 										taskService.getTaskAmount(),
 										taskService.getTaskDoneAmount()
 									);
 		}
-		view = useCaseController.getView();
+		view = viewController.getView();
 	}
 
 	public void setErrorMessage(String string) {

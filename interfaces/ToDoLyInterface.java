@@ -2,13 +2,16 @@ package todoly.interfaces;
 
 import java.util.List;
 
+import todoly.model.Project;
 import todoly.model.Task;
 
-public interface TaskManagerAPI {
+public interface ToDoLyInterface {
 
-	void setRepository(RepositoryService repositoryService);
+	void setRepository(RepositoryInterface repositoryInterface);
 	
 	List<Task> listTasksByDueDate();
+	
+	List<Project> listProjects();
 
 	List<Task> getProjectTasks(int projectId);
 
@@ -23,6 +26,4 @@ public interface TaskManagerAPI {
 	String getTaskDoneAmount();
 
 	void save();
-	
-	void sort();
 }

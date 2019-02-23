@@ -2,27 +2,27 @@ package todoly.views;
 
 import java.util.List;
 
-import todoly.model.Task;
+import todoly.model.Project;
 
-public class OrderByDateView extends View {
+public class ListProjectsMenuView extends View {
 	
-	private List<Task> tasks;
+	List<Project> projects;
 	
-	public OrderByDateView(List<Task> tasks) {
-		this.tasks = tasks;
+	public ListProjectsMenuView(List<Project> projects) {
+		this.projects = projects;
 	}
 
 	@Override
 	public void display() {
 		printErrorMessage();
 		System.out.println("################################################");
-		if(tasks != null) {
-			for (Task task : tasks) {
-				System.out.println(task);
+		if(projects != null) {
+			for (Project project : projects) {
+				System.out.println(project);
 			}
 		}
 		else {
-			System.out.println(">> There are no tasks");
+			System.out.println(">> There are no projects");
 		}
 		System.out.println(">> Pick an option:");
 		System.out.println(">> (1) Show Task List filtered by project)");
