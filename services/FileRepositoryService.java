@@ -1,6 +1,5 @@
 package todoly.services;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,13 +12,12 @@ import todoly.model.Task;
 
 public class FileRepositoryService implements RepositoryInterface {
 	
-	private Path path;
 	private Map<Integer,Task> tasks;
 	private Map<Integer,Project> projects;
 		
-	public FileRepositoryService(Path path) {
-		this.path = path;
+	public FileRepositoryService() {
 		tasks = new HashMap<>();
+		tasks.put(2, new Task());
 		projects = new HashMap<>();
 	}
 

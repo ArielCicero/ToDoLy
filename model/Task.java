@@ -5,8 +5,7 @@ import java.util.Date;
 public class Task implements Comparable<Task>{
 
 	private String taskId;
-    private String name;
-    private String description;
+    private String title;
     private Date dueDate;
     private boolean isDone;
     private Integer projectId;
@@ -49,23 +48,13 @@ public class Task implements Comparable<Task>{
 	}
 
 
-	public String getDescription() {
-		return description;
+	public String getTitle() {
+		return title;
 	}
 
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 

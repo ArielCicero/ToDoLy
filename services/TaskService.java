@@ -5,21 +5,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import todoly.interfaces.RepositoryInterface;
-import todoly.interfaces.ToDoLyInterface;
+import todoly.interfaces.ServiceInterface;
 import todoly.model.Project;
 import todoly.model.Task;
 
-public class ToDoLyService implements ToDoLyInterface {
+public class TaskService implements ServiceInterface {
 	
 	private RepositoryInterface repo;
 
-	public ToDoLyService(RepositoryInterface repositoryInterface) {
-		setRepository(repositoryInterface);
+	public TaskService(RepositoryInterface repo) {
+		this.repo = repo;
 	}
 	
 	@Override
-	public void setRepository(RepositoryInterface repositoryInterface) {
-		repo = repositoryInterface;
+	public void setRepository(RepositoryInterface repository) {
+		repo = repository;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ToDoLyService implements ToDoLyInterface {
 	}
 
 	@Override
-	public void updateTask(int taskId, String description) {
+	public void updateTask(int taskId, Task task) {
 	}
 
 	@Override
@@ -62,17 +62,15 @@ public class ToDoLyService implements ToDoLyInterface {
 	}
 
 	@Override
-	public String getTaskAmount() {
-		return Integer.toString(repo.listTasks().size());
+	public Integer getTaskAmount() {
+		return repo.listTasks().size();
 	}
 
 	@Override
-	public String getTaskDoneAmount() {
-		return Integer.toString(
-				repo.listTasks().stream()
-								.filter(x->x.isDone())
-								.collect(Collectors.toList())
-								.size()
-				);
+	public Integer getTaskDoneAmount() {
+		return repo.listTasks().stream()
+				.filter(x->x.isDone())
+				.collect(Collectors.toList())
+				.size();
 	}
 }

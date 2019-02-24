@@ -5,7 +5,7 @@ import java.util.List;
 import todoly.model.Project;
 import todoly.model.Task;
 
-public interface ToDoLyInterface {
+public interface ServiceInterface {
 
 	void setRepository(RepositoryInterface repositoryInterface);
 	
@@ -15,15 +15,15 @@ public interface ToDoLyInterface {
 
 	List<Task> getProjectTasks(int projectId);
 
-	void updateTask(int taskId, String description);
+	void updateTask(int taskId, Task task);
 
 	void markAsDone(int taskId);
 
 	void removeTask(int taskId);
 	
-	String getTaskAmount();
+	Integer getTaskAmount();
 
-	String getTaskDoneAmount();
+	Integer getTaskDoneAmount();
 
 	void save();
 }
