@@ -45,12 +45,14 @@ public abstract class Presenter {
 							+ " * * * * * * * * * * * * * * * * * * * * * *");		}
 	}
 	
-	public Context getContext(String input) throws InvalidUserInputException {
-		Context context = validOptions.get(input);
-		if(context == null) {
-			Set<String> options = validOptions.keySet();
+	public void validateUserInput(String input) throws InvalidUserInputException {
+		Set<String> options = validOptions.keySet();
+		if(false == options.stream().anyMatch(input::equals)) {
 			throw new InvalidUserInputException("Invalid Input!!! The options are " + options);
 		}
-		return context;
+	}
+	
+	public Context getContext(String input){
+		return validOptions.get(input);
 	}
 }

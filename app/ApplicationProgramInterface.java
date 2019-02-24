@@ -10,6 +10,8 @@ public abstract class ApplicationProgramInterface {
 	
 	protected abstract List<String> showTasksByDueDate();
 	
+	protected abstract List<String> showProjects();
+	
 	abstract void save();
 
 }

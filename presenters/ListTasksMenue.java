@@ -1,8 +1,10 @@
 package todoly.presenters;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import todoly.enums.Context;
+import todoly.exceptions.InvalidUserInputException;
 
 public class ListTasksMenue extends Presenter {
 
@@ -41,6 +43,19 @@ public class ListTasksMenue extends Presenter {
 			put("3", Context.EDIT_TASK);
 			put("4", Context.SAVE_AND_QUIT);
 		}};
+	}
+	
+	@Override
+	public void validateUserInput(String input) throws InvalidUserInputException {
+		Set<String> options = validOptions.keySet();
+		if(false == options.stream().anyMatch(input::equals)) {
+			throw new InvalidUserInputException("Invalid Input!!! The options are " + options);
+		}
+	}
+	
+	@Override
+	public Context getContext(String input){
+		return validOptions.get(input);
 	}
 
 }

@@ -25,7 +25,7 @@ public class Task implements Comparable<Task>{
     
 	@Override
 	public int compareTo(Task otherTask) {
-		return dueDate.compareTo(otherTask.getDueDate());
+		return -1 * dueDate.compareTo(otherTask.getDueDate());
 	}
 
 

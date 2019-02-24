@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 import todoly.enums.Context;
 import todoly.exceptions.InvalidUserInputException;
 import todoly.interfaces.ServiceInterface;
+import todoly.model.Project;
 import todoly.model.Task;
+import todoly.presenters.ListProjects;
 import todoly.presenters.ListTasksMenue;
 import todoly.presenters.MainMenue;
 import todoly.presenters.Presenter;
@@ -36,6 +38,7 @@ public class TextBasedUserInterface extends ApplicationProgramInterface{
 		input = scanner.nextLine();
 		
 		try {
+			presenter.validateUserInput(input);
 			context = presenter.getContext(input);
 		} catch (InvalidUserInputException e) {
 			presenter.setErrorMessage(e.getMessage());
@@ -50,6 +53,9 @@ public class TextBasedUserInterface extends ApplicationProgramInterface{
 			break;
 		case LIST_TASKS:
 			presenter.setProperties(showTasksByDueDate());
+			break;
+		case LIST_PROJECTS:
+			presenter.setProperties(showProjects());
 			break;
 		}
 		
@@ -67,20 +73,22 @@ public class TextBasedUserInterface extends ApplicationProgramInterface{
 	
 	@Override
 	protected List<String> showTasksByDueDate(){
-		return taskListToStringList(
-					taskService.listTasksByDueDate()
-				);
+		return taskService.listTasksByDueDate().stream()
+											   .map(Task::toString)
+											   .collect(Collectors.toList());
+	}
+	
+	@Override
+	protected List<String> showProjects(){
+		return taskService.listProjects().stream()
+									     .map(Project::toString)
+									     .collect(Collectors.toList());
 	}
 	
 	@Override
 	public void save() {
 		taskService.save();
 		scanner.close();
-	}
-	
-	private List<String> taskListToStringList(List<Task> list){
-		return list.stream().map(Task::toString)
-							.collect(Collectors.toList());
 	}
 
 	public boolean isRunning() {
@@ -92,6 +100,7 @@ public class TextBasedUserInterface extends ApplicationProgramInterface{
 		presenters = new HashMap<Context, Presenter>(){{
 						put(Context.MAIN_MENUE,new MainMenue());
 						put(Context.LIST_TASKS,new ListTasksMenue());
+						put(Context.LIST_PROJECTS,new ListProjects());
 					}};
 	}
 }
