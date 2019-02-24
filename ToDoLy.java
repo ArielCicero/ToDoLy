@@ -1,21 +1,23 @@
 package todoly;
 
+import todoly.app.TextBasedUserInterface;
 import todoly.services.FileRepositoryService;
 import todoly.services.TaskService;
 
 public class ToDoLy {
 	
 	public static void main(String[] args) {
-		TextBasedInterface textBasedInterface = new TextBasedInterface(
+		// cli = Command Line Interface
+		TextBasedUserInterface cli = new TextBasedUserInterface(
 											new TaskService(
-													new FileRepositoryService()
-												)
-										);
+												new FileRepositoryService()
+											)
+									  );
 		
 		do {
-			textBasedInterface.run();
-		}while(textBasedInterface.isRunning());
+			cli.run();
+		}while(cli.isRunning());
 		
-		textBasedInterface.save();
+		cli.save();
 	}
 }

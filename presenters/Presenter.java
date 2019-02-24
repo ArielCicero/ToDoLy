@@ -1,5 +1,7 @@
 package todoly.presenters;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,13 +11,17 @@ import todoly.exceptions.InvalidUserInputException;
 public abstract class Presenter {
 	
 	protected String errorMessage;
-	protected Map<String,Object> props;
+	protected List<String> props = new ArrayList<>();
 	protected Map<String,Context> validOptions;
 	
 	public abstract void displayView();
 	protected abstract void setValidOptions();
 	
-	public void setProperties(Map<String, Object> properties) {
+	public void addPropertie(String propertie) {
+		props.add(propertie);
+	}
+	
+	public void setProperties(List<String> properties) {
 		props = properties;
 	}
 
@@ -31,9 +37,9 @@ public abstract class Presenter {
 	
 	public void printErrorMessage() {
 		if(errorMessage != null) {
-			System.out.println("************************************************");
+			System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * *");
 			System.out.println(errorMessage);
-			System.out.println("************************************************");
+			System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * *");
 		}
 	}
 	

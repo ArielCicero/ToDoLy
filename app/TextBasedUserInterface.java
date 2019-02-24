@@ -1,9 +1,10 @@
-package todoly;
+package todoly.app;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import todoly.enums.Context;
 import todoly.exceptions.InvalidUserInputException;
@@ -13,7 +14,7 @@ import todoly.presenters.ListTasksMenue;
 import todoly.presenters.MainMenue;
 import todoly.presenters.Presenter;
 
-public class TextBasedInterface extends ApplicationInterface{
+public class TextBasedUserInterface extends ApplicationProgramInterface{
 	
 	private Map<Context,Presenter> presenters;
 	private ServiceInterface taskService;
@@ -22,7 +23,7 @@ public class TextBasedInterface extends ApplicationInterface{
 	private String input;
 	
 	
-	public TextBasedInterface(ServiceInterface taskService) {
+	public TextBasedUserInterface(ServiceInterface taskService) {
 		this.taskService = taskService;
 		context = Context.MAIN_MENUE;
 		setViews();
@@ -42,43 +43,48 @@ public class TextBasedInterface extends ApplicationInterface{
 	}
 	
 	private void setPresenterProperties(Presenter presenter){
-		Map<String, Object> properties = new HashMap<>();
 		switch (context) {
 		case MAIN_MENUE:
-			properties.put("taskAmount",Integer.toString(getTaskAmount()));
-			properties.put("taskDoneAmount",Integer.toString(getTaskDoneAmount()));
-			presenter.setProperties(properties);
+			presenter.addPropertie(showTaskAmount());
+			presenter.addPropertie(showTaskDoneAmount());
 			break;
 		case LIST_TASKS:
-			properties.put("tasks",listTasksByDueDate());
-			presenter.setProperties(properties);
+			presenter.setProperties(showTasksByDueDate());
 			break;
 		}
 		
 	}
 
 	@Override
-	protected Integer getTaskAmount() {
-		return taskService.getTaskAmount();
+	protected String showTaskAmount() {
+		return Integer.toString(taskService.getTaskAmount());
 	}
 
 	@Override
-	protected Integer getTaskDoneAmount() {
-		return taskService.getTaskDoneAmount();
+	protected String showTaskDoneAmount() {
+		return Integer.toString(taskService.getTaskDoneAmount());
 	}
 	
 	@Override
-	protected List<Task> listTasksByDueDate(){
-		return taskService.listTasksByDueDate();
+	protected List<String> showTasksByDueDate(){
+		return taskListToStringList(
+					taskService.listTasksByDueDate()
+				);
+	}
+	
+	@Override
+	public void save() {
+		taskService.save();
+		scanner.close();
+	}
+	
+	private List<String> taskListToStringList(List<Task> list){
+		return list.stream().map(Task::toString)
+							.collect(Collectors.toList());
 	}
 
 	public boolean isRunning() {
 		return context != Context.SAVE_AND_QUIT;
-	}
-	
-	public void save() {
-		taskService.save();
-		scanner.close();
 	}
 	
 	@SuppressWarnings("serial")

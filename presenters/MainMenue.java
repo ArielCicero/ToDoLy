@@ -8,12 +8,12 @@ public class MainMenue extends Presenter {
 
 	@Override
 	public void displayView() {
-		String taskAmount = (String) props.get("taskAmount");
-		String taskDoneAmount = (String) props.get("taskDoneAmount");
+		String taskAmount = props.get(0);
+		String taskDoneAmount = props.get(1);
 		
 		printErrorMessage();
 		
-		System.out.println("################################################");
+		System.out.println("#################################################");
 		System.out.println(">> Welcome to ToDoLy");
 		System.out.println(">> You have "+taskAmount+" tasks todo and "+taskDoneAmount+" tasks are done!");
 		System.out.println(">> Pick an option:");

@@ -1,6 +1,5 @@
 package todoly.model;
 
-import java.util.Date;
 
 public class Task implements Comparable<Task>{
 
@@ -8,8 +7,16 @@ public class Task implements Comparable<Task>{
     private String title;
     private Date dueDate;
     private boolean isDone;
-    private Integer projectId;
+    private Project project;
     
+    
+    public Task(String taskId, String title, Date dueDate, boolean isDone, Project project) {
+    	this.taskId = taskId;
+    	this.title = title;
+    	this.dueDate = dueDate;
+    	this.isDone = isDone;
+    	this.project = project;
+    }
     
     
 	@Override
@@ -25,16 +32,6 @@ public class Task implements Comparable<Task>{
 
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
-	}
-
-
-	public Integer getProjectId() {
-		return projectId;
-	}
-
-
-	public void setProjectId(Integer projectId) {
-		this.projectId = projectId;
 	}
 
 
@@ -65,6 +62,26 @@ public class Task implements Comparable<Task>{
 
 	public void setDone(boolean isDone) {
 		this.isDone = isDone;
+	}
+
+
+	public Project getProject() {
+		return project;
+	}
+
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+
+	@Override
+	public String toString() {	
+		return	"Task [" + taskId + "] " +
+				"Due Date: " + dueDate + " " +
+				"Title: " + title + " " +
+				"Done: " + (isDone? "yes": "not yet") + " " +
+				"Project: " + project;
 	}
 
 }

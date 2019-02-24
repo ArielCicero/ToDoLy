@@ -17,7 +17,7 @@ public class FileRepositoryService implements RepositoryInterface {
 		
 	public FileRepositoryService() {
 		tasks = new HashMap<>();
-		tasks.put(2, new Task());
+		//tasks.put(2, new Task());
 		projects = new HashMap<>();
 	}
 

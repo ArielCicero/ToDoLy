@@ -4,6 +4,11 @@ public class Project implements Comparable<Project>{
 	private Integer projectId;
     private String projectName;
     
+	public Project(Integer projectId, String projectName) {
+		this.projectId = projectId;
+		this.projectName = projectName;
+	}
+
 	@Override
 	public int compareTo(Project otherProject) {
 		return projectId.compareTo(otherProject.getProjectId());
@@ -23,5 +28,10 @@ public class Project implements Comparable<Project>{
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
+	}
+
+	@Override
+	public String toString() {
+		return "[" + projectId + "] " + projectName;
 	}
 }
