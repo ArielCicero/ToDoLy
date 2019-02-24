@@ -37,10 +37,12 @@ public abstract class Presenter {
 	
 	public void printErrorMessage() {
 		if(errorMessage != null) {
-			System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * *");
+			System.out.println("* * * * * * * * * * * * * * * * * * * * * *"
+							+ " * * * * * * * * * * * * * * * * * * * * * *");
+			System.out.println("ERROR");
 			System.out.println(errorMessage);
-			System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * *");
-		}
+			System.out.println("* * * * * * * * * * * * * * * * * * * * * *"
+							+ " * * * * * * * * * * * * * * * * * * * * * *");		}
 	}
 	
 	public Context getContext(String input) throws InvalidUserInputException {

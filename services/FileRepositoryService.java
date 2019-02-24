@@ -17,8 +17,12 @@ public class FileRepositoryService implements RepositoryInterface {
 		
 	public FileRepositoryService() {
 		tasks = new HashMap<>();
-		//tasks.put(2, new Task());
 		projects = new HashMap<>();
+	}
+	
+	public FileRepositoryService(Map<Integer,Task> tasks, Map<Integer,Project> projects) {
+		this.tasks = tasks;
+		this.projects = projects;
 	}
 
 	@Override

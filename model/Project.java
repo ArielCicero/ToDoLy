@@ -1,11 +1,15 @@
 package todoly.model;
 
 public class Project implements Comparable<Project>{
-	private Integer projectId;
+	private String projectId;
     private String projectName;
     
-	public Project(Integer projectId, String projectName) {
+	public Project(String projectId, String projectName) {
+		this(projectName);
 		this.projectId = projectId;
+	}
+	
+	public Project(String projectName) {
 		this.projectName = projectName;
 	}
 
@@ -14,11 +18,11 @@ public class Project implements Comparable<Project>{
 		return projectId.compareTo(otherProject.getProjectId());
 	}
 
-	public Integer getProjectId() {
+	public String getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(Integer projectId) {
+	public void setProjectId(String projectId) {
 		this.projectId = projectId;
 	}
 

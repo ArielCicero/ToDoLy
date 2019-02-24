@@ -11,7 +11,11 @@ public class Task implements Comparable<Task>{
     
     
     public Task(String taskId, String title, Date dueDate, boolean isDone, Project project) {
+    	this(title, dueDate, isDone, project);
     	this.taskId = taskId;
+    }
+    
+    public Task(String title, Date dueDate, boolean isDone, Project project) {
     	this.title = title;
     	this.dueDate = dueDate;
     	this.isDone = isDone;
@@ -77,11 +81,16 @@ public class Task implements Comparable<Task>{
 
 	@Override
 	public String toString() {	
+//		return	"Task [" + taskId + "]    " +
+//				"Due Date: " + dueDate + "    " +
+//				"Title: " + title + "    " +
+//				"Status: " + (isDone? "Done": "To do") + "    " +
+//				"Project: " + project;
 		return	"Task [" + taskId + "] " +
-				"Due Date: " + dueDate + " " +
-				"Title: " + title + " " +
-				"Done: " + (isDone? "yes": "not yet") + " " +
-				"Project: " + project;
+				"Due Date: " + dueDate + "\n" +
+				"\t Title: " + title + "\n" +
+				"\t Status: " + (isDone? "Done": "To do") + "\n" +
+				"\t Project: " + project;
 	}
 
 }

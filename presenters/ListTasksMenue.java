@@ -11,17 +11,19 @@ public class ListTasksMenue extends Presenter {
 		
 		printErrorMessage();
 		
-		System.out.println("#################################################");
-		
+		System.out.println("###########################################"
+						+ "############################################");
 		if(props == null || props.isEmpty()) {
 			System.out.println(">> There are no tasks");
 		}
 		else {
 			for (String task : props) {
 				System.out.println(task);
+				System.out.println();
 			}
 		}
-		System.out.println("#################################################");
+		System.out.println("###########################################"
+						+ "############################################");
 		System.out.println(">> Pick an option:");
 		System.out.println(">> (1) Filtered Tasks By Project");
 		System.out.println(">> (2) Add New Task");

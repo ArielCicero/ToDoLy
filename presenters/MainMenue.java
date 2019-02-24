@@ -13,7 +13,8 @@ public class MainMenue extends Presenter {
 		
 		printErrorMessage();
 		
-		System.out.println("#################################################");
+		System.out.println("###########################################"
+						+ "############################################");
 		System.out.println(">> Welcome to ToDoLy");
 		System.out.println(">> You have "+taskAmount+" tasks todo and "+taskDoneAmount+" tasks are done!");
 		System.out.println(">> Pick an option:");
