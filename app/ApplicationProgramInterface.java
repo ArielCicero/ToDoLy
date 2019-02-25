@@ -1,17 +1,18 @@
 package todoly.app;
 
-import java.util.List;
-
 public abstract class ApplicationProgramInterface {
 	
-	protected abstract String showTaskDoneAmount();
+	public abstract void run();
 	
-	protected abstract String showTaskAmount();
+	protected abstract void listTasksByDueDate();
 	
-	protected abstract List<String> showTasksByDueDate();
+	protected abstract void listTasksFilterByDate();
 	
-	protected abstract List<String> showProjects();
+	protected abstract void addTask();
 	
-	abstract void save();
-
+	protected abstract void editTask();
+	
+	protected abstract void markTaskAsDone();
+	
+	protected abstract void removeTask();
 }

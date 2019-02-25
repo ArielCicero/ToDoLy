@@ -1,8 +1,8 @@
 package todoly.presenters;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 import todoly.enums.Context;
@@ -11,48 +11,54 @@ import todoly.exceptions.InvalidUserInputException;
 public abstract class Presenter {
 	
 	protected String errorMessage;
-	protected List<String> props = new ArrayList<>();
-	protected Map<String,Context> validOptions;
+	protected String[] viewProps;
+	protected Map<String,Context> validOptions = new HashMap<>();
+	protected String userInput;
 	
-	public abstract void displayView();
+	Presenter(String[] viewProps, String errorMessage, Scanner scanner){
+		setViewProperties(viewProps);
+		setErrorMessage(errorMessage);
+		setValidOptions();
+		displayView();
+		userInput = scanner.nextLine();
+		validateUserInput(userInput);
+		
+	}
+	
+	protected abstract void displayView();
 	protected abstract void setValidOptions();
 	
-	public void addPropertie(String propertie) {
-		props.add(propertie);
-	}
 	
-	public void setProperties(List<String> properties) {
-		props = properties;
+	protected void setViewProperties(String[] props) {
+		viewProps = new String[props.length];
+		for (int i = 0; i < props.length; i++) {
+			viewProps[i] = props[i];
+		}
 	}
 
-	public void setErrorMessage(String errorMessage) {
+	protected void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
 	
-	Presenter(){
-		setValidOptions();
-	}
-	
-	
-	
-	public void printErrorMessage() {
+	protected void printErrorMessage() {
 		if(errorMessage != null) {
 			System.out.println("* * * * * * * * * * * * * * * * * * * * * *"
 							+ " * * * * * * * * * * * * * * * * * * * * * *");
 			System.out.println("ERROR");
 			System.out.println(errorMessage);
 			System.out.println("* * * * * * * * * * * * * * * * * * * * * *"
-							+ " * * * * * * * * * * * * * * * * * * * * * *");		}
+							+ " * * * * * * * * * * * * * * * * * * * * * *");		
+		}
 	}
 	
-	public void validateUserInput(String input) throws InvalidUserInputException {
+	protected void validateUserInput(String input) throws InvalidUserInputException {
 		Set<String> options = validOptions.keySet();
 		if(false == options.stream().anyMatch(input::equals)) {
 			throw new InvalidUserInputException("Invalid Input!!! The options are " + options);
 		}
 	}
 	
-	public Context getContext(String input){
-		return validOptions.get(input);
+	public Context getContext(){
+		return validOptions.get(userInput);
 	}
 }

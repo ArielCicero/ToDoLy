@@ -23,25 +23,33 @@ public class TaskService implements ServiceInterface {
 	}
 
 	@Override
-	public List<Task> listTasksByDueDate(){
+	public String[] listTasksByDueDate(){
 		List<Task> tasks = repo.listTasks();
-		if(tasks != null)
+		if(tasks != null) {
 			// Due date order is the natural order implemented for tasks 
 			Collections.sort(tasks);
-		return tasks;
+			return tasks.stream()
+						.map(Task::toString)
+						.toArray(String[]::new);
+		}
+		return null;
 	}
 	
 	@Override
-	public List<Project> listProjects() {
+	public String[] listProjects() {
 		List<Project> projects = repo.listProjects();
-		if(projects != null)
+		if(projects != null) {
 			// ID order is the natural order implemented for projects 
 			Collections.sort(projects);
-		return projects;
+			return projects.stream()
+						   .map(Project::toString)
+						   .toArray(String[]::new);
+		}
+		return null;
 	}
 
 	@Override
-	public List<Task> getProjectTasks(int projectId) {
+	public String[] getProjectTasks(int projectId) {
 		return null;
 	}
 
@@ -62,15 +70,17 @@ public class TaskService implements ServiceInterface {
 	}
 
 	@Override
-	public Integer getTaskAmount() {
-		return repo.listTasks().size();
+	public String getTasksAmount() {
+		return Integer.toString(repo.listTasks().size());
 	}
 
 	@Override
-	public Integer getTaskDoneAmount() {
-		return repo.listTasks().stream()
-				.filter(x->x.isDone())
-				.collect(Collectors.toList())
-				.size();
+	public String getTasksDoneAmount() {
+		return Integer.toString(
+					repo.listTasks().stream()
+					.filter(x->x.isDone())
+					.collect(Collectors.toList())
+					.size()
+				);
 	}
 }

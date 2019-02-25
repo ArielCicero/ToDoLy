@@ -1,106 +1,101 @@
 package todoly.app;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import todoly.enums.Context;
 import todoly.exceptions.InvalidUserInputException;
 import todoly.interfaces.ServiceInterface;
-import todoly.model.Project;
-import todoly.model.Task;
 import todoly.presenters.ListProjects;
-import todoly.presenters.ListTasksMenue;
+import todoly.presenters.ListTasksByDueDate;
 import todoly.presenters.MainMenue;
-import todoly.presenters.Presenter;
 
 public class TextBasedUserInterface extends ApplicationProgramInterface{
 	
-	private Map<Context,Presenter> presenters;
 	private ServiceInterface taskService;
 	private Context context;
+	private String errorMessage;
 	private Scanner scanner = new Scanner(System.in);
-	private String input;
 	
 	
 	public TextBasedUserInterface(ServiceInterface taskService) {
 		this.taskService = taskService;
 		context = Context.MAIN_MENUE;
-		setViews();
 	}
 	
+	@Override
 	public void run() {
-		Presenter presenter = presenters.get(context);
-		setPresenterProperties(presenter);
-		presenter.displayView();
-		input = scanner.nextLine();
-		
-		try {
-			presenter.validateUserInput(input);
-			context = presenter.getContext(input);
-		} catch (InvalidUserInputException e) {
-			presenter.setErrorMessage(e.getMessage());
-		}
-	}
-	
-	private void setPresenterProperties(Presenter presenter){
-		switch (context) {
-		case MAIN_MENUE:
-			presenter.addPropertie(showTaskAmount());
-			presenter.addPropertie(showTaskDoneAmount());
-			break;
-		case LIST_TASKS:
-			presenter.setProperties(showTasksByDueDate());
-			break;
-		case LIST_PROJECTS:
-			presenter.setProperties(showProjects());
-			break;
-		}
-		
-	}
-
-	@Override
-	protected String showTaskAmount() {
-		return Integer.toString(taskService.getTaskAmount());
-	}
-
-	@Override
-	protected String showTaskDoneAmount() {
-		return Integer.toString(taskService.getTaskDoneAmount());
-	}
-	
-	@Override
-	protected List<String> showTasksByDueDate(){
-		return taskService.listTasksByDueDate().stream()
-											   .map(Task::toString)
-											   .collect(Collectors.toList());
-	}
-	
-	@Override
-	protected List<String> showProjects(){
-		return taskService.listProjects().stream()
-									     .map(Project::toString)
-									     .collect(Collectors.toList());
-	}
-	
-	@Override
-	public void save() {
+		do {
+			try {
+				switch (context) {
+				case MAIN_MENUE:
+					showMainMenu();
+					break;
+				case LIST_TASKS:
+					listTasksByDueDate();
+					break;
+				case FILTER_BY_PROJECT:
+					listTasksFilterByDate();
+					break;
+				default:
+					showMainMenu();
+					break;
+				}
+				errorMessage = null;
+			} catch (InvalidUserInputException e) {
+				errorMessage = e.getMessage();
+			}
+		}while(context != Context.SAVE_AND_QUIT);
 		taskService.save();
 		scanner.close();
 	}
 
-	public boolean isRunning() {
-		return context != Context.SAVE_AND_QUIT;
+	private void showMainMenu(){
+		String[] viewProps = {
+				taskService.getTasksAmount(),
+				taskService.getTasksDoneAmount()
+		};
+		context = new MainMenue(viewProps, errorMessage, scanner).getContext();
 	}
-	
-	@SuppressWarnings("serial")
-	private void setViews() {
-		presenters = new HashMap<Context, Presenter>(){{
-						put(Context.MAIN_MENUE,new MainMenue());
-						put(Context.LIST_TASKS,new ListTasksMenue());
-						put(Context.LIST_PROJECTS,new ListProjects());
-					}};
+
+	@Override
+	protected void listTasksByDueDate(){
+		context = new ListTasksByDueDate(
+							taskService.listTasksByDueDate(),
+							errorMessage,
+							scanner
+				 ).getContext();
+	}
+
+	@Override
+	protected void listTasksFilterByDate(){
+		context = new ListProjects(
+				taskService.listProjects(),
+				errorMessage,
+				scanner
+				).getContext();
+	}
+
+	@Override
+	protected void addTask() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void editTask() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void markTaskAsDone() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void removeTask() {
+		// TODO Auto-generated method stub
+		
 	}
 }

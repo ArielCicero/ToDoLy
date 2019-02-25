@@ -3,6 +3,7 @@ package todoly;
 import java.util.HashMap;
 import java.util.Map;
 
+import todoly.app.ApplicationProgramInterface;
 import todoly.app.TextBasedUserInterface;
 import todoly.exceptions.DateException;
 import todoly.model.Date;
@@ -30,17 +31,12 @@ public class ToDoLy {
 		
 		
 		
-		// cli = Command Line Interface
-		TextBasedUserInterface cli = new TextBasedUserInterface(
+		ApplicationProgramInterface app = new TextBasedUserInterface(
 											new TaskService(
 												new FileRepositoryService(tasks,projects)
 											)
 									  );
 		
-		do {
-			cli.run();
-		}while(cli.isRunning());
-		
-		cli.save();
+		app.run();
 	}
 }

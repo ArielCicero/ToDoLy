@@ -1,22 +1,26 @@
 package todoly.presenters;
 
-import java.util.HashMap;
+import java.util.Scanner;
 
 import todoly.enums.Context;
 
 public class MainMenue extends Presenter {
 
+	public MainMenue(String[] viewProps, String errorMessage, Scanner scanner) {
+		super(viewProps,errorMessage,scanner);
+	}
+
 	@Override
 	public void displayView() {
-		String taskAmount = props.get(0);
-		String taskDoneAmount = props.get(1);
+		String tasksAmount = viewProps[0];
+		String tasksDoneAmount = viewProps[1];
 		
 		printErrorMessage();
 		
 		System.out.println("###########################################"
 						+ "############################################");
 		System.out.println(">> Welcome to ToDoLy");
-		System.out.println(">> You have "+taskAmount+" tasks todo and "+taskDoneAmount+" tasks are done!");
+		System.out.println(">> You have "+tasksAmount+" tasks todo and "+tasksDoneAmount+" tasks are done!");
 		System.out.println(">> Pick an option:");
 		System.out.println(">> (1) Show Task List (by date or project)");
 		System.out.println(">> (2) Add New Task");
@@ -25,15 +29,19 @@ public class MainMenue extends Presenter {
 		System.out.print(">> ");
 	}
 	
-	@SuppressWarnings("serial")
+//	@Override
+//	public void readLine() {
+//		Scanner scanner = new Scanner(System.in);
+//		userInput = scanner.nextLine();
+//		scanner.close();
+//	}
+	
 	@Override
 	protected void setValidOptions() {
-		validOptions = new HashMap<>() {{
-			put("1", Context.LIST_TASKS);
-			put("2", Context.ADD_TASK_TITLE);
-			put("3", Context.EDIT_TASK);
-			put("4", Context.SAVE_AND_QUIT);
-		}};		
+		validOptions.put("1", Context.LIST_TASKS);
+		validOptions.put("2", Context.ADD_TASK_TITLE);
+		validOptions.put("3", Context.EDIT_TASK);
+		validOptions.put("4", Context.SAVE_AND_QUIT);
 	}
 	/*
 	@Override
