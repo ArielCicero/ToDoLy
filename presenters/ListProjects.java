@@ -6,13 +6,13 @@ import todoly.enums.Context;
 import todoly.exceptions.InvalidUserInputException;
 
 public class ListProjects extends Presenter {
-
+	
 	public ListProjects(String[] viewProps, String errorMessage, Scanner scanner) {
 		super(viewProps,errorMessage,scanner);
 	}
 
 	@Override
-	public void displayView() {
+	protected void displayView() {
 		
 		printErrorMessage();
 		
@@ -35,12 +35,7 @@ public class ListProjects extends Presenter {
 	}
 	
 	@Override
-	protected void setValidOptions() {
-		validOptions = null;
-	}
-	
-	@Override
-	public void validateUserInput(String input) throws InvalidUserInputException {
+	protected void validateUserInput(String input) throws InvalidUserInputException {
 		if(!isProjectId(input)) {
 			if(!input.equals("0")) {
 				throw new InvalidUserInputException("Invalid Input!!! (0) "
@@ -49,21 +44,37 @@ public class ListProjects extends Presenter {
 		}
 	}
 	
-	private boolean isProjectId(String input) {
-		if(viewProps != null) {
-			for (String project : viewProps) {
-				if(input.equals(
-							project.substring(1, project.indexOf("]"))
-						)
-				) {System.out.println("#adc in ListProject Presenter");return true;}
+	protected boolean isProjectId(String input) {
+		String[] projectsId = getProjectsId();
+		if(projectsId != null) {
+			for (String id : projectsId) {
+				if(input.equals(id)) {
+					return true;
+				}
 			}
 		}
 		return false;
 	}
-
-	@Override
-	public Context getContext(){
-		return userInput.equals("0")? Context.MAIN_MENUE : Context.FILTER_BY_PROJECT;
+	
+	private String[] getProjectsId() {
+		if(viewProps != null) {
+			String[] projectsId = new String[viewProps.length];
+			for (int i = 0; i < viewProps.length; i++) {
+				projectsId[i] = viewProps[i].substring(1, viewProps[i].indexOf("]"));
+			}
+			return projectsId;
+		}
+		return null;
 	}
 
+	@Override
+	protected void setValidOptions() {
+		validOptions.put("0", Context.MAIN_MENUE);
+		String[] projectsId = getProjectsId();
+		if(projectsId != null) {
+			for (String id : projectsId) {
+				validOptions.put(id, Context.FILTER_BY_PROJECT);
+			}
+		}
+	}
 }

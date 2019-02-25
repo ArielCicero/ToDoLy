@@ -11,7 +11,7 @@ public class MainMenue extends Presenter {
 	}
 
 	@Override
-	public void displayView() {
+	protected void displayView() {
 		String tasksAmount = viewProps[0];
 		String tasksDoneAmount = viewProps[1];
 		
@@ -29,13 +29,6 @@ public class MainMenue extends Presenter {
 		System.out.print(">> ");
 	}
 	
-//	@Override
-//	public void readLine() {
-//		Scanner scanner = new Scanner(System.in);
-//		userInput = scanner.nextLine();
-//		scanner.close();
-//	}
-	
 	@Override
 	protected void setValidOptions() {
 		validOptions.put("1", Context.LIST_TASKS);
@@ -43,39 +36,4 @@ public class MainMenue extends Presenter {
 		validOptions.put("3", Context.EDIT_TASK);
 		validOptions.put("4", Context.SAVE_AND_QUIT);
 	}
-	/*
-	@Override
-	public void validateUserInput(String input) throws InvalidUserInputException {
-		try {
-			Integer value = Integer.parseInt(input);
-			if(value < 0 || value > 5) {
-				throw new InvalidUserInputException("Wrong value: " + input 
-													+ "  - The options are 1, 2, 3, 4");
-			}
-		} catch (NumberFormatException e) {
-			String message = e.getMessage()
-					  .replace("For input string", 
-							   "Wrong value"
-					  );
-			message += " - The options are 1, 2, 3, 4";
-			throw new InvalidUserInputException(message);
-		}
-	}
-	
-	@Override
-	public Context getContext(String input){
-		switch (input) {
-		case "1":
-			return Context.LIST_TASKS;
-		case "2":
-			return Context.ADD_TASK_TITLE;
-		case "3":
-			return Context.EDIT_TASK;
-		case "4":
-			return Context.SAVE_AND_QUIT;
-		}
-		
-		throw new RuntimeException("This should never Happen");
-	}
-	*/
 }

@@ -10,10 +10,7 @@ public class ListTasksByDueDate extends Presenter {
 	}
 
 	@Override
-	public void displayView() {
-		
-		
-		
+	protected void displayView() {		
 		System.out.println("###########################################"
 						+ "############################################");
 		if(viewProps == null || viewProps.length == 0) {
@@ -38,7 +35,7 @@ public class ListTasksByDueDate extends Presenter {
 	
 	@Override
 	protected void setValidOptions() {
-		validOptions.put("1", Context.FILTER_BY_PROJECT);
+		validOptions.put("1", Context.LIST_PROJECTS);
 		validOptions.put("2", Context.ADD_TASK_TITLE);
 		validOptions.put("3", Context.EDIT_TASK);
 		validOptions.put("4", Context.SAVE_AND_QUIT);

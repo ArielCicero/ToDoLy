@@ -33,6 +33,7 @@ public class TextBasedUserInterface extends ApplicationProgramInterface{
 				case LIST_TASKS:
 					listTasksByDueDate();
 					break;
+				case LIST_PROJECTS:
 				case FILTER_BY_PROJECT:
 					listTasksFilterByDate();
 					break;
@@ -66,13 +67,30 @@ public class TextBasedUserInterface extends ApplicationProgramInterface{
 				 ).getContext();
 	}
 
+	@SuppressWarnings("incomplete-switch")
 	@Override
 	protected void listTasksFilterByDate(){
-		context = new ListProjects(
-				taskService.listProjects(),
-				errorMessage,
-				scanner
-				).getContext();
+		switch (context) {
+		case LIST_PROJECTS:
+			context = new ListProjects(
+					taskService.listProjects(),
+					errorMessage,
+					scanner
+					).getContext();
+			break;
+
+		case FILTER_BY_PROJECT:
+			String selectedProjectId = context.values;
+			System.out.println("#adc create ListTasksFilterByDate Presenter");
+			System.out.println(selectedProjectId);
+			scanner.nextLine();
+//			context = new ListTasksFilterByDate(
+//					/*taskService.listProjects(),*/
+//					errorMessage,
+//					scanner
+//					).getContext();
+			break;
+		}
 	}
 
 	@Override

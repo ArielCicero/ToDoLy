@@ -59,6 +59,9 @@ public abstract class Presenter {
 	}
 	
 	public Context getContext(){
-		return validOptions.get(userInput);
+		System.out.println(validOptions);
+		Context context = validOptions.get(userInput);
+		context.values = userInput;
+		return context;
 	}
 }
