@@ -1,21 +1,30 @@
 package todoly.model;
 
-import java.util.Date;
-
 public class Task implements Comparable<Task>{
 
 	private String taskId;
-    private String name;
-    private String description;
+    private String title;
     private Date dueDate;
     private boolean isDone;
-    private Integer projectId;
+    private Project project;
     
+    
+    public Task(String taskId, String title, Date dueDate, boolean isDone, Project project) {
+    	this(title, dueDate, isDone, project);
+    	this.taskId = taskId;
+    }
+    
+    public Task(String title, Date dueDate, boolean isDone, Project project) {
+    	this.title = title;
+    	this.dueDate = dueDate;
+    	this.isDone = isDone;
+    	this.project = project;
+    }
     
     
 	@Override
 	public int compareTo(Task otherTask) {
-		return dueDate.compareTo(otherTask.getDueDate());
+		return -1 * title.compareTo(otherTask.getTitle());
 	}
 
 
@@ -29,16 +38,6 @@ public class Task implements Comparable<Task>{
 	}
 
 
-	public Integer getProjectId() {
-		return projectId;
-	}
-
-
-	public void setProjectId(Integer projectId) {
-		this.projectId = projectId;
-	}
-
-
 	public String getTaskId() {
 		return taskId;
 	}
@@ -49,23 +48,13 @@ public class Task implements Comparable<Task>{
 	}
 
 
-	public String getDescription() {
-		return description;
+	public String getTitle() {
+		return title;
 	}
 
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 
@@ -74,8 +63,36 @@ public class Task implements Comparable<Task>{
 	}
 
 
-	public void setDone(boolean isDone) {
+	public void setStatus(boolean isDone) {
 		this.isDone = isDone;
+	}
+
+
+	public Project getProject() {
+		return project;
+	}
+
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+
+	@Override
+	public String toString() {	
+		// The next code commented it's a different Task displaying format 
+		
+//		return	"Task [" + taskId + "]    " +
+//				"Due Date: " + dueDate + "    " +
+//				"Title: " + title + "    " +
+//				"Status: " + (isDone? "Done": "To do") + "    " +
+//				"Project: " + project;
+		
+		return	"Task [" + taskId + "] " +
+				"Due Date: " + dueDate + "\n" +
+				"\t Title: " + title + "\n" +
+				"\t Status: " + (isDone? "Done": "To do") + "\n" +
+				"\t Project: " + project;
 	}
 
 }
