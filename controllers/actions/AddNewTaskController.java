@@ -10,7 +10,6 @@ import todoly.interfaces.TaskListInterface;
 import todoly.model.Date;
 import todoly.model.Project;
 import todoly.model.Task;
-import todoly.util.enums.MenuOption;
 import todoly.views.actions.AddNewTaskView;
 
 public class AddNewTaskController extends Controller {
@@ -94,21 +93,11 @@ public class AddNewTaskController extends Controller {
 	}
 
 	@Override
-	public MenuOption getMenuOption() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String validateMenuOption(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected void setMenuOption(String userInput) {
-		// TODO Auto-generated method stub
-		
+	protected void setMenuOption() {
+//		validOptions.put("1", MenuOption.LIST_TASKS_MENU);
+//		validOptions.put("2", MenuOption.ADD_NEW_TASK);
+//		validOptions.put("3", MenuOption.EDIT_TASK_MENU);
+//		validOptions.put("4", MenuOption.SAVE_AND_QUIT);
 	}
 
 }
