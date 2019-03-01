@@ -11,6 +11,7 @@ import todoly.views.actions.edition.UpdateTaskStatusView;
 public class UpdateTaskStatusController extends EditionController {
 
 	public UpdateTaskStatusController(TaskListInterface taskList, Scanner scanner) {
+		
 		UpdateTaskStatusView view = new UpdateTaskStatusView();
 
 		getTaskId(taskList, view);

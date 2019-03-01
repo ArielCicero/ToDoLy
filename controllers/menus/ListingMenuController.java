@@ -8,8 +8,8 @@ import todoly.views.menus.ListingMenuView;
 public class ListingMenuController extends MenuController {
 
 	public ListingMenuController(Scanner scanner) {
-		scanner = new Scanner(System.in);
-		displayMenu(new ListingMenuView());
+		
+		displayMenu(new ListingMenuView(), scanner);
 	}
 
 	@Override

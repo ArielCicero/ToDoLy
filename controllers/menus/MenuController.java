@@ -9,8 +9,7 @@ import todoly.views.menus.MenuView;
 public abstract class MenuController extends Controller {
 	protected MenuView view;
 	
-	protected void displayMenu(MenuView view) {
-		scanner = new Scanner(System.in);
+	protected void displayMenu(MenuView view, Scanner scanner) {
 		this.view = view;
 		do {
 			view.printMenu(errorMessage);
