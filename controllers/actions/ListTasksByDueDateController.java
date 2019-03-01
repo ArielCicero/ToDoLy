@@ -16,12 +16,12 @@ public class ListTasksByDueDateController extends Controller {
 	public ListTasksByDueDateController(TaskListInterface taskList, Scanner scanner) {
 		ListTasksByDueDateView view = new ListTasksByDueDateView();
 		
-		List<Task> tasksList = taskList.getTasks();
-		Collections.sort(tasksList, new SortByDueDate());
-		List<String> tasks = parseTasks(taskList.getTasks());
+		List<Task> tasks = taskList.getTasks();
+		Collections.sort(tasks, new SortByDueDate());
+		List<String> tasksParsed = parseTasks(taskList.getTasks());
 		
 		do {
-			view.printList(errorMessage, tasks);
+			view.printList(errorMessage, tasksParsed);
 			userInput = scanner.nextLine();
 			errorMessage = validateTaskSelection(userInput, taskList);
 		}while(errorMessage != null);
