@@ -10,9 +10,7 @@ import todoly.model.Task;
 import todoly.views.actions.edition.EditionView;
 
 public abstract class EditionController extends Controller {
-	
-	protected abstract String validateIdSelection(String userInput, TaskListInterface taskList);
-	
+		
 	protected Task getTask(TaskListInterface taskList, EditionView view, Scanner scanner) {
 		List<Task> tasksList = taskList.getTasks();
 		Collections.sort(tasksList);
@@ -21,12 +19,17 @@ public abstract class EditionController extends Controller {
 		
 		view.printList(errorMessage, tasks);
 		
+		Task task = null;
 		do {
 			view.askForTaskId(errorMessage, tasks);
 			userInput = scanner.nextLine();
-			errorMessage = validateIdSelection(userInput, taskList);
+			task = taskList.getTask(Integer.parseInt(userInput));
+			errorMessage = null;
+			if(task == null) {
+				errorMessage = "The option selected was not correct, try again";
+			}
 		}while(errorMessage != null);
 		
-		return taskList.getTask(Integer.parseInt(userInput));
+		return task;
 	}
 }

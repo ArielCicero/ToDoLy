@@ -20,11 +20,16 @@ public class ListTasksFilteredByProjectController extends Controller {
 		
 		List<String> projects = projectsToStringList(projectList);
 
-		
+		Project project = null;
 		do {
 			view.askForProject(errorMessage, projects);
 			userInput = scanner.nextLine();
-			errorMessage = validateProjectSelection(userInput, taskList);
+			
+			project = taskList.getProject(Integer.parseInt(userInput));
+			errorMessage = null;
+			if(project == null) {
+				errorMessage = "The option selected was not correct, try again";
+			}
 		}while(errorMessage != null);
 		
 		List<Task> tasksList = taskList.getTasks();
@@ -37,12 +42,6 @@ public class ListTasksFilteredByProjectController extends Controller {
 		
 		displayMenu(view, scanner);
 	}
-
-	private String validateProjectSelection(String userInput, TaskListInterface taskList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	protected void setMenuOption() {

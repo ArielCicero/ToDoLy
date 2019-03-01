@@ -51,11 +51,4 @@ public class UpdateTaskStatusController extends EditionController {
 //		validOptions.put("3", MenuOption.EDIT_TASK_MENU);
 //		validOptions.put("4", MenuOption.SAVE_AND_QUIT);
 	}
-
-
-	@Override
-	protected String validateIdSelection(String userInput, TaskListInterface taskList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

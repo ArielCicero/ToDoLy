@@ -24,5 +24,4 @@ public interface TaskListInterface {
 	int getTasksAmount();
 	
 	int getTasksDoneAmount();
-
 }
