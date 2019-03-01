@@ -12,13 +12,13 @@ public class RemoveTaskController extends EditionController {
 	public RemoveTaskController(TaskListInterface taskList, Scanner scanner) {
 		RemoveTaskView view = new RemoveTaskView();
 
-		getTaskId(taskList, view);
+		getTaskId(taskList, view, scanner);
 		
 		String task = removeTask(taskList, userInput);
 		
 		view.printConfirmation(task);
 		
-		displayMenu(view);
+		displayMenu(view, scanner);
 
 	}
 

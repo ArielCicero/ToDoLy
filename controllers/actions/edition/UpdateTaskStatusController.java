@@ -14,7 +14,7 @@ public class UpdateTaskStatusController extends EditionController {
 		
 		UpdateTaskStatusView view = new UpdateTaskStatusView();
 
-		getTaskId(taskList, view);
+		getTaskId(taskList, view, scanner);
 		
 		Task task = taskList.getTask(userInput);
 		
@@ -32,7 +32,7 @@ public class UpdateTaskStatusController extends EditionController {
 		
 		view.printConfirmation(task.toString());
 		
-		displayMenu(view);
+		displayMenu(view, scanner);
 		
 	}
 	

@@ -12,7 +12,7 @@ public class UpdateTaskTitleController extends EditionController {
 	public UpdateTaskTitleController(TaskListInterface taskList, Scanner scanner) {
 		UpdateTaskTitleView view = new UpdateTaskTitleView();
 
-		getTaskId(taskList, view);
+		getTaskId(taskList, view, scanner);
 		
 		Task task = taskList.getTask(userInput);
 		
@@ -29,7 +29,7 @@ public class UpdateTaskTitleController extends EditionController {
 		
 		view.printConfirmation(task.toString());
 		
-		displayMenu(view);
+		displayMenu(view , scanner);
 		
 	}
 	

@@ -13,7 +13,7 @@ public class UpdateTaskDueDateController extends EditionController {
 	public UpdateTaskDueDateController(TaskListInterface taskList, Scanner scanner) {
 		UpdateTaskDueDateView view = new UpdateTaskDueDateView();
 
-		getTaskId(taskList, view);
+		getTaskId(taskList, view, scanner);
 		
 		Task task = taskList.getTask(userInput);
 		
@@ -30,7 +30,7 @@ public class UpdateTaskDueDateController extends EditionController {
 		
 		view.printConfirmation(task.toString());
 		
-		displayMenu(view);
+		displayMenu(view, scanner);
 	}
 	
 

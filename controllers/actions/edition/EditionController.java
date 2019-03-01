@@ -2,6 +2,7 @@ package todoly.controllers.actions.edition;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import todoly.controllers.Controller;
 import todoly.interfaces.TaskListInterface;
@@ -11,7 +12,7 @@ import todoly.views.actions.edition.EditionView;
 
 public abstract class EditionController extends Controller {
 	
-	protected void getTaskId(TaskListInterface taskList, EditionView view) {
+	protected void getTaskId(TaskListInterface taskList, EditionView view, Scanner scanner) {
 		List<Task> tasksList = taskList.getTasks();
 		Collections.sort(tasksList);
 		List<String> tasks = parseTasks(taskList.getTasks());
@@ -25,7 +26,7 @@ public abstract class EditionController extends Controller {
 		}while(errorMessage != null);
 	}
 	
-	protected void displayMenu(EditionView view) {
+	protected void displayMenu(EditionView view , Scanner scanner) {
 		do {
 			view.printMenu(errorMessage);
 			

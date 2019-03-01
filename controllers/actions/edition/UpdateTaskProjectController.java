@@ -13,7 +13,7 @@ public class UpdateTaskProjectController extends EditionController {
 	public UpdateTaskProjectController(TaskListInterface taskList, Scanner scanner) {
 		UpdateTaskProjectView view = new UpdateTaskProjectView();
 
-		getTaskId(taskList, view);
+		getTaskId(taskList, view, scanner);
 		
 		Task task = taskList.getTask(userInput);
 		
@@ -30,7 +30,7 @@ public class UpdateTaskProjectController extends EditionController {
 		
 		view.printConfirmation(task.toString());
 		
-		displayMenu(view);
+		displayMenu(view, scanner);
 		
 	}
 	
