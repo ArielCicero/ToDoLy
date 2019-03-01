@@ -3,6 +3,7 @@ package todoly.controllers.actions.edition;
 import java.util.List;
 import java.util.Scanner;
 
+import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Project;
 import todoly.model.Task;
@@ -14,15 +15,18 @@ public class UpdateTaskProjectController extends EditionController {
 		UpdateTaskProjectView view = new UpdateTaskProjectView();
 
 		Task task = getTask(taskList, view, scanner);
-
 		
 		do {
-			view.askNewProject(errorMessage);
+			view.askNewProjectName(errorMessage);
 			
 			userInput = scanner.nextLine();
 			
-			setMenuOption(userInput);
-			errorMessage = validateProject(userInput);
+			try {
+				task.getProject().setName(userInput);
+				errorMessage = null;
+			} catch (ToDoLyException e) {
+				errorMessage = e.getMessage();
+			}
 		}while(errorMessage != null);
 		
 		task.setProject(new Project(userInput));
@@ -31,12 +35,6 @@ public class UpdateTaskProjectController extends EditionController {
 		
 		displayMenu(view, scanner);
 		
-	}
-	
-
-	private String validateProject(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 

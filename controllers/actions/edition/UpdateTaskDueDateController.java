@@ -3,6 +3,7 @@ package todoly.controllers.actions.edition;
 import java.util.List;
 import java.util.Scanner;
 
+import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Date;
 import todoly.model.Task;
@@ -22,20 +23,17 @@ public class UpdateTaskDueDateController extends EditionController {
 			userInput = scanner.nextLine();
 			
 			setMenuOption(userInput);
-			errorMessage = validateDate(userInput);
+			try {
+				task.setDueDate(new Date(userInput));
+				errorMessage = null;
+			} catch (ToDoLyException e) {
+				errorMessage = e.getMessage();
+			}
 		}while(errorMessage != null);
-		
-		task.setDueDate(new Date(userInput));
 		
 		view.printConfirmation(task.toString());
 		
 		displayMenu(view, scanner);
-	}
-	
-
-	private String validateDate(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 

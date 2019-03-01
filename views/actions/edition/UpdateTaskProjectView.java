@@ -28,7 +28,7 @@ public class UpdateTaskProjectView extends EditionView {
 		
 	}
 
-	public void askNewProject(String errorMessage) {
+	public void askNewProjectName(String errorMessage) {
 		// TODO Auto-generated method stub
 		
 	}
