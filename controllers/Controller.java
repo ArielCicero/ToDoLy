@@ -19,10 +19,7 @@ public abstract class Controller {
 	protected Scanner scanner;
 	protected View view;
 	protected Map<String,MenuOption> validOptions = new HashMap<>();
-	
-	
-	protected abstract void setMenuOption();
-	
+		
 	protected void validateMenuOption(String input) throws ToDoLyException {
 		Set<String> options = validOptions.keySet();
 		if(false == options.stream().anyMatch(input::equals)) {
@@ -30,7 +27,6 @@ public abstract class Controller {
 		}
 	}
 	
-
 	public MenuOption getMenuOption() {
 		return validOptions.get(userInput);
 	}
@@ -40,7 +36,6 @@ public abstract class Controller {
 		do {
 			view.printMenu(errorMessage);
 			userInput = scanner.nextLine();
-			setMenuOption();
 			try {
 				validateMenuOption(userInput);
 				errorMessage = null;
@@ -51,11 +46,23 @@ public abstract class Controller {
 		}while(errorMessage != null);
 	}
 	
-	public List<String> tasksToStringList(List<Task> list) {
+	protected List<String> tasksToStringList(List<Task> list) {
 		return list.stream().map(x->x.toString()).collect(Collectors.toList());
 	}
 	
 	protected List<String> projectsToStringList(List<Project> list) {
 		return list.stream().map(x->x.toString()).collect(Collectors.toList());
+	}
+	
+	protected void setMenuOption() {
+		validOptions.put("1", MenuOption.LIST_TASKS_BY_DUE_DATE);
+		validOptions.put("2", MenuOption.LIST_TASKS_FILTERED_BY_PROJECT);
+		validOptions.put("3", MenuOption.ADD_NEW_TASK);
+		validOptions.put("4", MenuOption.UPDATE_TASK_STATUS);
+		validOptions.put("5", MenuOption.UPDATE_TASK_TITLE);
+		validOptions.put("6", MenuOption.UPDATE_TASK_DUE_DATE);
+		validOptions.put("7", MenuOption.UPDATE_TASK_PROJECT);
+		validOptions.put("8", MenuOption.REMOVE_TASK);
+		validOptions.put("9", MenuOption.SAVE_AND_QUIT);
 	}
 }

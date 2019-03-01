@@ -9,8 +9,8 @@ public class ListingMenuView extends View{
 		printErrorMessage(errorMessage);
 		printLineSeparator();
 		System.out.println(">> Pick an option:");
-		System.out.println(">> (1) Show Task List Ordered By Due date or project)");
-		System.out.println(">> (2) Show Task List filtered by project)");
+		System.out.println(">> (1) Show Task List Ordered by Due Date");
+		System.out.println(">> (2) Show Task List Filtered by Project");
 		System.out.print(">> ");
 	}
 

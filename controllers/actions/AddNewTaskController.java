@@ -57,7 +57,6 @@ public class AddNewTaskController extends Controller {
 			
 			try {
 				// date format YYYY-MM-DD = "2012-7-1"
-				
 				task.setDueDate(new Date(userInput));
 				
 			} catch (ToDoLyException e) {
@@ -78,22 +77,8 @@ public class AddNewTaskController extends Controller {
 			}
 		}while(errorMessage != null);
 		
-		try {
-			
-			view.printConfirmation();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		view.printConfirmation();
 		
 		displayMenu(view, scanner);
 	}
-
-	@Override
-	protected void setMenuOption() {
-//		validOptions.put("1", MenuOption.LIST_TASKS_MENU);
-//		validOptions.put("2", MenuOption.ADD_NEW_TASK);
-//		validOptions.put("3", MenuOption.EDIT_TASK_MENU);
-//		validOptions.put("4", MenuOption.SAVE_AND_QUIT);
-	}
-
 }

@@ -15,10 +15,4 @@ public class ListTasksFilteredByProjectView extends View {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void printMenu(String errorMessage) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
