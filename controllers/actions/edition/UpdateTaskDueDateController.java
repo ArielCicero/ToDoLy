@@ -32,13 +32,6 @@ public class UpdateTaskDueDateController extends EditionController {
 		
 		displayMenu(view, scanner);
 	}
-	
-
-	@Override
-	protected String validateUserInput(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	@Override
@@ -55,11 +48,4 @@ public class UpdateTaskDueDateController extends EditionController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-//	@Override
-//	protected List<String> parseTasks(List<Task> tasks) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

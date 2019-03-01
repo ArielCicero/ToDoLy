@@ -1,8 +1,6 @@
 package todoly.controllers.actions.edition;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
@@ -36,13 +34,6 @@ public class UpdateTaskTitleController extends EditionController {
 
 
 	@Override
-	protected String validateUserInput(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
 	protected void setMenuOption() {
 //		validOptions.put("1", MenuOption.LIST_TASKS_MENU);
 //		validOptions.put("2", MenuOption.ADD_NEW_TASK);
@@ -55,11 +46,5 @@ public class UpdateTaskTitleController extends EditionController {
 	protected String validateIdSelection(String userInput, TaskListInterface taskList) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-
-	
-	protected List<String> toStringList(List<Object> list) {
-		return list.stream().map(x->x.toString()).collect(Collectors.toList());
 	}
 }

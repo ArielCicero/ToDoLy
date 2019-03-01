@@ -11,14 +11,12 @@ import todoly.views.actions.edition.EditionView;
 
 public abstract class EditionController extends Controller {
 	
-	//protected abstract List<String> parseTasks(List<Task> tasks);
 	protected abstract String validateIdSelection(String userInput, TaskListInterface taskList);
-	protected abstract String validateUserInput(String userInput);
 	
 	protected Task getTask(TaskListInterface taskList, EditionView view, Scanner scanner) {
 		List<Task> tasksList = taskList.getTasks();
 		Collections.sort(tasksList);
-		//List<String> tasks = parseTasks(taskList.getTasks());
+		
 		List<String> tasks = tasksToStringList(taskList.getTasks());
 		
 		view.printList(errorMessage, tasks);

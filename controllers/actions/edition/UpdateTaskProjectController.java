@@ -33,13 +33,6 @@ public class UpdateTaskProjectController extends EditionController {
 
 
 	@Override
-	protected String validateUserInput(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
 	protected void setMenuOption() {
 //		validOptions.put("1", MenuOption.LIST_TASKS_MENU);
 //		validOptions.put("2", MenuOption.ADD_NEW_TASK);
@@ -53,11 +46,4 @@ public class UpdateTaskProjectController extends EditionController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-//	@Override
-//	protected List<String> parseTasks(List<Task> tasks) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

@@ -18,7 +18,6 @@ public class ListTasksByDueDateController extends Controller {
 		List<Task> tasks = taskList.getTasks();
 		Collections.sort(tasks, new SortByDueDate());
 		
-		//List<String> tasksParsed = parseTasks(taskList.getTasks());
 		List<String> tasksParsed = tasksToStringList(taskList.getTasks());
 
 		
@@ -36,11 +35,6 @@ public class ListTasksByDueDateController extends Controller {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-//	private List<String> parseTasks(List<Task> tasks) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 
 	@Override

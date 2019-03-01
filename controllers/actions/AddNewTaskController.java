@@ -21,8 +21,7 @@ public class AddNewTaskController extends Controller {
 		List<Project> projectList = taskList.getProjects();
 		Collections.sort(projectList);
 		
-		//List<String> projects = parseProjects(projectList);
-		List<String> projects = tasksToStringList(taskList.getTasks());
+		List<String> projects = projectsToStringList(projectList);
 
 		
 		Project project = null;
@@ -88,11 +87,6 @@ public class AddNewTaskController extends Controller {
 		
 		displayMenu(view, scanner);
 	}
-
-//	private List<String> parseProjects(List<Project> projects) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	@Override
 	protected void setMenuOption() {
