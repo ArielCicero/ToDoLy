@@ -70,4 +70,11 @@ public class UpdateTaskDueDateController extends EditionController {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	protected String validateMenuOption(String userInput) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

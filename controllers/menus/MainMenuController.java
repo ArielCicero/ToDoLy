@@ -2,11 +2,12 @@ package todoly.controllers.menus;
 
 import java.util.Scanner;
 
+import todoly.controllers.Controller;
 import todoly.interfaces.TaskListInterface;
 import todoly.util.enums.MenuOption;
 import todoly.views.menus.MainMenuView;
 
-public class MainMenuController extends MenuController {
+public class MainMenuController extends Controller {
 
 	public MainMenuController(TaskListInterface taskList, Scanner scanner) {
 		
@@ -19,7 +20,7 @@ public class MainMenuController extends MenuController {
 
 	
 	@Override
-	protected String validateUserInput(String userInput) {
+	protected String validateMenuOption(String userInput) {
 		try {
 			int option = Integer.parseInt(userInput);
 			if(1 > option || option > 4) {

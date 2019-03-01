@@ -27,23 +27,9 @@ public class ListTasksByDueDateController extends Controller {
 			errorMessage = validateTaskSelection(userInput, taskList);
 		}while(errorMessage != null);
 		
-		do {
-			view.printMenu(errorMessage);
-			userInput = scanner.nextLine();
-			setMenuOption(userInput);
-			errorMessage = validateUserInput(userInput);
-		}while(errorMessage != null);
+		displayMenu(view, scanner);
 	}
 
-	private String validateUserInput(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private void setMenuOption(String userInput) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	private String validateTaskSelection(String userInput, TaskListInterface taskList) {
 		// TODO Auto-generated method stub
@@ -55,8 +41,23 @@ public class ListTasksByDueDateController extends Controller {
 		return null;
 	}
 
+	@Override
 	public MenuOption getMenuOption() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	protected String validateMenuOption(String userInput) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	protected void setMenuOption(String userInput) {
+		// TODO Auto-generated method stub
+		
 	}
 }

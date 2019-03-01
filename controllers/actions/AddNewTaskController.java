@@ -85,22 +85,7 @@ public class AddNewTaskController extends Controller {
 			// TODO: handle exception
 		}
 		
-		do {
-			view.printMenu(errorMessage);
-			userInput = scanner.nextLine();
-			setMenuOption(userInput);
-			errorMessage = validateUserInput(userInput);
-		}while(errorMessage != null);
-	}
-
-	private String validateUserInput(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private void setMenuOption(String userInput) {
-		// TODO Auto-generated method stub
-		
+		displayMenu(view, scanner);
 	}
 
 	private List<String> parseProjects(List<Project> projects) {
@@ -108,9 +93,22 @@ public class AddNewTaskController extends Controller {
 		return null;
 	}
 
+	@Override
 	public MenuOption getMenuOption() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected String validateMenuOption(String userInput) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void setMenuOption(String userInput) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

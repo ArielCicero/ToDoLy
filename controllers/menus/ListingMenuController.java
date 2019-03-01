@@ -2,10 +2,11 @@ package todoly.controllers.menus;
 
 import java.util.Scanner;
 
+import todoly.controllers.Controller;
 import todoly.util.enums.MenuOption;
 import todoly.views.menus.ListingMenuView;
 
-public class ListingMenuController extends MenuController {
+public class ListingMenuController extends Controller {
 
 	public ListingMenuController(Scanner scanner) {
 		
@@ -13,7 +14,7 @@ public class ListingMenuController extends MenuController {
 	}
 
 	@Override
-	protected String validateUserInput(String userInput) {
+	protected String validateMenuOption(String userInput) {
 		// TODO Auto-generated method stub
 		return null;
 	}

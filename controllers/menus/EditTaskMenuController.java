@@ -2,10 +2,11 @@ package todoly.controllers.menus;
 
 import java.util.Scanner;
 
+import todoly.controllers.Controller;
 import todoly.util.enums.MenuOption;
 import todoly.views.menus.EditTaskMenuView;
 
-public class EditTaskMenuController extends MenuController {
+public class EditTaskMenuController extends Controller {
 
 	public EditTaskMenuController(Scanner scanner) {
 		
@@ -13,7 +14,7 @@ public class EditTaskMenuController extends MenuController {
 	}
 
 	@Override
-	protected String validateUserInput(String userInput) {
+	protected String validateMenuOption(String userInput) {
 		// TODO Auto-generated method stub
 		return null;
 	}

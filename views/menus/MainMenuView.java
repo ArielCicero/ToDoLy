@@ -1,6 +1,8 @@
 package todoly.views.menus;
 
-public class MainMenuView extends MenuView {
+import todoly.views.View;
+
+public class MainMenuView extends View {
 	String tasksAmount;
 	String tasksDoneAmount;
 	public MainMenuView(String tasksAmount, String tasksDoneAmount) {

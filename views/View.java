@@ -1,6 +1,8 @@
 package todoly.views;
 
 public abstract class View {
+	public abstract void printMenu(String errorMessage);
+	
 	protected void printLineSeparator() {
 		System.out.println("###########################################"
 						  +"############################################");

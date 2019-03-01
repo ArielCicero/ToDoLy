@@ -1,6 +1,8 @@
 package todoly.views.menus;
 
-public class EditTaskMenuView extends MenuView {
+import todoly.views.View;
+
+public class EditTaskMenuView extends View {
 
 	@Override
 	public void printMenu(String errorMessage) {
