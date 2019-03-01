@@ -28,7 +28,9 @@ public class ListTasksFilteredByProjectController extends Controller {
 		
 		List<Task> tasksList = taskList.getTasks();
 		Collections.sort(tasksList);
-		List<String> tasks = parseTasks(taskList.getTasks());
+		//List<String> tasks = parseTasks(taskList.getTasks());
+		List<String> tasks = tasksToStringList(taskList.getTasks());
+
 		
 		view.printList(errorMessage, tasks);
 		
@@ -36,10 +38,10 @@ public class ListTasksFilteredByProjectController extends Controller {
 	}
 
 
-	private List<String> parseTasks(List<Task> list) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	private List<String> parseTasks(List<Task> list) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	private String validateProjectSelection(String userInput, TaskListInterface taskList) {
 		// TODO Auto-generated method stub

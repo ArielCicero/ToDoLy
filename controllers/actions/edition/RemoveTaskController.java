@@ -1,6 +1,5 @@
 package todoly.controllers.actions.edition;
 
-import java.util.List;
 import java.util.Scanner;
 
 import todoly.interfaces.TaskListInterface;
@@ -41,9 +40,9 @@ public class RemoveTaskController extends EditionController {
 		return null;
 	}
 
-	@Override
-	protected List<String> parseTasks(List<Task> tasks) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	protected List<String> parseTasks(List<Task> tasks) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

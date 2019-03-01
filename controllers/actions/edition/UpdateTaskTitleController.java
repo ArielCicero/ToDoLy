@@ -2,6 +2,7 @@ package todoly.controllers.actions.edition;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
@@ -57,9 +58,8 @@ public class UpdateTaskTitleController extends EditionController {
 	}
 
 
-	@Override
-	protected List<String> parseTasks(List<Task> tasks) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	protected List<String> toStringList(List<Object> list) {
+		return list.stream().map(x->x.toString()).collect(Collectors.toList());
 	}
 }
