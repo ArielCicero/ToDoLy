@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
-import todoly.model.Project;
 import todoly.model.Task;
 import todoly.util.enums.MenuOption;
 import todoly.views.actions.edition.UpdateTaskProjectView;
@@ -28,13 +27,10 @@ public class UpdateTaskProjectController extends EditionController {
 				errorMessage = e.getMessage();
 			}
 		}while(errorMessage != null);
-		
-		task.setProject(new Project(userInput));
-		
+				
 		view.printConfirmation(task.toString());
 		
 		displayMenu(view, scanner);
-		
 	}
 
 

@@ -3,6 +3,7 @@ package todoly.controllers.actions.edition;
 import java.util.List;
 import java.util.Scanner;
 
+import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Task;
 import todoly.util.enums.MenuOption;
@@ -19,22 +20,18 @@ public class UpdateTaskTitleController extends EditionController {
 			
 			userInput = scanner.nextLine();
 			
-			setMenuOption(userInput);
-			errorMessage = validateTitle(userInput);
+			try {
+				task.setTitle(userInput);
+				errorMessage = null;
+			} catch (ToDoLyException e) {
+				errorMessage = e.getMessage();
+			}
 		}while(errorMessage != null);
-		
-		task.setTitle(userInput); 
-		
+				
 		view.printConfirmation(task.toString());
 		
 		displayMenu(view , scanner);
 		
-	}
-	
-
-	private String validateTitle(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 

@@ -22,23 +22,27 @@ public class UpdateTaskStatusController extends EditionController {
 			
 			userInput = scanner.nextLine();
 			
-			setMenuOption(userInput);
-			errorMessage = validateStatus(userInput);
+			errorMessage = null;
+			//0 = to do , 1 = done
+			switch (userInput) {
+			case "0":
+				task.setStatus(false);
+				break;
+			case "1":
+				task.setStatus(false);
+				break;
+
+			default:
+				errorMessage = "Valid options are 0 and 1. ["+
+								userInput + "] is not a valid option";
+				break;
+			}
 		}while(errorMessage != null);
-		
-		//0 = to do , 1 = done
-		task.setStatus(userInput == "1"); 
 		
 		view.printConfirmation(task.toString());
 		
 		displayMenu(view, scanner);
 		
-	}
-	
-
-	private String validateStatus(String userInput) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 
