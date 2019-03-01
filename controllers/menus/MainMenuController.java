@@ -9,6 +9,7 @@ import todoly.views.menus.MainMenuView;
 public class MainMenuController extends MenuController {
 
 	public MainMenuController(TaskListInterface taskList, Scanner scanner) {
+		scanner = new Scanner(System.in);
 		displayMenu(new MainMenuView(
 						Integer.toString(taskList.getTasksAmount()),
 						Integer.toString(taskList.getTasksDoneAmount())

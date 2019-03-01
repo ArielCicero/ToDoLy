@@ -8,6 +8,7 @@ import todoly.views.menus.EditTaskMenuView;
 public class EditTaskMenuController extends MenuController {
 
 	public EditTaskMenuController(Scanner scanner) {
+		scanner = new Scanner(System.in);
 		displayMenu(new EditTaskMenuView());
 	}
 

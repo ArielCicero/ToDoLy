@@ -1,5 +1,7 @@
 package todoly.controllers.menus;
 
+import java.util.Scanner;
+
 import todoly.controllers.Controller;
 import todoly.util.enums.MenuOption;
 import todoly.views.menus.MenuView;
@@ -8,6 +10,7 @@ public abstract class MenuController extends Controller {
 	protected MenuView view;
 	
 	protected void displayMenu(MenuView view) {
+		scanner = new Scanner(System.in);
 		this.view = view;
 		do {
 			view.printMenu(errorMessage);
