@@ -13,9 +13,8 @@ public class UpdateTaskProjectController extends EditionController {
 	public UpdateTaskProjectController(TaskListInterface taskList, Scanner scanner) {
 		UpdateTaskProjectView view = new UpdateTaskProjectView();
 
-		getTaskId(taskList, view, scanner);
-		
-		Task task = taskList.getTask(userInput);
+		Task task = getTask(taskList, view, scanner);
+
 		
 		do {
 			view.askNewProject(errorMessage);

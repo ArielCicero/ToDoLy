@@ -12,9 +12,7 @@ public class UpdateTaskTitleController extends EditionController {
 	public UpdateTaskTitleController(TaskListInterface taskList, Scanner scanner) {
 		UpdateTaskTitleView view = new UpdateTaskTitleView();
 
-		getTaskId(taskList, view, scanner);
-		
-		Task task = taskList.getTask(userInput);
+		Task task = getTask(taskList, view, scanner);
 		
 		do {
 			view.askNewTitle(errorMessage);

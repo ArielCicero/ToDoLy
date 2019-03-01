@@ -13,9 +13,8 @@ public class UpdateTaskDueDateController extends EditionController {
 	public UpdateTaskDueDateController(TaskListInterface taskList, Scanner scanner) {
 		UpdateTaskDueDateView view = new UpdateTaskDueDateView();
 
-		getTaskId(taskList, view, scanner);
-		
-		Task task = taskList.getTask(userInput);
+		Task task = getTask(taskList, view, scanner);
+
 		
 		do {
 			view.askNewDueDate(errorMessage);

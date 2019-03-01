@@ -12,7 +12,7 @@ import todoly.views.actions.edition.EditionView;
 
 public abstract class EditionController extends Controller {
 	
-	protected void getTaskId(TaskListInterface taskList, EditionView view, Scanner scanner) {
+	protected Task getTask(TaskListInterface taskList, EditionView view, Scanner scanner) {
 		List<Task> tasksList = taskList.getTasks();
 		Collections.sort(tasksList);
 		List<String> tasks = parseTasks(taskList.getTasks());
@@ -24,6 +24,8 @@ public abstract class EditionController extends Controller {
 			userInput = scanner.nextLine();
 			errorMessage = validateIdSelection(userInput, taskList);
 		}while(errorMessage != null);
+		
+		return taskList.getTask(Integer.parseInt(userInput));
 	}
 	
 	protected void displayMenu(EditionView view , Scanner scanner) {

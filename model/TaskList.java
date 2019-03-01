@@ -40,9 +40,10 @@ public class TaskList implements TaskListInterface{
 			if(projectIdOfNewTask == null) {
 				newTask.setId(id);
 				tasks.put(id, newTask);
-				id = projects.values().size()+1;
 				
+				id = projects.values().size()+1;
 				Project newProject = newTask.getProject();
+				
 				newProject.setId(id);
 				newProject.addTask(newTask);
 				projects.put(id, newProject);
@@ -64,15 +65,13 @@ public class TaskList implements TaskListInterface{
 	}
 
 	@Override
-	public void updateTask(Task task) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void removeTask(Integer taskId) {
-		// TODO Auto-generated method stub
-		
+		Task removedTask = tasks.remove(taskId);
+		Project projectOfRemovedTask = removedTask.getProject();
+		projectOfRemovedTask.getTasks().remove(removedTask);
+		if(projectOfRemovedTask.getTasks().isEmpty()) {
+			projects.remove(projectOfRemovedTask.getId());
+		}
 	}
 
 	@Override
@@ -91,14 +90,12 @@ public class TaskList implements TaskListInterface{
 
 	@Override
 	public Task getTask(Integer taskId) {
-		// TODO Auto-generated method stub
-		return null;
+		return tasks.get(taskId);
 	}
 
 	@Override
 	public Project getProject(Integer userInput) {
-		// TODO Auto-generated method stub
-		return null;
+		return projects.get(userInput);
 	}
 	
 }

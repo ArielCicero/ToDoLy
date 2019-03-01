@@ -19,8 +19,6 @@ public interface TaskListInterface {
 	
 	void addTask(Task task);
 
-	void updateTask(Task task);
-
 	void removeTask(Integer taskId);
 	
 	int getTasksAmount();

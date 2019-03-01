@@ -14,9 +14,8 @@ public class UpdateTaskStatusController extends EditionController {
 		
 		UpdateTaskStatusView view = new UpdateTaskStatusView();
 
-		getTaskId(taskList, view, scanner);
-		
-		Task task = taskList.getTask(userInput);
+		Task task = getTask(taskList, view, scanner);
+
 		
 		do {
 			view.askTaskStatus(errorMessage);

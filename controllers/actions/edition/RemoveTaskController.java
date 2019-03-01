@@ -12,11 +12,11 @@ public class RemoveTaskController extends EditionController {
 	public RemoveTaskController(TaskListInterface taskList, Scanner scanner) {
 		RemoveTaskView view = new RemoveTaskView();
 
-		getTaskId(taskList, view, scanner);
+		Task task = getTask(taskList, view, scanner);
 		
-		String task = removeTask(taskList, userInput);
+		taskList.removeTask(task.getId());
 		
-		view.printConfirmation(task);
+		view.printConfirmation(task.toString());
 		
 		displayMenu(view, scanner);
 
@@ -44,12 +44,6 @@ public class RemoveTaskController extends EditionController {
 	protected List<String> parseTasks(List<Task> tasks) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	private String removeTask(TaskListInterface taskList, String id) {
-		// TODO Auto-generated method stub
-		return null;
-		
 	}
 
 	@Override
