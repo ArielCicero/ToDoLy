@@ -1,12 +1,14 @@
 package todoly.controllers.menus;
 
+import java.util.Scanner;
+
 import todoly.util.enums.MenuOption;
 import todoly.views.menus.ListingMenuView;
 
 public class ListingMenuController extends MenuController {
 
-	public ListingMenuController() {
-		super(new ListingMenuView());
+	public ListingMenuController(Scanner scanner) {
+		displayMenu(new ListingMenuView());
 	}
 
 	@Override

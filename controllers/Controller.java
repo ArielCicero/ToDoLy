@@ -8,5 +8,5 @@ public abstract class Controller {
 	protected MenuOption menuOption;
 	protected String errorMessage;
 	protected String userInput;
-	protected Scanner scanner = new Scanner(System.in);
+	protected Scanner scanner;
 }

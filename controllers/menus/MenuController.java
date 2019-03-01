@@ -7,7 +7,7 @@ import todoly.views.menus.MenuView;
 public abstract class MenuController extends Controller {
 	protected MenuView view;
 	
-	public MenuController(MenuView view) {
+	protected void displayMenu(MenuView view) {
 		this.view = view;
 		do {
 			view.printMenu(errorMessage);
@@ -17,7 +17,7 @@ public abstract class MenuController extends Controller {
 			setMenuOption(userInput);
 			errorMessage = validateUserInput(userInput);
 		}while(errorMessage != null);
-		scanner.close();
+		
 	}
 	
 	protected abstract String validateUserInput(String userInput);

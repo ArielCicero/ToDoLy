@@ -17,7 +17,7 @@ public class AddNewTaskView extends View {
 	}
 
 	public void askForProject(String errorMessage, List<String> projects) {
-		// TODO Auto-generated method stub
+		System.out.println("be aware that any input that is not a number will be considered the name of your project");
 		
 	}
 

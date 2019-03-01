@@ -8,6 +8,7 @@ public class MainMenuView extends MenuView {
 		this.tasksDoneAmount = tasksDoneAmount;
 	}
 
+	
 	@Override
 	public void printMenu(String errorMessage) {
 		printErrorMessage(errorMessage);

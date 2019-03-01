@@ -2,6 +2,7 @@ package todoly.controllers.actions;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import todoly.controllers.Controller;
 import todoly.interfaces.TaskListInterface;
@@ -12,7 +13,7 @@ import todoly.views.actions.ListTasksByDueDateView;
 
 public class ListTasksByDueDateController extends Controller {
 
-	public ListTasksByDueDateController(TaskListInterface taskList) {
+	public ListTasksByDueDateController(TaskListInterface taskList, Scanner scanner) {
 		ListTasksByDueDateView view = new ListTasksByDueDateView();
 		
 		List<Task> tasksList = taskList.getTasks();
@@ -31,7 +32,6 @@ public class ListTasksByDueDateController extends Controller {
 			setMenuOption(userInput);
 			errorMessage = validateUserInput(userInput);
 		}while(errorMessage != null);
-		scanner.close();
 	}
 
 	private String validateUserInput(String userInput) {

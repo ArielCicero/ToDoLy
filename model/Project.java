@@ -1,52 +1,88 @@
 package todoly.model;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
+import todoly.exceptions.ToDoLyException;
 
 public class Project implements Comparable<Project>{
-	private String projectId;
-    private String projectName;
-    private List<Task> tasks;
+	private Integer id;
+    private String name;
+    private Set<Task> tasks = new HashSet<>();
     
-	public Project(String projectId, String projectName) {
-		this(projectName);
-		this.projectId = projectId;
-	}
+    Set<Task> getTasks(){
+    	return tasks;
+    }
+    
+    void addTask(Task task) {
+    	tasks.add(task);
+    }
+    
+    void removeTask(Task task) {
+    	tasks.remove(task);
+    }
 	
-	public Project(String projectName) {
-		this.projectName = projectName;
+	public Project(String name) {
+		setName(name);
+	}
+
+	public Project() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public int compareTo(Project otherProject) {
-		return -1 * projectName.compareTo(otherProject.getProjectName());
+		return -1 * name.compareTo(otherProject.getName());
 	}
 
-	public String getProjectId() {
-		return projectId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setProjectId(String projectId) {
-		this.projectId = projectId;
+	public void setId(Integer projectId) {
+		this.id = projectId;
 	}
 
-	public String getProjectName() {
-		return projectName;
+	public String getName() {
+		return name;
 	}
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+	public void setName(String name) {
+		if(name.trim() == "" || name == null) {
+			throw new ToDoLyException("The project name can not be empty");
+		}
+		
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return "[" + projectId + "] " + projectName;
+		return "[" + id + "] " + name;
+	}
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
 	}
 
-	public List<Task> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Project other = (Project) obj;
+		if (name == null) {
+			if (other.getName() != null)
+				return false;
+		} else if (!name.equals(other.getName()))
+			return false;
+		return true;
 	}
 }

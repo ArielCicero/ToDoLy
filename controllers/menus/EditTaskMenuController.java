@@ -1,12 +1,14 @@
 package todoly.controllers.menus;
 
+import java.util.Scanner;
+
 import todoly.util.enums.MenuOption;
 import todoly.views.menus.EditTaskMenuView;
 
 public class EditTaskMenuController extends MenuController {
 
-	public EditTaskMenuController() {
-		super(new EditTaskMenuView());
+	public EditTaskMenuController(Scanner scanner) {
+		displayMenu(new EditTaskMenuView());
 	}
 
 	@Override

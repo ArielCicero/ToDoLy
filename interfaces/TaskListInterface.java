@@ -11,6 +11,8 @@ public interface TaskListInterface {
 	
 	Task getTask(String taskId);
 	
+	Project getProject(Integer projectId);
+	
 	List<Project> getProjects();
 	
 	List<Task> getTasksFilteredByProject(String taskId);
@@ -25,5 +27,4 @@ public interface TaskListInterface {
 	
 	int getTasksDoneAmount();
 
-	
 }

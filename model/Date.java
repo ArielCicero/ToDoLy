@@ -3,12 +3,12 @@ package todoly.model;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-import todoly.exceptions.DateException;
+import todoly.exceptions.ToDoLyException;
 
 public class Date{
 	private LocalDate date;
 	
-	public Date(String date) throws DateException {
+	public Date(String date) throws ToDoLyException {
 		set(date);
 	}
 
@@ -20,21 +20,21 @@ public class Date{
 		return date;
 	}
 
-	public void set(String date) throws DateException {
+	public void set(String date) throws ToDoLyException {
 		int[] YearMonthDay = parseDate(date);
 		
 		try {
 			this.date = LocalDate.of(YearMonthDay[0], YearMonthDay[1], YearMonthDay[2]);
 		} catch (DateTimeException e) {
-			throw new DateException(e.getMessage());
+			throw new ToDoLyException(e.getMessage());
 		}
 	}
 
-	private int[] parseDate(String date) throws DateException {
+	private int[] parseDate(String date) throws ToDoLyException {
 		String[] parts = date.split("-");
 		
 		if(parts.length!=3) {
-			throw new DateException("The date mus be composed of 3 parts: YYYY-MM-DD");
+			throw new ToDoLyException("The date mus be composed of 3 parts: YYYY-MM-DD");
 		}
 		
 		try {
@@ -42,7 +42,7 @@ public class Date{
 			int value0 = Integer.parseInt(parts[0]);
 			
 			if(parts[0].length()!=4)
-				throw new DateException("The year must be with 4 digits: YYYY");
+				throw new ToDoLyException("The year must be with 4 digits: YYYY");
 			
 			int[] YearMonthDay = {
 				value0,
@@ -58,7 +58,7 @@ public class Date{
 									   "Wrong value"
 							  );
 			
-			throw new DateException(message);
+			throw new ToDoLyException(message);
 		}
 	}
 

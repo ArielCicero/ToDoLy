@@ -2,6 +2,7 @@ package todoly.controllers.actions;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import todoly.controllers.Controller;
 import todoly.interfaces.TaskListInterface;
@@ -12,7 +13,7 @@ import todoly.views.actions.ListTasksFilteredByProjectView;
 
 public class ListTasksFilteredByProjectController extends Controller {
 
-	public ListTasksFilteredByProjectController(TaskListInterface taskList) {
+	public ListTasksFilteredByProjectController(TaskListInterface taskList, Scanner scanner) {
 		ListTasksFilteredByProjectView view = new ListTasksFilteredByProjectView();
 		
 		List<Project> projectList = taskList.getProjects();
@@ -37,7 +38,6 @@ public class ListTasksFilteredByProjectController extends Controller {
 			setMenuOption(userInput);
 			errorMessage = validateUserInput(userInput);
 		}while(errorMessage != null);
-		scanner.close();
 	}
 
 	private String validateUserInput(String userInput) {

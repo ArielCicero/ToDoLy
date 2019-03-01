@@ -1,6 +1,7 @@
 package todoly.controllers.actions.edition;
 
 import java.util.List;
+import java.util.Scanner;
 
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Date;
@@ -9,7 +10,7 @@ import todoly.util.enums.MenuOption;
 import todoly.views.actions.edition.UpdateTaskDueDateView;
 
 public class UpdateTaskDueDateController extends EditionController {
-	public UpdateTaskDueDateController(TaskListInterface taskList) {
+	public UpdateTaskDueDateController(TaskListInterface taskList, Scanner scanner) {
 		UpdateTaskDueDateView view = new UpdateTaskDueDateView();
 
 		getTaskId(taskList, view);
@@ -30,8 +31,6 @@ public class UpdateTaskDueDateController extends EditionController {
 		view.printConfirmation(task.toString());
 		
 		displayMenu(view);
-		
-		scanner.close();
 	}
 	
 

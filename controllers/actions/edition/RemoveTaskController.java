@@ -1,6 +1,7 @@
 package todoly.controllers.actions.edition;
 
 import java.util.List;
+import java.util.Scanner;
 
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Task;
@@ -8,7 +9,7 @@ import todoly.util.enums.MenuOption;
 import todoly.views.actions.edition.RemoveTaskView;
 
 public class RemoveTaskController extends EditionController {
-	public RemoveTaskController(TaskListInterface taskList) {
+	public RemoveTaskController(TaskListInterface taskList, Scanner scanner) {
 		RemoveTaskView view = new RemoveTaskView();
 
 		getTaskId(taskList, view);
@@ -18,8 +19,7 @@ public class RemoveTaskController extends EditionController {
 		view.printConfirmation(task);
 		
 		displayMenu(view);
-		
-		scanner.close();
+
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package todoly.app;
 
+import java.util.Scanner;
+
 import todoly.controllers.actions.AddNewTaskController;
 import todoly.controllers.actions.ListTasksByDueDateController;
 import todoly.controllers.actions.ListTasksFilteredByProjectController;
@@ -12,20 +14,21 @@ import todoly.controllers.menus.EditTaskMenuController;
 import todoly.controllers.menus.ListingMenuController;
 import todoly.controllers.menus.MainMenuController;
 import todoly.interfaces.ApplicationProgramInterface;
-import todoly.interfaces.RepositoryInterface;
 import todoly.interfaces.TaskListInterface;
+import todoly.interfaces.TaskListRepositoryInterface;
 import todoly.util.enums.MenuOption;
 
 public class TextBasedApp implements ApplicationProgramInterface, Runnable{
 
 	private TaskListInterface taskList;
-	private RepositoryInterface<TaskListInterface> fileRepository;
+	private TaskListRepositoryInterface fileRepository;
 	private MenuOption menuOption = MenuOption.MAIN_MENUE;
+	private Scanner scanner = new Scanner(System.in);
 
 	
-	public TextBasedApp(RepositoryInterface<TaskListInterface> fileRepository) {
+	public TextBasedApp(TaskListRepositoryInterface fileRepository) {
 		this.fileRepository = fileRepository;
-		taskList = fileRepository.load();
+		taskList = fileRepository.loadTaskList();
 	}
 
 	@Override
@@ -67,63 +70,64 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
 				break;
 			}
 		}while(menuOption != MenuOption.SAVE_AND_QUIT);
+		scanner.close();
 		saveAndQuit();
 	}
 	
 	protected void showMainMenu(){
-		menuOption = new MainMenuController(taskList).getMenuOption();
+		menuOption = new MainMenuController(taskList, scanner).getMenuOption();
 	}
 
 	public void showListingMenu() {
-		menuOption = new ListingMenuController().getMenuOption();
+		menuOption = new ListingMenuController(scanner).getMenuOption();
 	}
 
 	@Override
 	public void addNewTask() {
-		menuOption = new AddNewTaskController(taskList).getMenuOption();		
+		menuOption = new AddNewTaskController(taskList, scanner).getMenuOption();		
 	}
 
 	@Override
 	public void listTasksByDueDate() {
-		menuOption = new ListTasksByDueDateController(taskList).getMenuOption();		
+		menuOption = new ListTasksByDueDateController(taskList, scanner).getMenuOption();		
 	}
 	
 	@Override
 	public void listTasksFilteredByProject() {
-		menuOption = new ListTasksFilteredByProjectController(taskList).getMenuOption();		
+		menuOption = new ListTasksFilteredByProjectController(taskList, scanner).getMenuOption();		
 	}
 	
 	public void editTaskMenu() {
-		menuOption = new EditTaskMenuController().getMenuOption();
+		menuOption = new EditTaskMenuController(scanner).getMenuOption();
 	}
 	
 	@Override
 	public void updateTaskStatus() {
-		menuOption = new UpdateTaskStatusController(taskList).getMenuOption();
+		menuOption = new UpdateTaskStatusController(taskList, scanner).getMenuOption();
 	}
 	
 	@Override
 	public void updateTaskTitle() {
-		menuOption = new UpdateTaskTitleController(taskList).getMenuOption();
+		menuOption = new UpdateTaskTitleController(taskList, scanner).getMenuOption();
 	}
 	
 	@Override
 	public void updateTaskDueDate() {
-		menuOption = new UpdateTaskDueDateController(taskList).getMenuOption();
+		menuOption = new UpdateTaskDueDateController(taskList, scanner).getMenuOption();
 	}
 	
 	@Override
 	public void updateTaskProject() {
-		menuOption = new UpdateTaskProjectController(taskList).getMenuOption();
+		menuOption = new UpdateTaskProjectController(taskList, scanner).getMenuOption();
 	}
 	
 	@Override
 	public void removeTask() {
-		menuOption = new RemoveTaskController(taskList).getMenuOption();
+		menuOption = new RemoveTaskController(taskList, scanner).getMenuOption();
 	}
 
 	@Override
 	public void saveAndQuit() {
-		fileRepository.save(taskList);
+		fileRepository.saveTaskList(taskList);
 	}
 }

@@ -1,6 +1,7 @@
 package todoly.controllers.actions.edition;
 
 import java.util.List;
+import java.util.Scanner;
 
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Project;
@@ -9,7 +10,7 @@ import todoly.util.enums.MenuOption;
 import todoly.views.actions.edition.UpdateTaskProjectView;
 
 public class UpdateTaskProjectController extends EditionController {
-	public UpdateTaskProjectController(TaskListInterface taskList) {
+	public UpdateTaskProjectController(TaskListInterface taskList, Scanner scanner) {
 		UpdateTaskProjectView view = new UpdateTaskProjectView();
 
 		getTaskId(taskList, view);
@@ -31,7 +32,6 @@ public class UpdateTaskProjectController extends EditionController {
 		
 		displayMenu(view);
 		
-		scanner.close();
 	}
 	
 
