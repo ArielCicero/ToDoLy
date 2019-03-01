@@ -18,6 +18,7 @@ public class ListTasksByDueDateController extends Controller {
 		
 		List<Task> tasks = taskList.getTasks();
 		Collections.sort(tasks, new SortByDueDate());
+		
 		List<String> tasksParsed = parseTasks(taskList.getTasks());
 		
 		do {

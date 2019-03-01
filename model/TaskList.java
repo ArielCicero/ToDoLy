@@ -1,8 +1,10 @@
 package todoly.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
@@ -13,20 +15,19 @@ public class TaskList implements TaskListInterface{
 
 	@Override
 	public List<Task> getTasks() {
-		// TODO Auto-generated method stub
-		return null;
+		return  new ArrayList<Task>(tasks.values());
 	}
 
 	@Override
 	public List<Project> getProjects() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Project>(projects.values());
 	}
 	
 	@Override
-	public List<Task> getTasksFilteredByProject(String taskId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Task> getTasksFilteredByProject(Integer projectId) {
+		List<Task> returnList = new ArrayList<Task>();
+		returnList.addAll(projects.get(projectId).getTasks());
+		return returnList;
 	}
 
 	@Override
@@ -69,25 +70,27 @@ public class TaskList implements TaskListInterface{
 	}
 
 	@Override
-	public void removeTask(String taskId) {
+	public void removeTask(Integer taskId) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public int getTasksAmount() {
-		// can not be null
-		return 0;
+		return tasks.values().size();
 	}
 
 	@Override
 	public int getTasksDoneAmount() {
-		// can not be null
-		return 0;
+		return tasks.values()
+					.stream()
+					.filter(x->x.isDone())
+					.collect(Collectors.toList())
+					.size();
 	}
 
 	@Override
-	public Task getTask(String taskId) {
+	public Task getTask(Integer taskId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

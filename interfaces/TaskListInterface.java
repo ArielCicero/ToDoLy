@@ -9,19 +9,19 @@ public interface TaskListInterface {
 	
 	List<Task> getTasks();
 	
-	Task getTask(String taskId);
+	Task getTask(Integer taskId);
 	
 	Project getProject(Integer projectId);
 	
 	List<Project> getProjects();
 	
-	List<Task> getTasksFilteredByProject(String taskId);
+	List<Task> getTasksFilteredByProject(Integer projectId);
 	
 	void addTask(Task task);
 
 	void updateTask(Task task);
 
-	void removeTask(String taskId);
+	void removeTask(Integer taskId);
 	
 	int getTasksAmount();
 	
