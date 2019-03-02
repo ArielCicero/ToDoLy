@@ -19,7 +19,7 @@ public class UpdateTaskStatusController extends EditionController {
 
 		
 		do {
-			view.askForInput(errorMessage, "New Status");
+			view.askForInput(errorMessage, "(1) to mark it as Dono or (0) to mark it as a task To Do");
 			
 			userInput = scanner.nextLine();
 			errorMessage = null;

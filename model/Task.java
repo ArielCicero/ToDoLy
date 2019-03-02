@@ -90,10 +90,10 @@ public class Task implements Comparable<Task>{
 //				"Status: " + (isDone? "Done": "To do") + "    " +
 //				"Project: " + project;
 		
-		return	"Task [" + id + "] " +
-				"Due Date: " + dueDate + "\n" +
-				"\t Title: " + title + "\n" +
-				"\t Status: " + (isDone? "Done": "To do") + "\n" +
+		return	"Task [" + id + "] " + 
+				title + "\n" +
+				"\t Due Date: " + dueDate + 
+				"\t Status: " + (isDone? "Done": "To Do") +
 				"\t Project: " + project;
 	}
 
