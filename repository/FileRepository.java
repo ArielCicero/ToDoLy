@@ -15,9 +15,9 @@ public class FileRepository implements TaskListRepositoryInterface {
 
 	@Override
 	public TaskListInterface loadTaskList() {
-		Task t1 =  new Task("titulo1", new Date("2012-7-1"), false, new Project("project1"));
-		Task t2 =  new Task("titulo2", new Date("2018-7-1"), false, new Project("project1"));
-		Task t3 =  new Task("titulo33333", new Date("2010-7-1"), false, new Project("project2"));
+		Task t1 =  new Task("b titulo1", new Date("2012-7-1"), false, new Project("project1"));
+		Task t2 =  new Task("c titulo2", new Date("2018-7-1"), false, new Project("project1"));
+		Task t3 =  new Task("a titulo33333", new Date("2010-7-1"), false, new Project("project2"));
 		
 		TaskList taskList = new TaskList();
 		taskList.addTask(t1);

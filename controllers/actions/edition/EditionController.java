@@ -16,6 +16,7 @@ public abstract class EditionController extends Controller {
 		Collections.sort(tasksList);
 		
 		List<String> tasks = tasksToStringList(taskList.getTasks());
+		Collections.sort(tasks);
 		
 		view.printList(errorMessage, tasks);
 		

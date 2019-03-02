@@ -23,7 +23,7 @@ public class Task implements Comparable<Task>{
 
 	@Override
 	public int compareTo(Task otherTask) {
-		return -1 * title.compareTo(otherTask.getTitle());
+		return -1 * title.compareTo(otherTask.title);
 	}
 
 
