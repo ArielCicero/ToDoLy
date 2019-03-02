@@ -8,7 +8,10 @@ import todoly.views.ActionView;
 
 public class RemoveTaskController extends EditionController {
 	public RemoveTaskController(TaskListInterface taskList, Scanner scanner) {
-		ActionView view = new ActionView();
+		ActionView view = new ActionView(
+								Integer.toString(taskList.getTasksAmount()),
+								Integer.toString(taskList.getTasksDoneAmount())
+							);
 
 		Task task = getTask(taskList, view, scanner);
 		

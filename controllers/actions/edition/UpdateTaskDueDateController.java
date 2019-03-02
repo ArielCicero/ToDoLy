@@ -10,7 +10,10 @@ import todoly.views.ActionView;
 
 public class UpdateTaskDueDateController extends EditionController {
 	public UpdateTaskDueDateController(TaskListInterface taskList, Scanner scanner) {
-		ActionView view = new ActionView();
+		ActionView view = new ActionView(
+								Integer.toString(taskList.getTasksAmount()),
+								Integer.toString(taskList.getTasksDoneAmount())
+							);
 
 		Task task = getTask(taskList, view, scanner);
 

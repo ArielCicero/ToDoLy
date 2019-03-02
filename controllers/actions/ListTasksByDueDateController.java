@@ -13,7 +13,10 @@ import todoly.views.ActionView;
 public class ListTasksByDueDateController extends Controller {
 
 	public ListTasksByDueDateController(TaskListInterface taskList, Scanner scanner) {
-		ActionView view = new ActionView();
+		ActionView view = new ActionView(
+								Integer.toString(taskList.getTasksAmount()),
+								Integer.toString(taskList.getTasksDoneAmount())
+							);
 		
 		List<Task> tasks = taskList.getTasks();
 		Collections.sort(tasks, new SortByDueDate());

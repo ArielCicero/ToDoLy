@@ -5,9 +5,9 @@ import todoly.views.View;
 public class MainMenuView extends View {
 	String tasksAmount;
 	String tasksDoneAmount;
+	
 	public MainMenuView(String tasksAmount, String tasksDoneAmount) {
-		this.tasksAmount = tasksAmount;
-		this.tasksDoneAmount = tasksDoneAmount;
+		super(tasksAmount,tasksDoneAmount);
 	}
 
 	

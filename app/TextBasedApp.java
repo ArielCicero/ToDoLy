@@ -81,7 +81,7 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
 	}
 
 	public void showListingMenu() {
-		menuOption = new ListingMenuController(scanner).getMenuOption();
+		menuOption = new ListingMenuController(taskList, scanner).getMenuOption();
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
 	}
 	
 	public void editTaskMenu() {
-		menuOption = new EditTaskMenuController(scanner).getMenuOption();
+		menuOption = new EditTaskMenuController(taskList, scanner).getMenuOption();
 	}
 	
 	@Override

@@ -3,13 +3,17 @@ package todoly.controllers.menus;
 import java.util.Scanner;
 
 import todoly.controllers.Controller;
+import todoly.interfaces.TaskListInterface;
 import todoly.util.enums.MenuOption;
 import todoly.views.menus.ListingMenuView;
 
 public class ListingMenuController extends Controller {
 
-	public ListingMenuController(Scanner scanner) {
-		displayMenu(new ListingMenuView(), scanner);
+	public ListingMenuController(TaskListInterface taskList, Scanner scanner) {
+		displayMenu(new ListingMenuView(
+							Integer.toString(taskList.getTasksAmount()),
+							Integer.toString(taskList.getTasksDoneAmount())
+					), scanner);
 	}
 
 	@Override

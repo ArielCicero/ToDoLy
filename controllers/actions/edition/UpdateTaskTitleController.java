@@ -9,7 +9,10 @@ import todoly.views.ActionView;
 
 public class UpdateTaskTitleController extends EditionController {
 	public UpdateTaskTitleController(TaskListInterface taskList, Scanner scanner) {
-		ActionView view = new ActionView();
+		ActionView view = new ActionView(
+								Integer.toString(taskList.getTasksAmount()),
+								Integer.toString(taskList.getTasksDoneAmount())
+							);
 
 		Task task = getTask(taskList, view, scanner);
 		

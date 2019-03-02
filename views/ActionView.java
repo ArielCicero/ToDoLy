@@ -4,6 +4,10 @@ import java.util.List;
 
 public class ActionView extends View {
 	
+	public ActionView(String tasksAmount, String tasksDoneAmount) {
+		super(tasksAmount,tasksDoneAmount);
+	}
+	
 	public void printList(String errorMessage, List<String> list) {
 		printLineSeparator();
 		for (String value : list) {

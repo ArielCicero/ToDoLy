@@ -16,7 +16,10 @@ public class AddNewTaskController extends Controller {
 
 	public AddNewTaskController(TaskListInterface taskList, Scanner scanner) {
 		
-		ActionView view = new ActionView();
+		ActionView view = new ActionView(
+								Integer.toString(taskList.getTasksAmount()),
+								Integer.toString(taskList.getTasksDoneAmount())
+							);
 		
 		List<Project> projectList = taskList.getProjects();
 		Collections.sort(projectList);

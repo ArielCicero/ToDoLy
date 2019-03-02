@@ -3,6 +3,10 @@ package todoly.views.menus;
 import todoly.views.View;
 
 public class EditTaskMenuView extends View {
+	
+	public EditTaskMenuView(String tasksAmount, String tasksDoneAmount) {
+		super(tasksAmount,tasksDoneAmount);
+	}
 
 	@Override
 	public void printMenu(String errorMessage) {

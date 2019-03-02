@@ -1,6 +1,13 @@
 package todoly.views;
 
 public abstract class View {
+	String tasksAmount;
+	String tasksDoneAmount;
+	
+	public View(String tasksAmount, String tasksDoneAmount) {
+		this.tasksAmount = tasksAmount;
+		this.tasksDoneAmount = tasksDoneAmount;
+	}
 	
 	protected void printLineSeparator() {
 		System.out.println("###########################################"
@@ -21,6 +28,7 @@ public abstract class View {
 	public void printMenu(String errorMessage) {
 		printErrorMessage(errorMessage);
 		printLineSeparator();
+		System.out.println(">> You have "+tasksAmount+" tasks todo and "+tasksDoneAmount+" tasks are done!");
 		System.out.println(">> Pick an option:");
 		System.out.println(">> (1) Show Task List Ordered by Due Date");
 		System.out.println(">> (2) Show Task List Filtered by Project");
