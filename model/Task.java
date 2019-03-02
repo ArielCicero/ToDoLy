@@ -116,14 +116,14 @@ public class Task implements Comparable<Task>{
 			return false;
 		Task other = (Task) obj;
 		if (project == null) {
-			if (other.getProject() != null)
+			if (other.project != null)
 				return false;
-		} else if (!project.equals(other.getProject()))
+		} else if (!project.equals(other.project))
 			return false;
 		if (title == null) {
-			if (other.getTitle() != null)
+			if (other.title != null)
 				return false;
-		} else if (!title.equals(other.getTitle()))
+		} else if (!title.equals(other.title))
 			return false;
 		return true;
 	}

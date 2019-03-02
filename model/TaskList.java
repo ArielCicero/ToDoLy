@@ -35,18 +35,38 @@ public class TaskList implements TaskListInterface{
 		Integer id = tasks.values().size()+1;
 		// a new task can not have an id already
 		if(newTask.getId() == null) {
-			// if the project is new as well
 			Integer projectIdOfNewTask = newTask.getProject().getId();
+			
 			if(projectIdOfNewTask == null) {
-				newTask.setId(id);
-				tasks.put(id, newTask);
-				
-				id = projects.values().size()+1;
 				Project newProject = newTask.getProject();
-				
-				newProject.setId(id);
-				newProject.addTask(newTask);
-				projects.put(id, newProject);
+				// if the project is new as well
+				if(!projects.containsValue(newProject)) {
+					newTask.setId(id);
+					tasks.put(id, newTask);
+					
+					id = projects.values().size()+1;
+					newProject.setId(id);
+					newProject.addTask(newTask);
+					projects.put(id, newProject);
+				}
+				// the user put the name of an already existing and listed project
+				else {
+					for (Project project : projects.values()) {
+						if(project.equals(newProject)) {
+							// if the project does not contain the the task requested to be added
+							if(!project.getTasks().contains(newTask)) {
+								newTask.setId(id);
+								tasks.put(id, newTask);
+								newTask.setProject(project);
+								project.addTask(newTask);
+								break;
+							}
+							else {
+								throw new ToDoLyException("The Task already exist.");
+							}
+						}
+					}
+				}
 			}
 			//else if project does not contains a task with this name
 			else if(!projects.get(projectIdOfNewTask).getTasks().contains(newTask)){

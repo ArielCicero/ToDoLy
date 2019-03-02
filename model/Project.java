@@ -79,9 +79,9 @@ public class Project implements Comparable<Project>{
 			return false;
 		Project other = (Project) obj;
 		if (name == null) {
-			if (other.getName() != null)
+			if (other.name != null)
 				return false;
-		} else if (!name.equals(other.getName()))
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
