@@ -40,7 +40,7 @@ public class ListTasksFilteredByProjectController extends Controller {
 		List<Task> tasksList = taskList.getTasks();
 		Collections.sort(tasksList);
 
-		List<String> tasks = tasksToStringList(taskList.getTasks());
+		List<String> tasks = tasksToStringList(tasksList);
 		view.printList(errorMessage, tasks);
 		
 		displayMenu(view, scanner);
