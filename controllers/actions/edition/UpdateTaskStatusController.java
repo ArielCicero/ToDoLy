@@ -30,7 +30,7 @@ public class UpdateTaskStatusController extends EditionController {
 				task.setStatus(false);
 				break;
 			case "1":
-				task.setStatus(false);
+				task.setStatus(true);
 				break;
 
 			default:
