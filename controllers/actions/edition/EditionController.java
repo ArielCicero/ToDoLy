@@ -23,9 +23,11 @@ public abstract class EditionController extends Controller {
 		Task task = null;
 		do {
 			view.askForTaskId(errorMessage, tasks);
+			
 			userInput = scanner.nextLine();
-			task = taskList.getTask(Integer.parseInt(userInput));
 			errorMessage = null;
+			
+			task = taskList.getTask(Integer.parseInt(userInput));
 			if(task == null) {
 				errorMessage = "The option selected was not correct, try again";
 			}

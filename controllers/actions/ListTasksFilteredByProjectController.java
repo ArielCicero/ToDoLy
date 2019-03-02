@@ -24,12 +24,14 @@ public class ListTasksFilteredByProjectController extends Controller {
 		Project project = null;
 		do {
 			view.askForInput(errorMessage, "one of the listed Project ID");
+			
 			userInput = scanner.nextLine();
+			errorMessage = null;
+			
 			try {
 				project = taskList.getProject(
 							Integer.parseInt(userInput)
 						  );
-				errorMessage = null;
 				if(project == null) {
 					errorMessage = "The option selected was not correct, try again";
 				}

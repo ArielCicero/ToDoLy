@@ -35,10 +35,12 @@ public abstract class Controller {
 		setMenuOption();
 		do {
 			view.printMenu(errorMessage);
+			
 			userInput = scanner.nextLine();
+			errorMessage = null;
+			
 			try {
 				validateMenuOption(userInput);
-				errorMessage = null;
 			} catch (ToDoLyException e) {
 				errorMessage = e.getMessage();
 			}

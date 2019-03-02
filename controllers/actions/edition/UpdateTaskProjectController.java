@@ -17,10 +17,10 @@ public class UpdateTaskProjectController extends EditionController {
 			view.askForInput(errorMessage, "New Project Name");
 			
 			userInput = scanner.nextLine();
+			errorMessage = null;
 			
 			try {
 				task.getProject().setName(userInput);
-				errorMessage = null;
 			} catch (ToDoLyException e) {
 				errorMessage = e.getMessage();
 			}

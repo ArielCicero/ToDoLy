@@ -19,8 +19,8 @@ public class UpdateTaskStatusController extends EditionController {
 			view.askForInput(errorMessage, "New Status");
 			
 			userInput = scanner.nextLine();
-			
 			errorMessage = null;
+			
 			//0 = to do , 1 = done
 			switch (userInput) {
 			case "0":

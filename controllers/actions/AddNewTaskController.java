@@ -28,12 +28,11 @@ public class AddNewTaskController extends Controller {
 		do {
 			view.askForInput(errorMessage, "one of the listed Project ID or, otherwise, write a New Project Name");
 			userInput = scanner.nextLine();
-			
+			errorMessage = null;
 			try {
 				Integer projectId = Integer.parseInt(userInput);
 				project = taskList.getProject(projectId);
 				
-				errorMessage = null;
 				if(project == null) {
 					errorMessage = "There is no Project with id number " + userInput;
 				}
@@ -53,11 +52,11 @@ public class AddNewTaskController extends Controller {
 		do {
 			view.askForInput(errorMessage, "Due Date (date format YYYY-MM-DD = \"2012-7-1\")");
 			userInput = scanner.nextLine();
-			
+			errorMessage = null;
 			try {
 				// date format YYYY-MM-DD = "2012-7-1"
 				task.setDueDate(new Date(userInput));
-				
+				errorMessage = null;
 			} catch (ToDoLyException e) {
 				errorMessage = e.getMessage();
 			}
@@ -66,11 +65,10 @@ public class AddNewTaskController extends Controller {
 		do {
 			view.askForInput(errorMessage, "New Task Title");
 			userInput = scanner.nextLine();
-			
+			errorMessage = null;
 			try {
 				task.setTitle(userInput);
 				taskList.addTask(task);
-				
 			} catch (ToDoLyException e) {
 				errorMessage = e.getMessage();
 			}

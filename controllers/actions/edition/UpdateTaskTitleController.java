@@ -17,10 +17,9 @@ public class UpdateTaskTitleController extends EditionController {
 			view.askForInput(errorMessage, "New Title");
 			
 			userInput = scanner.nextLine();
-			
+			errorMessage = null;
 			try {
 				task.setTitle(userInput);
-				errorMessage = null;
 			} catch (ToDoLyException e) {
 				errorMessage = e.getMessage();
 			}

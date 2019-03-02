@@ -19,10 +19,10 @@ public class UpdateTaskDueDateController extends EditionController {
 			view.askForInput(errorMessage, "New Due Date");
 			
 			userInput = scanner.nextLine();
+			errorMessage = null;
 			
 			try {
 				task.setDueDate(new Date(userInput));
-				errorMessage = null;
 			} catch (ToDoLyException e) {
 				errorMessage = e.getMessage();
 			}
