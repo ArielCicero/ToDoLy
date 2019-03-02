@@ -6,92 +6,67 @@ import java.time.LocalDate;
 import todoly.exceptions.ToDoLyException;
 
 public class Date implements Comparable<Date>{
-	private LocalDate date;
-	
-	public Date(String date) throws ToDoLyException {
-		set(date);
-	}
+    private LocalDate date;
+    
+    public Date(String date) throws ToDoLyException {
+        set(date);
+    }
 
-	public LocalDate get() {
-		return date;
-	}
+    public LocalDate get() {
+        return date;
+    }
 
-	public void set(String date) throws ToDoLyException {
-		int[] YearMonthDay = parseDate(date);
-		
-		try {
-			this.date = LocalDate.of(YearMonthDay[0], YearMonthDay[1], YearMonthDay[2]);
-		} catch (DateTimeException e) {
-			throw new ToDoLyException(e.getMessage());
-		}
-	}
+    public void set(String date) throws ToDoLyException {
+        int[] YearMonthDay = parseDate(date);
+        
+        try {
+            this.date = LocalDate.of(YearMonthDay[0], YearMonthDay[1], YearMonthDay[2]);
+        } catch (DateTimeException e) {
+            throw new ToDoLyException(e.getMessage());
+        }
+    }
 
-	private int[] parseDate(String date) throws ToDoLyException {
-		String[] parts = date.split("-");
-		
-		if(parts.length!=3) {
-			throw new ToDoLyException("The date mus be composed of 3 parts: YYYY-MM-DD");
-		}
-		
-		try {
-			
-			int value0 = Integer.parseInt(parts[0]);
-			
-			if(parts[0].length()!=4)
-				throw new ToDoLyException("The year must be with 4 digits: YYYY");
-			
-			int[] YearMonthDay = {
-				value0,
-				Integer.parseInt(parts[1]),
-				Integer.parseInt(parts[2])
-			};
-			
-			return YearMonthDay;
-			
-		} catch (NumberFormatException e) {
-			String message = e.getMessage()
-							  .replace("For input string", 
-									   "Wrong value"
-							  );
-			
-			throw new ToDoLyException(message);
-		}
-	}
+    private int[] parseDate(String date) throws ToDoLyException {
+        String[] parts = date.split("-");
+        
+        if(parts.length!=3) {
+            throw new ToDoLyException("The date mus be composed of 3 parts: YYYY-MM-DD");
+        }
+        
+        try {
+            
+            int value0 = Integer.parseInt(parts[0]);
+            
+            if(parts[0].length()!=4)
+                throw new ToDoLyException("The year must be with 4 digits: YYYY");
+            
+            int[] YearMonthDay = {
+                value0,
+                Integer.parseInt(parts[1]),
+                Integer.parseInt(parts[2])
+            };
+            
+            return YearMonthDay;
+            
+        } catch (NumberFormatException e) {
+            String message = e.getMessage()
+                              .replace("For input string", 
+                                       "Wrong value"
+                              );
+            
+            throw new ToDoLyException(message);
+        }
+    }
 
-	@Override
-	public String toString() {
-		return date.toString();
-	}
+    @Override
+    public String toString() {
+        return date.toString();
+    }
 
-//	@Override
-//	public int hashCode() {
-//		final int prime = 31;
-//		int result = 1;
-//		result = prime * result + ((date == null) ? 0 : date.hashCode());
-//		return result;
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Date other = (Date) obj;
-//		if (date == null) {
-//			if (other.date != null)
-//				return false;
-//		} else if (!date.equals(other.date))
-//			return false;
-//		return true;
-//	}
+    @Override
+    public int compareTo(Date other) {
+        return date.compareTo(other.date);
+    }
 
-	@Override
-	public int compareTo(Date other) {
-		return date.compareTo(other.date);
-	}
-
-	
+    
 }

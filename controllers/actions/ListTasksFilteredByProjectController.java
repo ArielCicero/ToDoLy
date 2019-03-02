@@ -12,48 +12,25 @@ import todoly.views.ActionView;
 
 public class ListTasksFilteredByProjectController extends Controller {
 
-	public ListTasksFilteredByProjectController(TaskListInterface taskList, Scanner scanner) {
-		ActionView view = new ActionView(
-								Integer.toString(taskList.getTasksAmount()),
-								Integer.toString(taskList.getTasksDoneAmount())
-							);
-		
-		List<Project> projectList = taskList.getProjects();
-		Collections.sort(projectList);
-		
-		List<String> projects = projectsToStringList(projectList);
-		view.printList(null, projects);
-		if(projects != null) {
-			Project project = null;
-			do {
-				view.askForInput(errorMessage, "one of the listed Project ID");
-				
-				userInput = scanner.nextLine();
-				errorMessage = null;
-				
-				try {
-					project = taskList.getProject(
-								Integer.parseInt(userInput)
-							  );
-					if(project == null) {
-						errorMessage = "The option selected was not correct, try again";
-					}
-				} catch (NumberFormatException e) {
-					errorMessage = e.getMessage()
-									.replace("For input string", "Wrong value");
-				}
-			}while(errorMessage != null);
-			
-			List<Task> tasksList = taskList.getTasksFilteredByProject(
-												Integer.parseInt(userInput)
-								   );
-			if(tasksList != null) {
-				Collections.sort(tasksList);
-		
-				List<String> tasks = tasksToStringList(tasksList);
-				view.printList(errorMessage, tasks);
-			}
-		}
-		displayMenu(view, scanner);
-	}
+    public ListTasksFilteredByProjectController(TaskListInterface taskList, Scanner scanner) {
+        ActionView view = new ActionView(
+                                Integer.toString(taskList.getTasksAmount()),
+                                Integer.toString(taskList.getTasksDoneAmount())
+                            );
+        
+        Project project = getProject(taskList, view, scanner);
+        
+        if(project != null) {
+            List<Task> tasksList = taskList.getTasksFilteredByProject(
+                                                            project.getId()
+                                   );
+            if(tasksList != null) {
+                Collections.sort(tasksList);
+        
+                List<String> tasks = tasksToStringList(tasksList);
+                view.printList(errorMessage, tasks);
+            }
+        }
+        displayMenu(view, scanner);
+    }
 }
