@@ -24,7 +24,7 @@ public class ActionView extends View {
     public void askForTaskId(String errorMessage, List<String> list) {
         printErrorMessage(errorMessage);
         printLineSeparator();
-        System.out.println(">> Please intoduce one ID from the list");
+        System.out.println(">> Intoduce one ID from the list");
         System.out.print(">> ");
     }
     

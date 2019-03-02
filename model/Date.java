@@ -9,7 +9,7 @@ public class Date implements Comparable<Date>{
     private LocalDate date;
     
     public Date(String date) throws ToDoLyException {
-        set(date);
+        set(date.trim());
     }
 
     public LocalDate get() {

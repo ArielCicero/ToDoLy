@@ -12,6 +12,8 @@ import todoly.interfaces.TaskListInterface;
 public class TaskList implements TaskListInterface{
     private Map<Integer,Task> tasks = new HashMap<>();
     private Map<Integer,Project> projects = new HashMap<>();
+    private Integer projectId = 0;
+    private Integer taskId = 0;
 
     @Override
     public List<Task> getTasks() {
@@ -32,7 +34,7 @@ public class TaskList implements TaskListInterface{
 
     @Override
     public void addTask(Task newTask) {
-        Integer id = tasks.values().size()+1;
+        Integer id = ++taskId;
         // a new task can not have an id already
         if(newTask.getId() == null) {
             Integer projectIdOfNewTask = newTask.getProject().getId();
@@ -44,7 +46,7 @@ public class TaskList implements TaskListInterface{
                     newTask.setId(id);
                     tasks.put(id, newTask);
                     
-                    id = projects.values().size()+1;
+                    id = ++projectId;
                     newProject.setId(id);
                     newProject.addTask(newTask);
                     projects.put(id, newProject);
@@ -130,6 +132,7 @@ public class TaskList implements TaskListInterface{
                     // the task is moved to the new project
                     if(!project.getTasks().contains(task)) {
                         Project previousProject = task.getProject();
+                        previousProject.removeTask(task);
                         task.setProject(project);
                         project.addTask(task);
                         // if the previous project ends up without task in this process
