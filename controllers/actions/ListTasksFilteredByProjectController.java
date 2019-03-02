@@ -26,7 +26,9 @@ public class ListTasksFilteredByProjectController extends Controller {
 			view.askForInput(errorMessage, "one of the listed Project ID");
 			userInput = scanner.nextLine();
 			try {
-				project = taskList.getProject(Integer.parseInt(userInput));
+				project = taskList.getProject(
+							Integer.parseInt(userInput)
+						  );
 				errorMessage = null;
 				if(project == null) {
 					errorMessage = "The option selected was not correct, try again";
@@ -37,7 +39,9 @@ public class ListTasksFilteredByProjectController extends Controller {
 			}
 		}while(errorMessage != null);
 		
-		List<Task> tasksList = taskList.getTasks();
+		List<Task> tasksList = taskList.getTasksFilteredByProject(
+											Integer.parseInt(userInput)
+							   );
 		Collections.sort(tasksList);
 
 		List<String> tasks = tasksToStringList(tasksList);

@@ -40,6 +40,7 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
 				break;
 			case LIST_TASKS_MENU:
 				showListingMenu();
+				break;
 			case LIST_TASKS_BY_DUE_DATE:
 				listTasksByDueDate();
 				break;
@@ -63,6 +64,7 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
 				break;
 			case UPDATE_TASK_PROJECT:
 				updateTaskProject();
+				break;
 			case REMOVE_TASK:
 				removeTask();
 				break;
@@ -80,6 +82,7 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
 
 	public void showListingMenu() {
 		menuOption = new ListingMenuController(scanner).getMenuOption();
+		System.out.println(menuOption);
 	}
 
 	@Override
