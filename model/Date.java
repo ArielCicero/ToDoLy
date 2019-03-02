@@ -5,15 +5,11 @@ import java.time.LocalDate;
 
 import todoly.exceptions.ToDoLyException;
 
-public class Date{
+public class Date implements Comparable<Date>{
 	private LocalDate date;
 	
 	public Date(String date) throws ToDoLyException {
 		set(date);
-	}
-
-	public int compareTo(Date other) {
-		return date.compareTo(other.get());
 	}
 
 	public LocalDate get() {
@@ -66,4 +62,36 @@ public class Date{
 	public String toString() {
 		return date.toString();
 	}
+
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((date == null) ? 0 : date.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Date other = (Date) obj;
+//		if (date == null) {
+//			if (other.date != null)
+//				return false;
+//		} else if (!date.equals(other.date))
+//			return false;
+//		return true;
+//	}
+
+	@Override
+	public int compareTo(Date other) {
+		return date.compareTo(other.date);
+	}
+
+	
 }

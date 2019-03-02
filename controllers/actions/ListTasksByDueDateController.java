@@ -20,17 +20,6 @@ public class ListTasksByDueDateController extends Controller {
 		
 		List<String> tasksParsed = tasksToStringList(taskList.getTasks());
 		view.printList(errorMessage, tasksParsed);
-
-//		Task task = null;
-//		do {
-//			view.printList(errorMessage, tasksParsed);
-//			userInput = scanner.nextLine();
-//			
-//			errorMessage = null;
-//			if(task == null) {
-//				errorMessage = "The option selected was not correct, try again";
-//			}
-//		}while(errorMessage != null);
 		
 		displayMenu(view, scanner);
 	}

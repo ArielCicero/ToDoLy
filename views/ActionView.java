@@ -8,6 +8,7 @@ public class ActionView extends View {
 		printLineSeparator();
 		for (String value : list) {
 			System.out.println(value);
+			System.out.println();
 		}
 	}
 
