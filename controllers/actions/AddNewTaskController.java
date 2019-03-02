@@ -10,7 +10,7 @@ import todoly.interfaces.TaskListInterface;
 import todoly.model.Date;
 import todoly.model.Project;
 import todoly.model.Task;
-import todoly.views.actions.edition.ActionView;
+import todoly.views.ActionView;
 
 public class AddNewTaskController extends Controller {
 
@@ -22,14 +22,11 @@ public class AddNewTaskController extends Controller {
 		Collections.sort(projectList);
 		
 		List<String> projects = projectsToStringList(projectList);
-
-		
-		Project project = null;
-		
 		view.printList(null, projects);
-		
+
+		Project project = null;
 		do {
-			view.askForInput(errorMessage, "one of the listed Project ID or  otherwise a New Project Name");
+			view.askForInput(errorMessage, "one of the listed Project ID or, otherwise, write a New Project Name");
 			userInput = scanner.nextLine();
 			
 			try {

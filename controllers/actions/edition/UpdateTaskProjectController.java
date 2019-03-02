@@ -5,7 +5,7 @@ import java.util.Scanner;
 import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Task;
-import todoly.views.actions.edition.ActionView;
+import todoly.views.ActionView;
 
 public class UpdateTaskProjectController extends EditionController {
 	public UpdateTaskProjectController(TaskListInterface taskList, Scanner scanner) {

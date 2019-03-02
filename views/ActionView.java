@@ -1,8 +1,6 @@
-package todoly.views.actions.edition;
+package todoly.views;
 
 import java.util.List;
-
-import todoly.views.View;
 
 public class ActionView extends View {
 	

@@ -6,7 +6,7 @@ import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Date;
 import todoly.model.Task;
-import todoly.views.actions.edition.ActionView;
+import todoly.views.ActionView;
 
 public class UpdateTaskDueDateController extends EditionController {
 	public UpdateTaskDueDateController(TaskListInterface taskList, Scanner scanner) {
