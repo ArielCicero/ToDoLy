@@ -1,5 +1,6 @@
 package todoly.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,9 @@ import java.util.stream.Collectors;
 import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
 
-public class TaskList implements TaskListInterface{
+public class TaskList implements TaskListInterface, Serializable {
+    private static final long serialVersionUID = -6345286127117485787L;
+    
     private Map<Integer,Task> tasks = new HashMap<>();
     private Map<Integer,Project> projects = new HashMap<>();
     private Integer projectId = 0;

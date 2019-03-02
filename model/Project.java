@@ -1,11 +1,13 @@
 package todoly.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import todoly.exceptions.ToDoLyException;
 
-public class Project implements Comparable<Project>{
+public class Project implements Comparable<Project>, Serializable {
+    private static final long serialVersionUID = -4489076521323526969L;
     private Integer id;
     private String name;
     private Set<Task> tasks = new HashSet<>();

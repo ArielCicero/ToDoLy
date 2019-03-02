@@ -1,9 +1,12 @@
 package todoly.model;
 
+import java.io.Serializable;
+
 import todoly.exceptions.ToDoLyException;
 
-public class Task implements Comparable<Task>{
-
+public class Task implements Comparable<Task>, Serializable {
+    private static final long serialVersionUID = 8663464221335074339L;
+    
     private Integer id;
     private String title;
     private Date dueDate;

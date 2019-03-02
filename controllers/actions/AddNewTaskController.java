@@ -93,6 +93,8 @@ public class AddNewTaskController extends Controller {
         
         view.printConfirmation("The Task Has Been Added Successfully", task.toString());
         
+        view.tasksAmount = (Integer.parseInt(view.tasksAmount) + 1) + "";
+
         displayMenu(view, scanner);
     }
 }

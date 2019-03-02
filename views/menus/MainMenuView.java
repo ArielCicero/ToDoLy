@@ -3,8 +3,6 @@ package todoly.views.menus;
 import todoly.views.View;
 
 public class MainMenuView extends View {
-    String tasksAmount;
-    String tasksDoneAmount;
     
     public MainMenuView(String tasksAmount, String tasksDoneAmount) {
         super(tasksAmount,tasksDoneAmount);

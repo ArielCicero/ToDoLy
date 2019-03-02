@@ -1,11 +1,13 @@
 package todoly.model;
 
+import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import todoly.exceptions.ToDoLyException;
 
-public class Date implements Comparable<Date>{
+public class Date implements Comparable<Date>, Serializable {
+    private static final long serialVersionUID = 5865782137277972768L;
     private LocalDate date;
     
     public Date(String date) throws ToDoLyException {
