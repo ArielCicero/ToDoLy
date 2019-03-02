@@ -4,8 +4,7 @@ import java.util.List;
 
 import todoly.views.View;
 
-public abstract class EditionView extends View {
-	public abstract void printConfirmation(String task);
+public class ActionView extends View {
 	
 	public void printList(String errorMessage, List<String> list) {
 		printLineSeparator();
@@ -19,5 +18,17 @@ public abstract class EditionView extends View {
 		printLineSeparator();
 		System.out.println(">> Please intoduce one ID from the list");
 		System.out.print(">> ");
+	}
+	
+	public void askForInput(String errorMessage, String request) {
+		printErrorMessage(errorMessage);
+		printLineSeparator();
+		System.out.println(">> Write " + request);
+		System.out.print(">> ");
+	}
+	
+	public void printConfirmation(String message, String item) {
+		System.out.println(">> " + message);
+		System.out.println(item);
 	}
 }

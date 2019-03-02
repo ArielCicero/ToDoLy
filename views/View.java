@@ -12,7 +12,7 @@ public abstract class View {
 			System.out.println("* * * * * * * * * * * * * * * * * * * * * *"
 							+ " * * * * * * * * * * * * * * * * * * * * * *");
 			System.out.println("ERROR");
-			System.out.println(errorMessage);
+			System.out.println("!!!!!" + errorMessage);
 			System.out.println("* * * * * * * * * * * * * * * * * * * * * *"
 							+ " * * * * * * * * * * * * * * * * * * * * * *");		
 		}

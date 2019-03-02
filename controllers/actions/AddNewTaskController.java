@@ -10,13 +10,13 @@ import todoly.interfaces.TaskListInterface;
 import todoly.model.Date;
 import todoly.model.Project;
 import todoly.model.Task;
-import todoly.views.actions.AddNewTaskView;
+import todoly.views.actions.edition.ActionView;
 
 public class AddNewTaskController extends Controller {
 
 	public AddNewTaskController(TaskListInterface taskList, Scanner scanner) {
 		
-		AddNewTaskView view = new AddNewTaskView();
+		ActionView view = new ActionView();
 		
 		List<Project> projectList = taskList.getProjects();
 		Collections.sort(projectList);
@@ -26,8 +26,10 @@ public class AddNewTaskController extends Controller {
 		
 		Project project = null;
 		
+		view.printList(null, projects);
+		
 		do {
-			view.askForProject(errorMessage, projects);
+			view.askForInput(errorMessage, "one of the listed Project ID or  otherwise a New Project Name");
 			userInput = scanner.nextLine();
 			
 			try {
@@ -52,7 +54,7 @@ public class AddNewTaskController extends Controller {
 		task.setProject(project);
 		
 		do {
-			view.askForDueDate(errorMessage);
+			view.askForInput(errorMessage, "Due Date (date format YYYY-MM-DD = \"2012-7-1\")");
 			userInput = scanner.nextLine();
 			
 			try {
@@ -65,19 +67,19 @@ public class AddNewTaskController extends Controller {
 		}while(errorMessage != null);
 		
 		do {
-			view.askForTaskTitle(errorMessage);
+			view.askForInput(errorMessage, "New Task Title");
 			userInput = scanner.nextLine();
 			
 			try {
 				task.setTitle(userInput);
-				taskList.addTask(task);;
+				taskList.addTask(task);
 				
 			} catch (ToDoLyException e) {
 				errorMessage = e.getMessage();
 			}
 		}while(errorMessage != null);
 		
-		view.printConfirmation();
+		view.printConfirmation("The Task Has Been Added Successfully", task.toString());
 		
 		displayMenu(view, scanner);
 	}

@@ -5,16 +5,16 @@ import java.util.Scanner;
 import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Task;
-import todoly.views.actions.edition.UpdateTaskProjectView;
+import todoly.views.actions.edition.ActionView;
 
 public class UpdateTaskProjectController extends EditionController {
 	public UpdateTaskProjectController(TaskListInterface taskList, Scanner scanner) {
-		UpdateTaskProjectView view = new UpdateTaskProjectView();
+		ActionView view = new ActionView();
 
 		Task task = getTask(taskList, view, scanner);
 		
 		do {
-			view.askNewProjectName(errorMessage);
+			view.askForInput(errorMessage, "New Project Name");
 			
 			userInput = scanner.nextLine();
 			
@@ -26,7 +26,7 @@ public class UpdateTaskProjectController extends EditionController {
 			}
 		}while(errorMessage != null);
 				
-		view.printConfirmation(task.toString());
+		view.printConfirmation("The Project Name Has Been Updated Successfully", task.toString());
 		
 		displayMenu(view, scanner);
 	}

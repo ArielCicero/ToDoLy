@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Task;
-import todoly.views.actions.edition.UpdateTaskStatusView;
+import todoly.views.actions.edition.ActionView;
 
 public class UpdateTaskStatusController extends EditionController {
 
 	public UpdateTaskStatusController(TaskListInterface taskList, Scanner scanner) {
 		
-		UpdateTaskStatusView view = new UpdateTaskStatusView();
+		ActionView view = new ActionView();
 
 		Task task = getTask(taskList, view, scanner);
 
 		
 		do {
-			view.askTaskStatus(errorMessage);
+			view.askForInput(errorMessage, "New Status");
 			
 			userInput = scanner.nextLine();
 			
@@ -37,7 +37,7 @@ public class UpdateTaskStatusController extends EditionController {
 			}
 		}while(errorMessage != null);
 		
-		view.printConfirmation(task.toString());
+		view.printConfirmation("The Task Status Has Been Updated Successfully", task.toString());
 		
 		displayMenu(view, scanner);
 		

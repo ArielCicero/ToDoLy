@@ -7,11 +7,11 @@ import java.util.Scanner;
 import todoly.controllers.Controller;
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Task;
-import todoly.views.actions.edition.EditionView;
+import todoly.views.actions.edition.ActionView;
 
 public abstract class EditionController extends Controller {
 		
-	protected Task getTask(TaskListInterface taskList, EditionView view, Scanner scanner) {
+	protected Task getTask(TaskListInterface taskList, ActionView view, Scanner scanner) {
 		List<Task> tasksList = taskList.getTasks();
 		Collections.sort(tasksList);
 		

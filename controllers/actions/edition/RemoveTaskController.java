@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Task;
-import todoly.views.actions.edition.RemoveTaskView;
+import todoly.views.actions.edition.ActionView;
 
 public class RemoveTaskController extends EditionController {
 	public RemoveTaskController(TaskListInterface taskList, Scanner scanner) {
-		RemoveTaskView view = new RemoveTaskView();
+		ActionView view = new ActionView();
 
 		Task task = getTask(taskList, view, scanner);
 		
 		taskList.removeTask(task.getId());
 		
-		view.printConfirmation(task.toString());
+		view.printConfirmation("The Next Task Has Been Removed", task.toString());
 		
 		displayMenu(view, scanner);
 

@@ -6,17 +6,17 @@ import todoly.exceptions.ToDoLyException;
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Date;
 import todoly.model.Task;
-import todoly.views.actions.edition.UpdateTaskDueDateView;
+import todoly.views.actions.edition.ActionView;
 
 public class UpdateTaskDueDateController extends EditionController {
 	public UpdateTaskDueDateController(TaskListInterface taskList, Scanner scanner) {
-		UpdateTaskDueDateView view = new UpdateTaskDueDateView();
+		ActionView view = new ActionView();
 
 		Task task = getTask(taskList, view, scanner);
 
 		
 		do {
-			view.askNewDueDate(errorMessage);
+			view.askForInput(errorMessage, "New Due Date");
 			
 			userInput = scanner.nextLine();
 			
@@ -28,7 +28,7 @@ public class UpdateTaskDueDateController extends EditionController {
 			}
 		}while(errorMessage != null);
 		
-		view.printConfirmation(task.toString());
+		view.printConfirmation("The Task Due Date Has Been Updated Successfully", task.toString());
 		
 		displayMenu(view, scanner);
 	}
