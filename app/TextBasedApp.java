@@ -82,7 +82,6 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
 
 	public void showListingMenu() {
 		menuOption = new ListingMenuController(scanner).getMenuOption();
-		System.out.println(menuOption);
 	}
 
 	@Override
