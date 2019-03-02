@@ -8,27 +8,32 @@ import todoly.controllers.Controller;
 import todoly.interfaces.TaskListInterface;
 import todoly.model.Project;
 import todoly.model.Task;
-import todoly.views.actions.ListTasksFilteredByProjectView;
+import todoly.views.actions.edition.ActionView;
 
 public class ListTasksFilteredByProjectController extends Controller {
 
 	public ListTasksFilteredByProjectController(TaskListInterface taskList, Scanner scanner) {
-		ListTasksFilteredByProjectView view = new ListTasksFilteredByProjectView();
+		ActionView view = new ActionView();
 		
 		List<Project> projectList = taskList.getProjects();
 		Collections.sort(projectList);
 		
 		List<String> projects = projectsToStringList(projectList);
-
+		view.printList(null, projects);
+		
 		Project project = null;
 		do {
-			view.askForProject(errorMessage, projects);
+			view.askForInput(errorMessage, "one of the listed Project ID");
 			userInput = scanner.nextLine();
-			
-			project = taskList.getProject(Integer.parseInt(userInput));
-			errorMessage = null;
-			if(project == null) {
-				errorMessage = "The option selected was not correct, try again";
+			try {
+				project = taskList.getProject(Integer.parseInt(userInput));
+				errorMessage = null;
+				if(project == null) {
+					errorMessage = "The option selected was not correct, try again";
+				}
+			} catch (NumberFormatException e) {
+				errorMessage = e.getMessage()
+								.replace("For input string", "Wrong value");
 			}
 		}while(errorMessage != null);
 		
@@ -36,8 +41,6 @@ public class ListTasksFilteredByProjectController extends Controller {
 		Collections.sort(tasksList);
 
 		List<String> tasks = tasksToStringList(taskList.getTasks());
-
-		
 		view.printList(errorMessage, tasks);
 		
 		displayMenu(view, scanner);
