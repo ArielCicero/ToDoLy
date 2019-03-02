@@ -10,9 +10,14 @@ public class ActionView extends View {
 	
 	public void printList(String errorMessage, List<String> list) {
 		printLineSeparator();
-		for (String value : list) {
-			System.out.println(value);
-			System.out.println();
+		if(list != null) {
+			for (String value : list) {
+				System.out.println(value);
+				System.out.println();
+			}
+		}
+		else {
+			System.out.println("There are no elements to list");
 		}
 	}
 
@@ -31,7 +36,9 @@ public class ActionView extends View {
 	}
 	
 	public void printConfirmation(String message, String item) {
-		System.out.println(">> " + message);
+		printLineSeparator();
+		System.out.println("!! " + message);
+		printLineSeparator();
 		System.out.println(item);
 	}
 }

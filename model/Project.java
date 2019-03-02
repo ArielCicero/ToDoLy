@@ -49,7 +49,10 @@ public class Project implements Comparable<Project>{
 
 	public void setName(String name) {
 		if(name.trim() == "" || name == null) {
-			throw new ToDoLyException("The project name can not be empty");
+			throw new ToDoLyException("The Project Name can not be empty");
+		}
+		if(name.trim().length() <= 2) {
+			throw new ToDoLyException("The Project Name has to have at least 2 chars");
 		}
 		
 		this.name = name;

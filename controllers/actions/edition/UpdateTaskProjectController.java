@@ -15,22 +15,22 @@ public class UpdateTaskProjectController extends EditionController {
 							);
 
 		Task task = getTask(taskList, view, scanner);
-		
-		do {
-			view.askForInput(errorMessage, "New Project Name");
-			
-			userInput = scanner.nextLine();
-			errorMessage = null;
-			
-			try {
-				task.getProject().setName(userInput);
-			} catch (ToDoLyException e) {
-				errorMessage = e.getMessage();
-			}
-		}while(errorMessage != null);
+		if(task != null) {
+			do {
+				view.askForInput(errorMessage, "New Project Name");
 				
-		view.printConfirmation("The Project Name Has Been Updated Successfully", task.toString());
-		
+				userInput = scanner.nextLine();
+				errorMessage = null;
+				
+				try {
+					task.getProject().setName(userInput);
+				} catch (ToDoLyException e) {
+					errorMessage = e.getMessage();
+				}
+			}while(errorMessage != null);
+					
+			view.printConfirmation("The Project Name Has Been Updated Successfully", task.toString());
+		}
 		displayMenu(view, scanner);
 	}
 }

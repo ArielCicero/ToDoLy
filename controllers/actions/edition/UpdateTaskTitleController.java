@@ -13,23 +13,24 @@ public class UpdateTaskTitleController extends EditionController {
 								Integer.toString(taskList.getTasksAmount()),
 								Integer.toString(taskList.getTasksDoneAmount())
 							);
-
+		
 		Task task = getTask(taskList, view, scanner);
 		
-		do {
-			view.askForInput(errorMessage, "New Title");
-			
-			userInput = scanner.nextLine();
-			errorMessage = null;
-			try {
-				task.setTitle(userInput);
-			} catch (ToDoLyException e) {
-				errorMessage = e.getMessage();
-			}
-		}while(errorMessage != null);
+		if(task != null) {
+			do {
+				view.askForInput(errorMessage, "New Title");
 				
-		view.printConfirmation("The Task Title Has Been Updated Successfully", task.toString());
-		
+				userInput = scanner.nextLine();
+				errorMessage = null;
+				try {
+					task.setTitle(userInput);
+				} catch (ToDoLyException e) {
+					errorMessage = e.getMessage();
+				}
+			}while(errorMessage != null);
+					
+			view.printConfirmation("The Task Title Has Been Updated Successfully", task.toString());
+		}
 		displayMenu(view , scanner);
 		
 	}

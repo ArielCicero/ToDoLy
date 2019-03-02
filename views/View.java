@@ -1,8 +1,8 @@
 package todoly.views;
 
 public abstract class View {
-	String tasksAmount;
-	String tasksDoneAmount;
+	public String tasksAmount;
+	public String tasksDoneAmount;
 	
 	public View(String tasksAmount, String tasksDoneAmount) {
 		this.tasksAmount = tasksAmount;

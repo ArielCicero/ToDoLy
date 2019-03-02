@@ -54,7 +54,10 @@ public class Task implements Comparable<Task>{
 
 	public void setTitle(String title) {
 		if(title.trim() == "" || title == null) {
-			throw new ToDoLyException("The task title can not be empty");
+			throw new ToDoLyException("The Task Title can not be empty");
+		}
+		if(title.trim().length() <= 2) {
+			throw new ToDoLyException("The Task Title has to have at least 2 chars");
 		}
 		
 		this.title = title;

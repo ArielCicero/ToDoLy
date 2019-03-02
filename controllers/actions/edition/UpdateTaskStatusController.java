@@ -17,32 +17,33 @@ public class UpdateTaskStatusController extends EditionController {
 
 		Task task = getTask(taskList, view, scanner);
 
-		
+		if(task != null) {
 		do {
-			view.askForInput(errorMessage, "(1) to mark it as Dono or (0) to mark it as a task To Do");
+				view.askForInput(errorMessage, "(1) to mark it as Dono or (0) to mark it as a task To Do");
+				
+				userInput = scanner.nextLine();
+				errorMessage = null;
+				
+				//0 = to do , 1 = done
+				switch (userInput) {
+				case "0":
+					task.setStatus(false);
+					break;
+				case "1":
+					task.setStatus(true);
+					break;
+	
+				default:
+					errorMessage = "Valid options are 0 and 1. ["+
+									userInput + "] is not a valid option";
+					break;
+				}
+			}while(errorMessage != null);
 			
-			userInput = scanner.nextLine();
-			errorMessage = null;
+			view.tasksDoneAmount = (1 + Integer.parseInt(view.tasksDoneAmount)) + "";
 			
-			//0 = to do , 1 = done
-			switch (userInput) {
-			case "0":
-				task.setStatus(false);
-				break;
-			case "1":
-				task.setStatus(true);
-				break;
-
-			default:
-				errorMessage = "Valid options are 0 and 1. ["+
-								userInput + "] is not a valid option";
-				break;
-			}
-		}while(errorMessage != null);
-		
-		view.printConfirmation("The Task Status Has Been Updated Successfully", task.toString());
-		
+			view.printConfirmation("The Task Status Has Been Updated Successfully", task.toString());
+		}
 		displayMenu(view, scanner);
-		
 	}
 }

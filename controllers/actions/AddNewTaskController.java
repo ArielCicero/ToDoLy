@@ -26,20 +26,25 @@ public class AddNewTaskController extends Controller {
 		
 		List<String> projects = projectsToStringList(projectList);
 		view.printList(null, projects);
-
-		Project project = null;
+		
+		Task task = new Task();
+		
 		do {
-			view.askForInput(errorMessage, "one of the listed Project ID or, otherwise, write a New Project Name");
+			Project project = null;
+			Integer projectId = null;
+			
+			if(projects != null) {
+				view.askForInput(errorMessage, "one of the listed Project ID or"
+											 + ", otherwise, write a New Project Name");
+			}
+			else {
+				view.askForInput(errorMessage, "the Project Name (\"ön\" and \"<3\" are valid names)");
+			}
 			userInput = scanner.nextLine();
 			errorMessage = null;
+			
 			try {
-				Integer projectId = Integer.parseInt(userInput);
-				project = taskList.getProject(projectId);
-				
-				if(project == null) {
-					errorMessage = "There is no Project with id number " + userInput;
-				}
-				
+				projectId = Integer.parseInt(userInput);
 			} catch (NumberFormatException e) {
 				try {
 					project = new Project(userInput);
@@ -47,10 +52,19 @@ public class AddNewTaskController extends Controller {
 					errorMessage = e2.getMessage();
 				}
 			}
+			
+			if(project == null) {
+				project = taskList.getProject(projectId);
+				
+				if(project == null) {
+					errorMessage = "There is no Project with id number " + userInput;
+				}
+			}
+			
+			task.setProject(project);
+			
 		}while(errorMessage != null);
 		
-		Task task = new Task();
-		task.setProject(project);
 		
 		do {
 			view.askForInput(errorMessage, "Due Date (date format YYYY-MM-DD = \"2012-7-1\")");

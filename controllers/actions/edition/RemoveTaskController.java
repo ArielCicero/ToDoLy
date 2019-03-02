@@ -15,10 +15,13 @@ public class RemoveTaskController extends EditionController {
 
 		Task task = getTask(taskList, view, scanner);
 		
-		taskList.removeTask(task.getId());
-		
-		view.printConfirmation("The Next Task Has Been Removed", task.toString());
-		
+		if(task != null) {
+			taskList.removeTask(task.getId());
+			
+			view.tasksAmount = (Integer.parseInt(view.tasksAmount) - 1) + "";
+			
+			view.printConfirmation("The Next Task Has Been Removed", task.toString());
+		}
 		displayMenu(view, scanner);
 
 	}

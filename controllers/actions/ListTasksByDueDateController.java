@@ -19,9 +19,13 @@ public class ListTasksByDueDateController extends Controller {
 							);
 		
 		List<Task> tasks = taskList.getTasks();
-		Collections.sort(tasks, new SortByDueDate());
-		
-		List<String> tasksParsed = tasksToStringList(tasks);
+		List<String> tasksParsed = null;
+		if(tasks != null) {
+			Collections.sort(tasks, new SortByDueDate());
+			
+			tasksParsed = tasksToStringList(tasks);
+		}
+
 		view.printList(errorMessage, tasksParsed);
 		
 		displayMenu(view, scanner);

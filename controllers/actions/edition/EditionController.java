@@ -21,17 +21,19 @@ public abstract class EditionController extends Controller {
 		view.printList(errorMessage, tasks);
 		
 		Task task = null;
-		do {
-			view.askForTaskId(errorMessage, tasks);
-			
-			userInput = scanner.nextLine();
-			errorMessage = null;
-			
-			task = taskList.getTask(Integer.parseInt(userInput));
-			if(task == null) {
-				errorMessage = "The option selected was not correct, try again";
-			}
-		}while(errorMessage != null);
+		if(tasks != null) {
+			do {
+				view.askForTaskId(errorMessage, tasks);
+				
+				userInput = scanner.nextLine();
+				errorMessage = null;
+				
+				task = taskList.getTask(Integer.parseInt(userInput));
+				if(task == null) {
+					errorMessage = "The option selected was not correct, try again";
+				}
+			}while(errorMessage != null);
+		}
 		
 		return task;
 	}
