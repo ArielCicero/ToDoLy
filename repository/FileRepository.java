@@ -13,6 +13,7 @@ import todoly.model.TaskList;
 
 public class FileRepository implements TaskListRepositoryInterface {
     private String path;
+    
     public FileRepository(String path) {
         this.path = path;
     }
@@ -32,7 +33,7 @@ public class FileRepository implements TaskListRepositoryInterface {
              ObjectInputStream in = new ObjectInputStream(fileIn);){  
             taskList = (TaskList) in.readObject();
          } catch (IOException e) {
-             throw new ToDoLyException(e.getMessage());
+             taskList = new TaskList();
          } catch (ClassNotFoundException e2) {
              throw new ToDoLyException(e2.getMessage());
          }
