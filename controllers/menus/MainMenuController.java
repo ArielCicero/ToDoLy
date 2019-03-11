@@ -2,26 +2,26 @@ package todoly.controllers.menus;
 
 import java.util.Scanner;
 
+import todoly.app.MenuOption;
 import todoly.controllers.Controller;
-import todoly.interfaces.TaskListInterface;
-import todoly.util.enums.MenuOption;
-import todoly.views.menus.MainMenuView;
+import todoly.model.TaskListInterface;
+import todoly.views.MainMenuView;
 
 public class MainMenuController extends Controller {
 
     public MainMenuController(TaskListInterface taskList, Scanner scanner) {
-        displayMenu(new MainMenuView(
-                        Integer.toString(taskList.getTasksAmount()),
-                        Integer.toString(taskList.getTasksDoneAmount())
-              ),scanner
-        );
+        // controller initialisation
+        super(new MainMenuView(), scanner);
+        
+        // displaying the menu and getting the menu option chosen by the user
+        displayMenu(taskList);
     }
     
     @Override
-    protected void setMenuOption() {
-        validOptions.put("1", MenuOption.LIST_TASKS_MENU);
+    protected void setValidMenuOptions() {
+        validOptions.put("1", MenuOption.TASK_LISTING_MENU);
         validOptions.put("2", MenuOption.ADD_NEW_TASK);
-        validOptions.put("3", MenuOption.EDIT_TASK_MENU);
+        validOptions.put("3", MenuOption.TASK_EDITION_MENU);
         validOptions.put("4", MenuOption.SAVE_AND_QUIT);
     }
 }

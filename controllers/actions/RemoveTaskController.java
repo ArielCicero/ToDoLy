@@ -3,27 +3,26 @@ package todoly.controllers.actions;
 import java.util.Scanner;
 
 import todoly.controllers.Controller;
-import todoly.interfaces.TaskListInterface;
 import todoly.model.Task;
-import todoly.views.ActionView;
+import todoly.model.TaskListInterface;
+import todoly.views.View;
 
 public class RemoveTaskController extends Controller {
     public RemoveTaskController(TaskListInterface taskList, Scanner scanner) {
-        ActionView view = new ActionView(
-                                Integer.toString(taskList.getTasksAmount()),
-                                Integer.toString(taskList.getTasksDoneAmount())
-                            );
-
-        Task task = getTask(taskList, view, scanner);
+        // controller initialisation
+        super(new View(), scanner);
+        
+        // displaying a list of tasks and asking the user to pick one ID
+        Task task = gettingTheTaskToProcess(taskList);
         
         if(task != null) {
-            taskList.removeTask(task.getId());
+            task = taskList.removeTask(task);
             
-            view.tasksAmount = (Integer.parseInt(view.tasksAmount) - 1) + "";
-            
-            view.printConfirmation("The Next Task Has Been Removed", task.toString());
+            // confirming operation result
+            diplayConfirmation(task);
         }
-        displayMenu(view, scanner);
-
+        
+        // displaying the menu and getting the menu option chosen by the user
+        displayMenu(taskList);
     }
 }

@@ -5,96 +5,136 @@ import java.util.List;
 import java.util.Scanner;
 
 import todoly.controllers.Controller;
-import todoly.exceptions.ToDoLyException;
-import todoly.interfaces.TaskListInterface;
+import todoly.model.BusinessModelException;
 import todoly.model.Date;
 import todoly.model.Project;
 import todoly.model.Task;
-import todoly.views.ActionView;
+import todoly.model.TaskListInterface;
+import todoly.util.ToStringList;
+import todoly.views.View;
 
 public class AddNewTaskController extends Controller {
 
     public AddNewTaskController(TaskListInterface taskList, Scanner scanner) {
+        // controller initialisation
+        super(new View(), scanner);
         
-        ActionView view = new ActionView(
-                                Integer.toString(taskList.getTasksAmount()),
-                                Integer.toString(taskList.getTasksDoneAmount())
-                            );
-        
+        // getting and sorting the projects that will be displayed to the user
         List<Project> projectList = taskList.getProjects();
         Collections.sort(projectList);
         
-        List<String> projects = projectsToStringList(projectList);
-        view.printList(null, projects);
+        Project project = null;
+        Integer projectId = null;
         
-        Task task = new Task();
-        
-        do {
-            Project project = null;
-            Integer projectId = null;
+        // if there are elements in in the list to be displayed
+        if(projectList != null && !projectList.isEmpty()) {
+            // converting the list of projects to a string list
+            // so they can be displayed in a text base App
+            List<String> projects = ToStringList.convert(projectList);
             
-            if(projects != null) {
-                view.askForInput(errorMessage, "one of the listed Project ID or"
-                                             + ", otherwise, write a New Project Name");
-            }
-            else {
-                view.askForInput(errorMessage, "the Project Name (\"ön\" and \"<3\" are valid names)");
-            }
-            userInput = scanner.nextLine();
-            errorMessage = null;
+            // displaying the project list
+            view.printList(projects);
             
-            try {
-                projectId = Integer.parseInt(userInput);
-            } catch (NumberFormatException e) {
-                try {
-                    project = new Project(userInput);
-                } catch (ToDoLyException e2) {
-                    errorMessage = e2.getMessage();
-                }
-            }
-            
-            if(project == null) {
-                project = taskList.getProject(projectId);
+            // looping until the user inserts a valid option
+            do {
+                // ask for project id or zero (0) to write new project name
+                view.askForProjectIdOrZero(errorMessage);
+                // getting the user input, saving it in a class field
+                // and initialising errorMessage to null again
+                scanUserInput();
                 
-                if(project == null) {
-                    errorMessage = "There is no Project with id number " + userInput;
+                try {
+                    // validating Integer insertion by the user
+                    // NumberFormatException if userInput is not an integer number
+                    projectId = Integer.parseInt(userInput);
+                    
+                    // checking if the user wants to write a name instead of picking 
+                    // an existing project id
+                    if(projectId == 0) {
+                        break;
+                    }
+                    // getting the project for the new task
+                    project = taskList.getProject(projectId);
+                    if(project == null) {
+                        errorMessage = "There are no projects with this id: " + projectId;
+                    }
+                } catch (NumberFormatException e) {
+                    errorMessage = e.getMessage().replace("For input string", "Wrong value");
                 }
-            }
-            
-            task.setProject(project);
-            
-        }while(errorMessage != null);
+            }while(errorMessage != null);
+        }
         
+        String projectName = null;
+        // if there are no elements in the project list
+        // or the user inserted 0  to be able to write the project name
+        if(projectId == null || projectId == 0 || projectList.isEmpty()) {
+            // looping until the user inserts a valid project name
+            do {
+                // asking for project name
+                view.askForProjectName(errorMessage);
+                // getting the user input, saving it in a class field
+                // and initialising errorMessage to null again
+                scanUserInput();
+                
+                try {
+                    // BusinessModelException if the user wrote a non valid project name
+                    projectName = Project.validateName(userInput);
+                    // getting the project for the new task
+                    project = taskList.getProject(projectName);
+                    // if there was no project with that name project = null
+                    if(project == null) {
+                        project = new Project(projectName);
+                    }
+                } catch (BusinessModelException e) {
+                    errorMessage = e.getMessage();
+                }
+            }while(errorMessage != null);
+        }
         
+        Date date = null;
+        // looping until the user inserts a valid date
         do {
-            view.askForInput(errorMessage, "Due Date (date format YYYY-MM-DD = \"2012-7-1\")");
-            userInput = scanner.nextLine();
-            errorMessage = null;
+            // asking for the date
+            view.askForDueDate(errorMessage);
+            // getting the user input, saving it in a class field
+            // and initialising errorMessage to null again
+            scanUserInput();
             try {
-                // date format YYYY-MM-DD = "2012-7-1"
-                task.setDueDate(new Date(userInput));
-                errorMessage = null;
-            } catch (ToDoLyException e) {
+                // right date format YYYY-MM-DD = "2012-7-1"
+                // BusinessModelException if user write a non valid date
+                date = new Date(userInput);
+            } catch (BusinessModelException e) {
                 errorMessage = e.getMessage();
             }
         }while(errorMessage != null);
         
+        Task task = null;
+        String taskTitle = null;
+        // looping until the user inserts a valid task title
         do {
-            view.askForInput(errorMessage, "New Task Title");
-            userInput = scanner.nextLine();
-            errorMessage = null;
-            try {
-                task.setTitle(userInput);
-                taskList.addTask(task);
-            } catch (ToDoLyException e) {
-                errorMessage = e.getMessage();
-            }
-        }while(errorMessage != null);
-        
-        view.printConfirmation("The Task Has Been Added Successfully", task.toString());
-        
-        view.tasksAmount = (Integer.parseInt(view.tasksAmount) + 1) + "";
+            // asking for the task title
+            view.askForTaskTitle(errorMessage);
+            // getting the user input, saving it in a class field
+            // and initialising errorMessage to null again
+            scanUserInput();
 
-        displayMenu(view, scanner);
+            try {
+                // BusinessModelException if the user wrote a non valid task title
+                taskTitle = Task.validateTitle(userInput);
+                
+                // adding the new task
+                // BusinessModelException if the user is trying to add a task with a title
+                // that already exist in the chosen project
+                task = taskList.addTask(project, date, taskTitle);
+            } catch (BusinessModelException e) {
+                errorMessage = e.getMessage();
+            }
+        }while(errorMessage != null);
+        
+        // confirming operation result
+        diplayConfirmation(task);
+        
+        // displaying the menu and getting the menu option chosen by the user
+        displayMenu(taskList);
     }
 }

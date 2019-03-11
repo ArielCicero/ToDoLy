@@ -7,16 +7,14 @@ import todoly.controllers.actions.ListTasksByDueDateController;
 import todoly.controllers.actions.ListTasksFilteredByProjectController;
 import todoly.controllers.actions.RemoveTaskController;
 import todoly.controllers.actions.UpdateTaskDueDateController;
-import todoly.controllers.actions.UpdateTaskProjectController;
+import todoly.controllers.actions.UpdateTaskProjectNameController;
 import todoly.controllers.actions.UpdateTaskStatusController;
 import todoly.controllers.actions.UpdateTaskTitleController;
-import todoly.controllers.menus.EditTaskMenuController;
-import todoly.controllers.menus.ListingMenuController;
+import todoly.controllers.menus.TaskEditionMenuController;
 import todoly.controllers.menus.MainMenuController;
-import todoly.interfaces.ApplicationProgramInterface;
-import todoly.interfaces.TaskListInterface;
-import todoly.interfaces.TaskListRepositoryInterface;
-import todoly.util.enums.MenuOption;
+import todoly.controllers.menus.TaskListingMenuController;
+import todoly.model.TaskListInterface;
+import todoly.repository.TaskListRepositoryInterface;
 
 public class TextBasedApp implements ApplicationProgramInterface, Runnable{
 
@@ -38,8 +36,8 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
             case MAIN_MENUE:
                 showMainMenu();
                 break;
-            case LIST_TASKS_MENU:
-                showListingMenu();
+            case TASK_LISTING_MENU:
+                showTaskListingMenu();
                 break;
             case LIST_TASKS_BY_DUE_DATE:
                 listTasksByDueDate();
@@ -50,8 +48,8 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
             case ADD_NEW_TASK:
                 addNewTask();
                 break;
-            case EDIT_TASK_MENU:
-                editTaskMenu();
+            case TASK_EDITION_MENU:
+                showTaskEditionMenu();
                 break;
             case UPDATE_TASK_STATUS:
                 updateTaskStatus();
@@ -62,8 +60,8 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
             case UPDATE_TASK_DUE_DATE:
                 updateTaskDueDate();
                 break;
-            case UPDATE_TASK_PROJECT:
-                updateTaskProject();
+            case UPDATE_TASK_PROJECT_NAME:
+                updateTaskProjectName();
                 break;
             case REMOVE_TASK:
                 removeTask();
@@ -80,8 +78,8 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
         menuOption = new MainMenuController(taskList, scanner).getMenuOption();
     }
 
-    public void showListingMenu() {
-        menuOption = new ListingMenuController(taskList, scanner).getMenuOption();
+    public void showTaskListingMenu() {
+        menuOption = new TaskListingMenuController(taskList, scanner).getMenuOption();
     }
 
     @Override
@@ -99,8 +97,8 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
         menuOption = new ListTasksFilteredByProjectController(taskList, scanner).getMenuOption();       
     }
     
-    public void editTaskMenu() {
-        menuOption = new EditTaskMenuController(taskList, scanner).getMenuOption();
+    public void showTaskEditionMenu() {
+        menuOption = new TaskEditionMenuController(taskList, scanner).getMenuOption();
     }
     
     @Override
@@ -119,8 +117,8 @@ public class TextBasedApp implements ApplicationProgramInterface, Runnable{
     }
     
     @Override
-    public void updateTaskProject() {
-        menuOption = new UpdateTaskProjectController(taskList, scanner).getMenuOption();
+    public void updateTaskProjectName() {
+        menuOption = new UpdateTaskProjectNameController(taskList, scanner).getMenuOption();
     }
     
     @Override

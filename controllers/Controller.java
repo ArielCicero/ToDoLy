@@ -6,126 +6,123 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import todoly.exceptions.ToDoLyException;
-import todoly.interfaces.TaskListInterface;
-import todoly.model.Project;
+import todoly.app.MenuOption;
 import todoly.model.Task;
-import todoly.util.enums.MenuOption;
-import todoly.views.ActionView;
+import todoly.model.TaskListInterface;
+import todoly.util.ToStringList;
 import todoly.views.View;
 
 public abstract class Controller {
-    protected String errorMessage;
     protected String userInput;
-    protected Scanner scanner;
+    protected String errorMessage;
     protected View view;
+    protected Scanner scanner;
+    protected MenuOption chosenMenuOption;
     protected Map<String,MenuOption> validOptions = new HashMap<>();
+    
+    protected Controller(View view, Scanner scanner){
+        this.view = view;
+        this.scanner = scanner;
+        setValidMenuOptions();
+    }
+    
+    protected void scanUserInput(){
+        userInput = scanner.nextLine();
+        errorMessage = null;
+    }
         
-    protected void validateMenuOption(String input) throws ToDoLyException {
+    protected boolean isNotValidMenuOption(String input){
         Set<String> options = validOptions.keySet();
         if(false == options.stream().anyMatch(input::equals)) {
-            throw new ToDoLyException("Invalid Input!!! The options are " + options);
+            return true;
         }
+        return false;
     }
     
     public MenuOption getMenuOption() {
-        return validOptions.get(userInput);
+        return chosenMenuOption;
     }
     
-    protected void displayMenu(View view, Scanner scanner) {
-        setMenuOption();
+    protected void setChosenMenuOption(String userInput) {
+        chosenMenuOption = validOptions.get(userInput);
+    }
+    
+    protected void displayMenu(TaskListInterface taskList) {
+        // initialising the tasks amount info that will be displayed in the menu
+        view.setTasksAmount(taskList.getTasksAmount().toString());
+        view.setTasksDoneAmount(taskList.getTasksDoneAmount().toString());
+        // printing the Menu as many times needed until the user
+        // picks a valid option
         do {
             view.printMenu(errorMessage);
+            // getting the user input, saving it in a class field
+            // and initialising errorMessage to null again
+            scanUserInput();
             
-            userInput = scanner.nextLine();
-            errorMessage = null;
-            
-            try {
-                validateMenuOption(userInput);
-            } catch (ToDoLyException e) {
-                errorMessage = e.getMessage();
+            if(isNotValidMenuOption(userInput)) {
+                errorMessage = "Invalid Input!!! please write one of the valid menu options";
             }
-             
         }while(errorMessage != null);
+        
+        // the chosen menu option is saved in a class field
+        // so the App can decide which controller will be loaded afterwards
+        setChosenMenuOption(userInput);
     }
     
-    protected List<String> tasksToStringList(List<Task> list) {
-        return list.stream().map(x->x.toString()).collect(Collectors.toList());
+    protected void diplayConfirmation(Task task) {
+        // confirming operation result
+        if(task != null) {
+            view.printConfirmation("The Operation Has Been Done Successfully", task.toString());
+        }
+        else {
+            view.printConfirmation("No Action Was Done !!", null);
+        }
     }
     
-    protected List<String> projectsToStringList(List<Project> list) {
-        return list.stream().map(x->x.toString()).collect(Collectors.toList());
-    }
-    
-    protected void setMenuOption() {
+    protected void setValidMenuOptions() {
         validOptions.put("1", MenuOption.LIST_TASKS_BY_DUE_DATE);
         validOptions.put("2", MenuOption.LIST_TASKS_FILTERED_BY_PROJECT);
         validOptions.put("3", MenuOption.ADD_NEW_TASK);
         validOptions.put("4", MenuOption.UPDATE_TASK_STATUS);
         validOptions.put("5", MenuOption.UPDATE_TASK_TITLE);
         validOptions.put("6", MenuOption.UPDATE_TASK_DUE_DATE);
-        validOptions.put("7", MenuOption.UPDATE_TASK_PROJECT);
+        validOptions.put("7", MenuOption.UPDATE_TASK_PROJECT_NAME);
         validOptions.put("8", MenuOption.REMOVE_TASK);
         validOptions.put("9", MenuOption.SAVE_AND_QUIT);
     }
     
-    protected Task getTask(TaskListInterface taskList, ActionView view, Scanner scanner) {
+    protected Task gettingTheTaskToProcess(TaskListInterface taskList) {
+        Task task = null;
+        // getting and sorting the list of tasks that will be displayed
         List<Task> listOfTasks = taskList.getTasks();
         Collections.sort(listOfTasks);
         
-        List<String> tasks = tasksToStringList(taskList.getTasks());
-        Collections.sort(tasks);
-        
-        view.printList(errorMessage, tasks);
-        
-        Task task = null;
-        if(tasks != null) {
+        // preparing the list of tasks to be displayed by the view
+        List<String> tasks = ToStringList.convert(listOfTasks);
+        // printing the list of tasks
+        view.printList(tasks);
+        // looping until the user writes a right task ID
+        if(listOfTasks != null && !listOfTasks.isEmpty()) {
             do {
                 view.askForTaskId(errorMessage, tasks);
-                
-                userInput = scanner.nextLine();
-                errorMessage = null;
-                
-                task = taskList.getTask(Integer.parseInt(userInput));
-                if(task == null) {
-                    errorMessage = "The option selected was not correct, try again";
-                }
-            }while(errorMessage != null);
-        }
-        
-        return task;
-    }
-    
-    protected Project getProject(TaskListInterface taskList, ActionView view, Scanner scanner) {
-        List<Project> projectList = taskList.getProjects();
-        Collections.sort(projectList);
-        
-        List<String> projects = projectsToStringList(projectList);
-        view.printList(null, projects);
-        Project project = null;
-        if(projects != null) {
-            do {
-                view.askForInput(errorMessage, "one of the listed Project ID");
-                
-                userInput = scanner.nextLine();
-                errorMessage = null;
+                // getting the user input, saving it in a class field
+                // and initialising errorMessage to null again
+                scanUserInput();
                 
                 try {
-                    project = taskList.getProject(
-                                Integer.parseInt(userInput)
-                              );
-                    if(project == null) {
-                        errorMessage = "The option selected was not correct, try again";
+                    // NumberFormatException if userInput is not an integer number
+                    task = taskList.getTask(Integer.parseInt(userInput));
+                    // if the user wrote a number and it was not one of the displayed IDs 
+                    // then task will be null
+                    if(task == null) {
+                        errorMessage = "There are no tasks with this id: " + userInput;
                     }
                 } catch (NumberFormatException e) {
-                    errorMessage = e.getMessage()
-                                    .replace("For input string", "Wrong value");
+                    errorMessage = e.getMessage().replace("For input string", "Wrong value");
                 }
             }while(errorMessage != null);
         }
-        
-        return project;
+        return task;
     }
 }

@@ -4,37 +4,36 @@ import java.util.Scanner;
 
 import todoly.controllers.Controller;
 import todoly.model.BusinessModelException;
-import todoly.model.Date;
 import todoly.model.Task;
 import todoly.model.TaskListInterface;
 import todoly.views.View;
 
-public class UpdateTaskDueDateController extends Controller {
-    public UpdateTaskDueDateController(TaskListInterface taskList, Scanner scanner) {
+public class UpdateTaskProjectNameController extends Controller {
+    public UpdateTaskProjectNameController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
         super(new View(), scanner);
         
         // displaying a list of tasks and asking the user to pick one ID
         Task task = gettingTheTaskToProcess(taskList);
-        Date dueDate = null;
+        
         if(task != null) {
-            // looping until the user writes a valid date
+            // looping until the user writes a valid project name
             do {
-                view.askForDueDate(errorMessage);
+                view.askForProjectName(errorMessage);
                 // getting the user input, saving it in a class field
                 // and initialising errorMessage to null again
                 scanUserInput();
                 
                 try {
-                    // BusinessModelException if date is not valid
-                    dueDate = new Date(userInput);
+                    // in case the written name is the same of an existing project,
+                    // the task will be moved to that project
+                    // BusinessModelException if is not a valid project name
+                    // or if the task title already exist in that project
+                    task = taskList.updateTaskProjectName(task, userInput);
                 } catch (BusinessModelException e) {
                     errorMessage = e.getMessage();
                 }
             }while(errorMessage != null);
-            
-            // setting a new due date for the selected task
-            task = taskList.updateTaskDueDate(task, dueDate);
             
             // confirming operation result
             diplayConfirmation(task);

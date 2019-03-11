@@ -1,35 +1,35 @@
 package todoly.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import todoly.exceptions.ToDoLyException;
+import todoly.util.IsNumeric;
 
 public class Project implements Comparable<Project>, Serializable {
     private static final long serialVersionUID = -4489076521323526969L;
     private Integer id;
     private String name;
-    private Set<Task> tasks = new HashSet<>();
+    private Map<Integer, Task> tasks = new HashMap<>();
     
-    Set<Task> getTasks(){
-        return tasks;
+    public List<Task> getTasks(){
+        List<Task> returnList = new ArrayList<Task>();
+        returnList.addAll(tasks.values());
+        return returnList;
     }
-    
+
     void addTask(Task task) {
-        tasks.add(task);
+        tasks.put(task.getId(), task);
     }
     
     void removeTask(Task task) {
-        tasks.remove(task);
+        tasks.remove(task.getId());
     }
     
     public Project(String name) {
         setName(name);
-    }
-
-    public Project() {
-        // TODO Auto-generated constructor stub
     }
 
     @Override
@@ -41,7 +41,8 @@ public class Project implements Comparable<Project>, Serializable {
         return id;
     }
 
-    public void setId(Integer projectId) {
+    //package visibility
+    void setId(Integer projectId) {
         this.id = projectId;
     }
 
@@ -49,15 +50,9 @@ public class Project implements Comparable<Project>, Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        if(name.trim() == "" || name == null) {
-            throw new ToDoLyException("The Project Name can not be empty");
-        }
-        if(name.trim().length() < 2) {
-            throw new ToDoLyException("The Project Name has to have at least 2 chars");
-        }
-        
-        this.name = name.trim();
+    //package visibility
+    void setName(String name) {
+        this.name = validateName(name);
     }
 
     @Override
@@ -89,5 +84,29 @@ public class Project implements Comparable<Project>, Serializable {
         } else if (!name.equals(other.name))
             return false;
         return true;
+    }
+
+    public static String validateName(String name) {
+        if(name == null) {
+            throw new BusinessModelException("The Project Name can not be null");
+        }
+        name = name.trim();
+        if(name == "") {
+            throw new BusinessModelException("The Project Name can not be empty");
+        }
+        if(name.length() < 2) {
+            throw new BusinessModelException("The Project Name has to have at least 2 chars");
+        }
+        if(IsNumeric.check(name)) {
+            throw new BusinessModelException("The Project Name can not be a number");
+        }
+        if(IsNumeric.check(name.replace(",","."))) {
+            throw new BusinessModelException("The Project Name can not be a number");
+        }
+        return name;
+    }
+
+    public boolean hasTaskTitle(String taskTitle) {
+        return tasks.values().stream().anyMatch(t->t.getTitle().equals(taskTitle));
     }
 }

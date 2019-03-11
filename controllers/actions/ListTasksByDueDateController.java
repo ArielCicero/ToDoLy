@@ -5,29 +5,29 @@ import java.util.List;
 import java.util.Scanner;
 
 import todoly.controllers.Controller;
-import todoly.interfaces.TaskListInterface;
 import todoly.model.Task;
-import todoly.util.comparators.SortByDueDate;
-import todoly.views.ActionView;
+import todoly.model.TaskListInterface;
+import todoly.util.SortByDueDate;
+import todoly.util.ToStringList;
+import todoly.views.View;
 
 public class ListTasksByDueDateController extends Controller {
 
     public ListTasksByDueDateController(TaskListInterface taskList, Scanner scanner) {
-        ActionView view = new ActionView(
-                                Integer.toString(taskList.getTasksAmount()),
-                                Integer.toString(taskList.getTasksDoneAmount())
-                            );
+        // controller initialisation
+        super(new View(), scanner);
         
+        // getting and sorting the tasks that will be displayed to the user
         List<Task> tasks = taskList.getTasks();
-        List<String> tasksParsed = null;
+        List<String> listOfTasks = null;
         if(tasks != null) {
             Collections.sort(tasks, new SortByDueDate());
-            
-            tasksParsed = tasksToStringList(tasks);
+            listOfTasks = ToStringList.convert(tasks);
         }
+        // displaying the list of tasks sorted by due date
+        view.printList(listOfTasks);
 
-        view.printList(errorMessage, tasksParsed);
-        
-        displayMenu(view, scanner);
+        // displaying the menu and getting the menu option chosen by the user
+        displayMenu(taskList);
     }
 }

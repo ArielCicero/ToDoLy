@@ -2,7 +2,7 @@ package todoly.model;
 
 import java.io.Serializable;
 
-import todoly.exceptions.ToDoLyException;
+import todoly.util.IsNumeric;
 
 public class Task implements Comparable<Task>, Serializable {
     private static final long serialVersionUID = 8663464221335074339L;
@@ -13,14 +13,10 @@ public class Task implements Comparable<Task>, Serializable {
     private boolean isDone = false;
     private Project project;
     
-    
-    public Task() {
-    }
-
-    public Task(String title, Date dueDate, boolean isDone, Project project) {
-        this.title = title;
+    Task(Integer id, String title, Date dueDate, Project project) {
+        this.id = id;
+        this.setTitle(title);
         this.dueDate = dueDate;
-        this.isDone = isDone;
         this.project = project;
     }
 
@@ -35,7 +31,7 @@ public class Task implements Comparable<Task>, Serializable {
     }
 
 
-    public void setDueDate(Date dueDate) {
+    void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -45,7 +41,8 @@ public class Task implements Comparable<Task>, Serializable {
     }
 
 
-    public void setId(Integer taskId) {
+    //package visibility
+    void setId(Integer taskId) {
         this.id = taskId;
     }
 
@@ -55,15 +52,28 @@ public class Task implements Comparable<Task>, Serializable {
     }
 
 
-    public void setTitle(String title) {
-        if(title.trim() == "" || title == null) {
-            throw new ToDoLyException("The Task Title can not be empty");
+    void setTitle(String title) {
+        this.title = validateTitle(title);
+    }
+    
+    public static String validateTitle(String title) {
+        if(title == null) {
+            throw new BusinessModelException("The Task Title can not be null");
         }
-        if(title.trim().length() < 2) {
-            throw new ToDoLyException("The Task Title has to have at least 2 chars");
+        title = title.trim();
+        if(title == "") {
+            throw new BusinessModelException("The Task Title can not be empty");
         }
-        
-        this.title = title.trim();
+        if(title.length() < 2) {
+            throw new BusinessModelException("The Task Title has to have at least 2 chars");
+        }
+        if(IsNumeric.check(title)) {
+            throw new BusinessModelException("The Task Title can not be a number");
+        }
+        if(IsNumeric.check(title.replace(",","."))) {
+            throw new BusinessModelException("The Task Title can not be a number");
+        }
+        return title;
     }
 
     public boolean isDone() {
@@ -71,8 +81,8 @@ public class Task implements Comparable<Task>, Serializable {
     }
 
 
-    public void setStatus(boolean isDone) {
-        this.isDone = isDone;
+    void setStatus(boolean status) {
+        isDone = status;
     }
 
 
@@ -81,7 +91,7 @@ public class Task implements Comparable<Task>, Serializable {
     }
 
 
-    public void setProject(Project project) {
+    void setProject(Project project) {
         this.project = project;
     }
 
@@ -132,8 +142,5 @@ public class Task implements Comparable<Task>, Serializable {
         } else if (!title.equals(other.title))
             return false;
         return true;
-    }
-    
-    
-
+    } 
 }

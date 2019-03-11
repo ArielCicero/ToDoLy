@@ -3,36 +3,42 @@ package todoly.controllers.actions;
 import java.util.Scanner;
 
 import todoly.controllers.Controller;
-import todoly.exceptions.ToDoLyException;
-import todoly.interfaces.TaskListInterface;
+import todoly.model.BusinessModelException;
 import todoly.model.Task;
-import todoly.views.ActionView;
+import todoly.model.TaskListInterface;
+import todoly.views.View;
 
 public class UpdateTaskTitleController extends Controller {
     public UpdateTaskTitleController(TaskListInterface taskList, Scanner scanner) {
-        ActionView view = new ActionView(
-                                Integer.toString(taskList.getTasksAmount()),
-                                Integer.toString(taskList.getTasksDoneAmount())
-                            );
+        // controller initialisation
+        super(new View(), scanner);
         
-        Task task = getTask(taskList, view, scanner);
+        // displaying a list of tasks and asking the user to pick one ID
+        Task task = gettingTheTaskToProcess(taskList);
         
         if(task != null) {
+            // looping until the user writes a valid task title
             do {
-                view.askForInput(errorMessage, "New Title");
-                
-                userInput = scanner.nextLine();
-                errorMessage = null;
+                view.askForTaskTitle(errorMessage);
+                // getting the user input, saving it in a class field
+                // and initialising errorMessage to null again
+                scanUserInput();
                 try {
-                    task.setTitle(userInput);
-                } catch (ToDoLyException e) {
+                    // BusinessModelException if the user wrote a non valid task title
+                    // or if the new title match with the one of another task
+                    // already inside of that project
+                    task = taskList.updateTaskTitle(task, userInput);
+                } catch (BusinessModelException e) {
                     errorMessage = e.getMessage();
                 }
             }while(errorMessage != null);
                     
-            view.printConfirmation("The Task Title Has Been Updated Successfully", task.toString());
+            // confirming operation result
+            diplayConfirmation(task);
         }
-        displayMenu(view , scanner);
+                
+        // displaying the menu and getting the menu option chosen by the user
+        displayMenu(taskList);
         
     }
 }

@@ -1,22 +1,21 @@
 package todoly;
 
 import todoly.app.TextBasedApp;
-import todoly.exceptions.ToDoLyException;
 import todoly.repository.FileRepository;
+import todoly.repository.RepositoryException;
 
 public class ToDoLy {
     
     public static void main(String[] args) {
         try {
-            
+            // comment, config
             String path = "ToDoLy.ser";
-            Runnable app = new TextBasedApp(
-                    new FileRepository(path)
-                    );
+            Runnable app = new TextBasedApp(new FileRepository(path));
             
+            // start app 
             app.run();
             
-        } catch (ToDoLyException e) {
+        } catch (RepositoryException e) {
             System.out.println(e.getMessage());
         }
     }

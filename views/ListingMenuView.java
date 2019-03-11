@@ -1,13 +1,6 @@
-package todoly.views.menus;
+package todoly.views;
 
-import todoly.views.View;
-
-public class ListingMenuView extends View{
-    
-    public ListingMenuView(String tasksAmount, String tasksDoneAmount) {
-        super(tasksAmount,tasksDoneAmount);
-    }
-
+public class ListingMenuView extends View {
     @Override
     public void printMenu(String errorMessage) {
         printErrorMessage(errorMessage);
@@ -17,5 +10,4 @@ public class ListingMenuView extends View{
         System.out.println(">> (2) Show Task List Filtered by Project");
         System.out.print(">> ");
     }
-
 }

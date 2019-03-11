@@ -1,14 +1,6 @@
-package todoly.views.menus;
-
-import todoly.views.View;
+package todoly.views;
 
 public class MainMenuView extends View {
-    
-    public MainMenuView(String tasksAmount, String tasksDoneAmount) {
-        super(tasksAmount,tasksDoneAmount);
-    }
-
-    
     @Override
     public void printMenu(String errorMessage) {
         printErrorMessage(errorMessage);

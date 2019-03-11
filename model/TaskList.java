@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import todoly.exceptions.ToDoLyException;
-import todoly.interfaces.TaskListInterface;
-
 public class TaskList implements TaskListInterface, Serializable {
     private static final long serialVersionUID = -6345286127117485787L;
     
@@ -28,84 +25,93 @@ public class TaskList implements TaskListInterface, Serializable {
         return new ArrayList<Project>(projects.values());
     }
     
+    /**
+     * @return the task corresponding to the specified ID,
+     * or {@code null} if this id is not valid.
+     */
     @Override
-    public List<Task> getTasksFilteredByProject(Integer projectId) {
-        List<Task> returnList = new ArrayList<Task>();
-        returnList.addAll(projects.get(projectId).getTasks());
-        return returnList;
+    public Project getProject(Integer projectId) {
+        return projects.get(projectId);
+    }
+    
+    @Override
+    public Project getProject(String projectName) {
+        Project found = null;
+        for (Project project : projects.values()) {
+            if(project.getName().equals(projectName)) {
+                found = project;
+                break;
+            }
+        }
+        return found;
     }
 
     @Override
-    public void addTask(Task newTask) {
-        Integer id = ++taskId;
-        // a new task can not have an id already
-        if(newTask.getId() == null) {
-            Integer projectIdOfNewTask = newTask.getProject().getId();
+    public Task addTask(Project project, Date dueDate, String taskTitle) {
+        Task newTask = null;
+ 
+        Integer projectIdOfNewTask = project.getId();
+        
+        // if the project is new as well
+        if(projectIdOfNewTask == null) {
+            taskId++;
+            newTask = new Task(taskId, taskTitle, dueDate, project);
+            tasks.put(taskId, newTask);
             
-            if(projectIdOfNewTask == null) {
-                Project newProject = newTask.getProject();
-                // if the project is new as well
-                if(!projects.containsValue(newProject)) {
-                    newTask.setId(id);
-                    tasks.put(id, newTask);
-                    
-                    id = ++projectId;
-                    newProject.setId(id);
-                    newProject.addTask(newTask);
-                    projects.put(id, newProject);
-                }
-                // the user put the name of an already existing and listed project
-                else {
-                    for (Project project : projects.values()) {
-                        if(project.equals(newProject)) {
-                            // if the project does not contain the the task requested to be added
-                            if(!project.getTasks().contains(newTask)) {
-                                newTask.setId(id);
-                                tasks.put(id, newTask);
-                                newTask.setProject(project);
-                                project.addTask(newTask);
-                                break;
-                            }
-                            else {
-                                throw new ToDoLyException("The Task already exist");
-                            }
-                        }
-                    }
-                }
-            }
-            //else if project does not contains a task with this name
-            else if(!projects.get(projectIdOfNewTask).getTasks().contains(newTask)){
-                newTask.setId(id);
-                tasks.put(id, newTask);
-                projects.get(projectIdOfNewTask).addTask(newTask);
-            }
-            else {
-                throw new ToDoLyException("The Task already exist");
-            }
+            projectId++;
+            project.setId(projectId);
+            project.addTask(newTask);
+            projects.put(projectId, project);
+        }
+        //else if project exists but does not contains a task with this title
+        else if(!projects.get(projectIdOfNewTask).hasTaskTitle(taskTitle)){
+            taskId++;
+            newTask = new Task(taskId, taskTitle, dueDate, project);
+            tasks.put(taskId, newTask);
+            project.addTask(newTask);
         }
         else {
-            throw new ToDoLyException("The Task already exist");
+            throw new BusinessModelException("The Task Title already exist in this project");
         }
         
+        return newTask;
     }
 
     @Override
-    public void removeTask(Integer taskId) {
-        Task removedTask = tasks.remove(taskId);
-        Project projectOfRemovedTask = removedTask.getProject();
-        projectOfRemovedTask.getTasks().remove(removedTask);
-        if(projectOfRemovedTask.getTasks().isEmpty()) {
-            projects.remove(projectOfRemovedTask.getId());
+    public Task removeTask(Task task) {
+        Task removedTask = tasks.remove(task.getId());
+        if(removedTask != null) {
+            Project projectOfRemovedTask = removedTask.getProject();
+            projectOfRemovedTask.removeTask(removedTask);
+            // if the task removed was the only one in that project the project will be removed
+            // because it's not possible to have empty projects in this App
+            if(projectOfRemovedTask.getTasks().isEmpty()) {
+                projects.remove(projectOfRemovedTask.getId());
+            }
         }
+        return removedTask;
+    }
+    
+    /**
+     * @return the task corresponding to the specified ID,
+     * or {@code null} if this id is not valid.
+     */
+    @Override
+    public Task getTask(Integer taskId) {
+        return tasks.get(taskId);
     }
 
     @Override
-    public int getTasksAmount() {
-        return tasks.values().size();
+    public Integer getTasksAmount() {
+        return tasks.values()
+                .stream()
+                .filter(x->!x.isDone())
+                .collect(Collectors.toList())
+                .size();
     }
 
     @Override
-    public int getTasksDoneAmount() {
+    public Integer getTasksDoneAmount() {
         return tasks.values()
                     .stream()
                     .filter(x->x.isDone())
@@ -113,49 +119,75 @@ public class TaskList implements TaskListInterface, Serializable {
                     .size();
     }
 
-    @Override
-    public Task getTask(Integer taskId) {
-        return tasks.get(taskId);
-    }
-
-    @Override
-    public Project getProject(Integer userInput) {
-        return projects.get(userInput);
-    }
-
-    // in case the new name is the same os an existing project,
+    // in case the new name is the same of an existing project,
     // the task will be moved to the new project
     @Override
-    public void updateTaskProjectName(String projectName, Task task) {
-        Project auxProject = new Project(projectName);
-        if(projects.containsValue(auxProject)) {
-            for (Project project : projects.values()) {
-                if(project.equals(auxProject)) {
-                    // if the project does not contain the the task requested to be added
-                    // the task is moved to the new project
-                    if(!project.getTasks().contains(task)) {
-                        Project previousProject = task.getProject();
-                        previousProject.removeTask(task);
-                        task.setProject(project);
-                        project.addTask(task);
-                        // if the previous project ends up without task in this process
-                        // then is removed from the task list
-                        if(previousProject.getTasks().isEmpty()) {
-                            projects.remove(previousProject.getId());
-                        }
-                        break;
-                    }
-                    else {
-                        throw new ToDoLyException("The Project already exist and "
-                                                + "there is a similar Task in it");
-                    }
+    public Task updateTaskProjectName(Task task , String newProjectName) {
+        if(task != null) {
+            Project newProject = new Project(newProjectName);
+            Project previousProject = task.getProject();
+            // if the project name is the same of a current project
+            // the task will be moved to that project
+            // (but only if that project does not have a task with that title already)
+            if(projects.containsValue(newProject)) {
+                Project project = getProject(newProjectName);
+                // if the project does not contain the a task with the same title
+                // than the requested task to be added the task is moved to the new project
+                if(!project.hasTaskTitle(task.getTitle())) {
+                    previousProject.removeTask(task);
+                    task.setProject(project);
+                    project.addTask(task);
+                }
+                else {
+                    throw new BusinessModelException("The Project already exist and " +
+                                                     "there is a Task with the same Title in it");
                 }
             }
+            else {
+                // if the project name is not the same of an existing project
+                // a new project is created and the task is moved to it
+                previousProject.removeTask(task);
+                projectId++;
+                newProject.setId(projectId);
+                newProject.addTask(task);
+                projects.put(projectId, newProject);
+                task.setProject(newProject);;
+            }
+            // if the previous project ends up without task in this process
+            // then is removed from the App
+            if(previousProject.getTasks().isEmpty()) {
+                projects.remove(previousProject.getId());
+            }
         }
-        else {
-            task.getProject().setName(projectName);
+        return task;
+    }
+
+    @Override
+    public Task updateTaskDueDate(Task task, Date dueDate) {
+        if(task != null) {
+            task.setDueDate(dueDate);
         }
-        
+        return task;
+    }
+
+    @Override
+    public Task updateTaskStatus(Task task, boolean status) {
+        if(task != null) {
+            task.setStatus(status);
+        }
+        return task;
+    }
+
+    @Override
+    public Task updateTaskTitle(Task task, String title) {
+        if(task != null) {
+            if(task.getProject().hasTaskTitle(title)) {
+                throw new BusinessModelException("The Project " + task.getProject().getName() +
+                                                 " already has a Task with the same Title in it");
+            }
+            task.setTitle(title);
+        }
+        return task;
     }
     
 }

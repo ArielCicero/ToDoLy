@@ -3,48 +3,50 @@ package todoly.controllers.actions;
 import java.util.Scanner;
 
 import todoly.controllers.Controller;
-import todoly.interfaces.TaskListInterface;
 import todoly.model.Task;
-import todoly.views.ActionView;
+import todoly.model.TaskListInterface;
+import todoly.views.View;
 
 public class UpdateTaskStatusController extends Controller {
 
     public UpdateTaskStatusController(TaskListInterface taskList, Scanner scanner) {
+        // controller initialisation
+        super(new View(), scanner);
         
-        ActionView view = new ActionView(
-                                Integer.toString(taskList.getTasksAmount()),
-                                Integer.toString(taskList.getTasksDoneAmount())
-                            );
-
-        Task task = getTask(taskList, view, scanner);
+        // displaying a list of tasks and asking the user to pick one ID
+        Task task = gettingTheTaskToProcess(taskList);
 
         if(task != null) {
-        do {
-                view.askForInput(errorMessage, "(1) to mark it as Dono or (0) to mark it as a task To Do");
+            // looping until the user writes a right option to change the status
+            do {
+                view.askForNewStatus(errorMessage);
+                // getting the user input, saving it in a class field
+                // and initialising errorMessage to null again
+                scanUserInput();
                 
-                userInput = scanner.nextLine();
-                errorMessage = null;
-                
-                //0 = to do , 1 = done
+                // updating the task status
+                // 0 = to do , 1 = done
                 switch (userInput) {
                 case "0":
-                    task.setStatus(false);
+                    task = taskList.updateTaskStatus(task, false);
                     break;
                 case "1":
-                    task.setStatus(true);
+                    task = taskList.updateTaskStatus(task, true);
                     break;
     
                 default:
-                    errorMessage = "Valid options are 0 and 1. ["+
+                    errorMessage = "Valid options are 0 or 1. [" +
                                     userInput + "] is not a valid option";
                     break;
                 }
             }while(errorMessage != null);
             
-            view.tasksDoneAmount = (1 + Integer.parseInt(view.tasksDoneAmount)) + "";
             
-            view.printConfirmation("The Task Status Has Been Updated Successfully", task.toString());
+            // confirming operation result
+            diplayConfirmation(task);
         }
-        displayMenu(view, scanner);
+        
+        // displaying the menu and getting the menu option chosen by the user
+        displayMenu(taskList);
     }
 }
