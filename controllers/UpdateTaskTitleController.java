@@ -1,15 +1,14 @@
-package todoly.controllers.actions;
+package todoly.controllers;
 
 import java.util.Scanner;
 
-import todoly.controllers.Controller;
 import todoly.model.BusinessModelException;
 import todoly.model.Task;
 import todoly.model.TaskListInterface;
 import todoly.views.View;
 
-public class UpdateTaskProjectNameController extends Controller {
-    public UpdateTaskProjectNameController(TaskListInterface taskList, Scanner scanner) {
+public class UpdateTaskTitleController extends Controller {
+    public UpdateTaskTitleController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
         super(new View(), scanner);
         
@@ -17,29 +16,28 @@ public class UpdateTaskProjectNameController extends Controller {
         Task task = gettingTheTaskToProcess(taskList);
         
         if(task != null) {
-            // looping until the user writes a valid project name
+            // looping until the user writes a valid task title
             do {
-                view.askForProjectName(errorMessage);
+                view.askForTaskTitle(errorMessage);
                 // getting the user input, saving it in a class field
                 // and initialising errorMessage to null again
                 scanUserInput();
-                
                 try {
-                    // in case the written name is the same of an existing project,
-                    // the task will be moved to that project
-                    // BusinessModelException if is not a valid project name
-                    // or if the task title already exist in that project
-                    task = taskList.updateTaskProjectName(task, userInput);
+                    // BusinessModelException if the user wrote a non valid task title
+                    // or if the new title match with the one of another task
+                    // already inside of that project
+                    task = taskList.updateTaskTitle(task, userInput);
                 } catch (BusinessModelException e) {
                     errorMessage = e.getMessage();
                 }
             }while(errorMessage != null);
-            
+                    
             // confirming operation result
             diplayConfirmation(task);
         }
-        
+                
         // displaying the menu and getting the menu option chosen by the user
         displayMenu(taskList);
+        
     }
 }

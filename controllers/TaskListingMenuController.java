@@ -1,9 +1,8 @@
-package todoly.controllers.menus;
+package todoly.controllers;
 
 import java.util.Scanner;
 
 import todoly.app.MenuOption;
-import todoly.controllers.Controller;
 import todoly.model.TaskListInterface;
 import todoly.views.ListingMenuView;
 

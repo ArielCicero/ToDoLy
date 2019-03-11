@@ -2,17 +2,17 @@ package todoly.app;
 
 import java.util.Scanner;
 
-import todoly.controllers.actions.AddNewTaskController;
-import todoly.controllers.actions.ListTasksByDueDateController;
-import todoly.controllers.actions.ListTasksFilteredByProjectController;
-import todoly.controllers.actions.RemoveTaskController;
-import todoly.controllers.actions.UpdateTaskDueDateController;
-import todoly.controllers.actions.UpdateTaskProjectNameController;
-import todoly.controllers.actions.UpdateTaskStatusController;
-import todoly.controllers.actions.UpdateTaskTitleController;
-import todoly.controllers.menus.TaskEditionMenuController;
-import todoly.controllers.menus.MainMenuController;
-import todoly.controllers.menus.TaskListingMenuController;
+import todoly.controllers.AddNewTaskController;
+import todoly.controllers.ListTasksByDueDateController;
+import todoly.controllers.ListTasksFilteredByProjectController;
+import todoly.controllers.MainMenuController;
+import todoly.controllers.RemoveTaskController;
+import todoly.controllers.TaskEditionMenuController;
+import todoly.controllers.TaskListingMenuController;
+import todoly.controllers.UpdateTaskDueDateController;
+import todoly.controllers.UpdateTaskProjectNameController;
+import todoly.controllers.UpdateTaskStatusController;
+import todoly.controllers.UpdateTaskTitleController;
 import todoly.model.TaskListInterface;
 import todoly.repository.TaskListRepositoryInterface;
 

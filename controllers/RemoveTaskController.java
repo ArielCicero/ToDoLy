@@ -1,8 +1,7 @@
-package todoly.controllers.actions;
+package todoly.controllers;
 
 import java.util.Scanner;
 
-import todoly.controllers.Controller;
 import todoly.model.Task;
 import todoly.model.TaskListInterface;
 import todoly.views.View;

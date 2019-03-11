@@ -15,9 +15,7 @@ public class Project implements Comparable<Project>, Serializable {
     private Map<Integer, Task> tasks = new HashMap<>();
     
     public List<Task> getTasks(){
-        List<Task> returnList = new ArrayList<Task>();
-        returnList.addAll(tasks.values());
-        return returnList;
+        return new ArrayList<Task>(tasks.values());
     }
 
     void addTask(Task task) {
