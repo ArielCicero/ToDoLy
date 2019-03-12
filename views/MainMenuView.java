@@ -1,5 +1,13 @@
 package todoly.views;
 
+/**
+ * The <code>MainMenuView</code> class extends <code>View</code> class and overrides
+ * its printMenu method offering different options.
+ * This is the required menu when starting the <code>ToDoLy</code> text based App.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class MainMenuView extends View {
     @Override
     public void printMenu(String errorMessage) {

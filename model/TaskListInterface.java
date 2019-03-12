@@ -2,6 +2,14 @@ package todoly.model;
 
 import java.util.List;
 
+/**
+ * The <code>TaskListInterface</code> interface should be implemented by any
+ * class whose instances are intended to implement the functionality of a task
+ * list for the <code>ToDoLy</code> App.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public interface TaskListInterface {
     
     List<Task> getTasks();

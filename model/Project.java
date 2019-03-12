@@ -8,6 +8,21 @@ import java.util.Map;
 
 import todoly.util.IsNumeric;
 
+/**
+ * The <code>Project</code> class belongs to the model of the <code>ToDoLy</code>
+ * App, and implements the functionality needed by the <code>ToDoLy</code> App to
+ * manage projects.
+ * The <code>Project</code> class implements the <code>Comparable</code> interface
+ * in order to be possible for the <code>ToDoLy</code> App to order its tasks by
+ * project name.
+ * The <code>Project</code> class implements the <code>Serializable</code> interface
+ * in order to be possible for the <code>ToDoLy</code> App to save its status in
+ * a file.
+ * The <code>Project</code> class throws <code>BusinessModelException</code>.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class Project implements Comparable<Project>, Serializable {
     private static final long serialVersionUID = -4489076521323526969L;
     private Integer id;

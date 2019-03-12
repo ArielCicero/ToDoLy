@@ -5,7 +5,7 @@ package todoly.app;
  * options that occurs in the <code>ToDoLy</code> App.
  *
  * @author  Ariel Cicero
- * @version 1.0, 15 Mar 2019
+ * @version 1.0, 14 Mar 2019
  */
 public enum MenuOption {
     MAIN_MENUE,

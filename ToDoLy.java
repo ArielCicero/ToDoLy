@@ -13,7 +13,7 @@ import todoly.repository.RepositoryException;
  * application will restart with the former state restored.
  *
  * @author  Ariel Cicero
- * @version 1.0, 15 Mar 2019
+ * @version 1.0, 14 Mar 2019
  */
 public class ToDoLy {
     

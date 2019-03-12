@@ -2,6 +2,14 @@ package todoly.views;
 
 import java.util.List;
 
+/**
+ * The <code>View</code> abstract class is general-purpose class that
+ * groups common processes needed in the <code>ToDoLy</code> text based
+ * App in order to display information and communicate with the user.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class View {
     public String tasksAmount;
     public String tasksDoneAmount;

@@ -7,6 +7,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * The <code>TaskList</code> class belongs to the model of the <code>ToDoLy</code>
+ * App, and implements the functionality needed by the <code>ToDoLy</code> App to
+ * manage a list of tasks and projects.
+ * The <code>TaskList</code> class implements the <code>TaskListInterface</code>
+ * interface to set a contract with the requirements given in the project specification
+ * for the <code>ToDoLy</code> text base application.
+ * The <code>TaskList</code> class implements the <code>Serializable</code> interface
+ * in order to be possible for the <code>ToDoLy</code> App to save its status in
+ * a file.
+ * The <code>TaskList</code> class throws <code>BusinessModelException</code>.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class TaskList implements TaskListInterface, Serializable {
     private static final long serialVersionUID = -6345286127117485787L;
     
@@ -189,5 +204,4 @@ public class TaskList implements TaskListInterface, Serializable {
         }
         return task;
     }
-    
 }

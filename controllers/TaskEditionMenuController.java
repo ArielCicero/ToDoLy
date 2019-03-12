@@ -6,6 +6,15 @@ import todoly.app.MenuOption;
 import todoly.model.TaskListInterface;
 import todoly.views.TaskEditionMenuView;
 
+/**
+ * The <code>TaskEditionMenuController</code> class extends <code>Controller</code>
+ * abstract class and implements the functionality related to showing the menu
+ * displayed when the user decides to edit a task in the <code>ToDoLy</code> text
+ * based App, and also the functionality needed to get the chosen user option.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class TaskEditionMenuController extends Controller {
 
     public TaskEditionMenuController(TaskListInterface taskList, Scanner scanner) {

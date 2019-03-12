@@ -4,6 +4,22 @@ import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+/**
+ * The <code>Date</code> class belongs to the model of the <code>ToDoLy</code>
+ * App, and it's a wraping of the <code>LocalDate</code> class with the goal of
+ * implementing the functionality needed by the task's due date in this application.
+ * 
+ * The <code>Date</code> class implements the <code>Comparable</code> interface
+ * in order to be possible for the <code>ToDoLy</code> App to order its tasks by
+ * due date.
+ * The <code>Date</code> class implements the <code>Serializable</code> interface
+ * in order to be possible for the <code>ToDoLy</code> App to save its status in
+ * a file.
+ * The <code>Date</code> class throws <code>BusinessModelException</code>.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class Date implements Comparable<Date>, Serializable {
     private static final long serialVersionUID = 5865782137277972768L;
     private LocalDate date;

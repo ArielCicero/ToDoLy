@@ -10,6 +10,14 @@ import todoly.util.SortByDueDate;
 import todoly.util.ToStringList;
 import todoly.views.View;
 
+/**
+ * The <code>ListTasksByDueDateController</code> class extends <code>Controller</code>
+ * abstract class and implements the functionality to process the listing of the tasks
+ * ordered by its due date in the <code>ToDoLy</code> text based App.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class ListTasksByDueDateController extends Controller {
 
     public ListTasksByDueDateController(TaskListInterface taskList, Scanner scanner) {

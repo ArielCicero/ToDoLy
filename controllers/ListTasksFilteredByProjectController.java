@@ -10,6 +10,15 @@ import todoly.model.TaskListInterface;
 import todoly.util.ToStringList;
 import todoly.views.View;
 
+/**
+ * The <code>ListTasksFilteredByProjectController</code> class extends
+ * <code>Controller</code> abstract class and implements the functionality
+ * to process the filtering of the tasks by its project in the
+ * <code>ToDoLy</code> text based App.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class ListTasksFilteredByProjectController extends Controller {
 
     public ListTasksFilteredByProjectController(TaskListInterface taskList, Scanner scanner) {

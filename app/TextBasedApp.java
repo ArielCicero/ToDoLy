@@ -18,12 +18,13 @@ import todoly.repository.TaskListRepositoryInterface;
 
 /**
  * The <code>TextBasedApp</code> class is and implementation of the
- * <code>ToDoLyAPI</code> interface in order to create a text based
- * application following the requirements of the <code>ToDoLy</code> App
- * this class it also implements the <code>Runnable</code> interface.
+ * <code>ToDoLyAPI</code> interface in order to follow the requirements
+ * of the <code>ToDoLy</code> App mentioned in the project specification
+ * for a text base application.
+ * This class it also implements the <code>Runnable</code> interface.
  *
  * @author  Ariel Cicero
- * @version 1.0, 15 Mar 2019
+ * @version 1.0, 14 Mar 2019
  */
 public class TextBasedApp implements ToDoLyAPI, Runnable{
 

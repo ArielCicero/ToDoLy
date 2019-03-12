@@ -1,5 +1,13 @@
 package todoly.views;
 
+/**
+ * The <code>TaskEditionMenuView</code> class extends <code>View</code> class and
+ * overridesits printMenu method offering options related with editing the tasks
+ * of the <code>ToDoLy</code> text based App.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class TaskEditionMenuView extends View {
     @Override
     public void printMenu(String errorMessage) {

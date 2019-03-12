@@ -7,6 +7,14 @@ import todoly.model.Task;
 import todoly.model.TaskListInterface;
 import todoly.views.View;
 
+/**
+ * The <code>UpdateTaskStatusController</code> class extends <code>Controller</code>
+ * abstract class and implements the functionality needed to update the title of a
+ * task in the <code>ToDoLy</code> text based App.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class UpdateTaskTitleController extends Controller {
     public UpdateTaskTitleController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation

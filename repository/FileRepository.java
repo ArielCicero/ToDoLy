@@ -9,6 +9,15 @@ import java.io.ObjectOutputStream;
 import todoly.model.TaskList;
 import todoly.model.TaskListInterface;
 
+/**
+ * The <code>FileRepository</code> class is and implementation of the
+ * <code>TaskListRepositoryInterface</code> interface in order to save
+ * in a file the status of the <code>ToDoLy</code> App and loaded it
+ * when the application restarts.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class FileRepository implements TaskListRepositoryInterface {
     private String path;
     

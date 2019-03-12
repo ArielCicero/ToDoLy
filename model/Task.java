@@ -4,6 +4,21 @@ import java.io.Serializable;
 
 import todoly.util.IsNumeric;
 
+/**
+ * The <code>Task</code> class belongs to the model of the <code>ToDoLy</code>
+ * App, and implements the functionality needed by the <code>ToDoLy</code> App to
+ * manage tasks.
+ * The <code>Task</code> class implements the <code>Comparable</code> interface
+ * in order to be possible for the <code>ToDoLy</code> App to order its tasks by
+ * task title.
+ * The <code>Task</code> class implements the <code>Serializable</code> interface
+ * in order to be possible for the <code>ToDoLy</code> App to save its status in
+ * a file.
+ * The <code>Task</code> class throws <code>BusinessModelException</code>.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class Task implements Comparable<Task>, Serializable {
     private static final long serialVersionUID = 8663464221335074339L;
     

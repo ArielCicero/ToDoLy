@@ -6,6 +6,15 @@ import todoly.app.MenuOption;
 import todoly.model.TaskListInterface;
 import todoly.views.MainMenuView;
 
+/**
+ * The <code>MainMenuController</code> class extends <code>Controller</code>
+ * abstract class and implements the functionality related to showing the
+ * Main Menu of the <code>ToDoLy</code> text based App and getting the user
+ * input.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class MainMenuController extends Controller {
 
     public MainMenuController(TaskListInterface taskList, Scanner scanner) {

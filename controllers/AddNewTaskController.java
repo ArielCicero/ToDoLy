@@ -18,7 +18,7 @@ import todoly.views.View;
  * of a new task in the <code>ToDoLy</code> text based App.
  *
  * @author  Ariel Cicero
- * @version 1.0, 15 Mar 2019
+ * @version 1.0, 14 Mar 2019
  */
 public class AddNewTaskController extends Controller {
 

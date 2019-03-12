@@ -8,6 +8,14 @@ import todoly.model.Task;
 import todoly.model.TaskListInterface;
 import todoly.views.View;
 
+/**
+ * The <code>UpdateTaskDueDateController</code> class extends <code>Controller</code>
+ * abstract class and implements the functionality needed to update the due date of a
+ * task in the <code>ToDoLy</code> text based App.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 14 Mar 2019
+ */
 public class UpdateTaskDueDateController extends Controller {
     public UpdateTaskDueDateController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
