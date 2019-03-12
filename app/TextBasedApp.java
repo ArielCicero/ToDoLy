@@ -16,7 +16,16 @@ import todoly.controllers.UpdateTaskTitleController;
 import todoly.model.TaskListInterface;
 import todoly.repository.TaskListRepositoryInterface;
 
-public class TextBasedApp implements ApplicationProgramInterface, Runnable{
+/**
+ * The <code>TextBasedApp</code> class is and implementation of the
+ * <code>ToDoLyAPI</code> interface in order to create a text based
+ * application following the requirements of the <code>ToDoLy</code> App
+ * this class it also implements the <code>Runnable</code> interface.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 15 Mar 2019
+ */
+public class TextBasedApp implements ToDoLyAPI, Runnable{
 
     private TaskListInterface taskList;
     private TaskListRepositoryInterface fileRepository;

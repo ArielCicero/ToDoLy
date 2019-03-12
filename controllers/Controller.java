@@ -13,6 +13,14 @@ import todoly.model.TaskListInterface;
 import todoly.util.ToStringList;
 import todoly.views.View;
 
+/**
+ * The <code>Controller</code> abstract class is general-purpose class that
+ * groups common processes followed by the rest of the <code>ToDoLy</code> 
+ * App controllers.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 15 Mar 2019
+ */
 public abstract class Controller {
     protected String userInput;
     protected String errorMessage;

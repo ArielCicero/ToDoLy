@@ -12,6 +12,14 @@ import todoly.model.TaskListInterface;
 import todoly.util.ToStringList;
 import todoly.views.View;
 
+/**
+ * The <code>AddNewTaskController</code> class extends <code>Controller</code>
+ * abstract class and implements the functionality to process the addition
+ * of a new task in the <code>ToDoLy</code> text based App.
+ *
+ * @author  Ariel Cicero
+ * @version 1.0, 15 Mar 2019
+ */
 public class AddNewTaskController extends Controller {
 
     public AddNewTaskController(TaskListInterface taskList, Scanner scanner) {
