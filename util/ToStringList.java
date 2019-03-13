@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
  * The <code>ToStringList</code> class is a helper class used by the 
  * <code>ToDoLy</code> App.
  * The <code>ToStringList</code> class implements the logic to convert
- * a List of objects to a list of strings
+ * a List of objects to a list of strings. For that purpose it uses its
+ * own method convert.
  *
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019

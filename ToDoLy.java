@@ -24,7 +24,6 @@ public class ToDoLy {
      * class for implementing a way to save the App status in a file.
      * 
      * @param args Unused.
-     * @return Nothing.
      * @exception RepositoryException On errors loading the file.
      * @see TextBasedAppController
      * @see RepositoryException

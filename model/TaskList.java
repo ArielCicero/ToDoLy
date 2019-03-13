@@ -43,10 +43,6 @@ public class TaskList implements TaskListInterface, Serializable {
         return new ArrayList<Project>(projects.values());
     }
     
-    /**
-     * @return the task corresponding to the specified ID,
-     * or {@code null} if this id is not valid.
-     */
     @Override
     public Project getProject(Integer projectId) {
         return projects.get(projectId);
@@ -63,7 +59,7 @@ public class TaskList implements TaskListInterface, Serializable {
         }
         return found;
     }
-
+    
     @Override
     public Task addTask(Project project, Date dueDate, String taskTitle) {
         Task newTask = null;
@@ -110,10 +106,6 @@ public class TaskList implements TaskListInterface, Serializable {
         return removedTask;
     }
     
-    /**
-     * @return the task corresponding to the specified ID,
-     * or {@code null} if this id is not valid.
-     */
     @Override
     public Task getTask(Integer taskId) {
         return tasks.get(taskId);

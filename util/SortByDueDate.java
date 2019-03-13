@@ -8,7 +8,7 @@ import todoly.model.Task;
  * The <code>SortByDueDate</code> class is a helper class used by the 
  * <code>ToDoLy</code> App.
  * The <code>SortByDueDate</code> class implements <code>Comparator</code>
- * interface with the goal of give the <code>ToDoLy</code> app the hability
+ * interface with the goal of give the <code>ToDoLy</code> App the ability
  * to sort tasks by their due date.
  *
  * @author  Ariel Cicero

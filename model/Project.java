@@ -19,7 +19,10 @@ import todoly.util.IsNumeric;
  * in order to be possible for the <code>ToDoLy</code> App to save its status in
  * a file.
  * The <code>Project</code> class throws <code>BusinessModelException</code>.
- *
+ * Since the way to update a project should be centralised in the object that implements
+ * a TaskListInterface interface, that object has to be placed in the same package
+ * because the mutators methods (setters) of the <code>Project</code> class has a
+ * default/package access modifier to encapsulate the visibility and separate concerns.
  * @see Serializable
  * @see Comparable
  * 
@@ -32,20 +35,22 @@ public class Project implements Comparable<Project>, Serializable {
     private String name;
     private Map<Integer, Task> tasks = new HashMap<>();
     
+    public Project(String name) {
+        setName(name);
+    }
+    
     public List<Task> getTasks(){
         return new ArrayList<Task>(tasks.values());
     }
-
+    
+    // package visibility
     void addTask(Task task) {
         tasks.put(task.getId(), task);
     }
     
+    // package visibility
     void removeTask(Task task) {
         tasks.remove(task.getId());
-    }
-    
-    public Project(String name) {
-        setName(name);
     }
 
     @Override
@@ -57,7 +62,7 @@ public class Project implements Comparable<Project>, Serializable {
         return id;
     }
 
-    //package visibility
+    // package visibility
     void setId(Integer projectId) {
         this.id = projectId;
     }
@@ -66,7 +71,7 @@ public class Project implements Comparable<Project>, Serializable {
         return name;
     }
 
-    //package visibility
+    // package visibility
     void setName(String name) {
         this.name = validateName(name);
     }
@@ -102,6 +107,11 @@ public class Project implements Comparable<Project>, Serializable {
         return true;
     }
 
+    /*
+     * @param name representing the name to validate
+     * @return String object type representing the name validated and trimmed
+     * @see String#trim()
+     */
     public static String validateName(String name) {
         if(name == null) {
             throw new BusinessModelException("The Project Name can not be null");

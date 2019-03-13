@@ -9,6 +9,11 @@ package todoly.util;
  * @version 1.0, 14 Mar 2019
  */
 public class IsNumeric {
+    /**
+     * This method checks if a string sent as a parameter is a number or not.
+     * @param str String
+     * @return boolean flag
+     */
     public static boolean check(String str) {
         if(isDouble(str) || isInteger(str) || isFloat(str)) {
             return true;

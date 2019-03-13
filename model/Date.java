@@ -20,6 +20,7 @@ import java.time.LocalDate;
  *
  * @see Serializable
  * @see Comparable
+ * @see LocalDate
  * 
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
@@ -28,6 +29,10 @@ public class Date implements Comparable<Date>, Serializable {
     private static final long serialVersionUID = 5865782137277972768L;
     private LocalDate date;
     
+    /**
+     * @param String date formated as YYYY-MM-DD
+     * @throws BusinessModelException
+     */
     public Date(String date) throws BusinessModelException {
         set(date.trim());
     }
@@ -36,6 +41,12 @@ public class Date implements Comparable<Date>, Serializable {
         return date;
     }
 
+    /**
+     * @param String date formated as YYYY-MM-DD
+     * @throws BusinessModelException when the year, the month or the day are not valid or in case
+     * the user insert a date before than the current one.
+     * @see LocalDate
+     */
     public void set(String date) throws BusinessModelException {
         int[] YearMonthDay = parseDate(date);
         LocalDate newDate = null;
@@ -55,7 +66,11 @@ public class Date implements Comparable<Date>, Serializable {
     private boolean isPastDate(LocalDate date) {
         return LocalDate.now().compareTo(date) > 0;
     }
-
+    
+    /**
+     * @param String date formated as YYYY-MM-DD
+     * @throws BusinessModelException when the year, the month or the day are not valid.
+     */
     private int[] parseDate(String date) throws BusinessModelException {
         String[] parts = date.split("-");
         

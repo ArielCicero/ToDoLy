@@ -27,6 +27,12 @@ public class FileRepository implements TaskListRepositoryInterface {
         this.path = path;
     }
 
+    /*
+     * Logic implemented to perform the loading of an object that implements
+     * the TaskListInterface, from a file.
+     * @see TaskListRepositoryInterface#loadTaskList()
+     * @see TaskListInterface
+     */
     @Override
     public TaskListInterface loadTaskList() {
         TaskList taskList = null;
@@ -43,6 +49,12 @@ public class FileRepository implements TaskListRepositoryInterface {
         return taskList;
     }
 
+    /*
+     * Logic implemented to perform the saving of an object that implements
+     * the TaskListInterface, in a file.
+     * @see TaskListRepositoryInterface#loadTaskList()
+     * @see TaskListInterface
+     */
     @Override
     public void saveTaskList(TaskListInterface taskList) {
         try (FileOutputStream fileOut = new FileOutputStream(path);

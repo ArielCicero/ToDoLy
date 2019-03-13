@@ -15,6 +15,10 @@ import todoly.util.IsNumeric;
  * in order to be possible for the <code>ToDoLy</code> App to save its status in
  * a file.
  * The <code>Task</code> class throws <code>BusinessModelException</code>.
+ * Since the way to update a task should be centralised in the object that implements
+ * a TaskListInterface interface, that object has to be placed in the same package
+ * because the mutators methods (setters) of the <code>Task</code> class has a
+ * default/package access modifier to encapsulate the visibility and separate concerns.
  *
  * @see Serializable
  * @see Comparable
@@ -31,6 +35,7 @@ public class Task implements Comparable<Task>, Serializable {
     private boolean isDone = false;
     private Project project;
     
+    // package visibility
     Task(Integer id, String title, Date dueDate, Project project) {
         this.id = id;
         this.setTitle(title);
@@ -48,7 +53,7 @@ public class Task implements Comparable<Task>, Serializable {
         return dueDate;
     }
 
-
+    // package visibility
     void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
@@ -59,7 +64,7 @@ public class Task implements Comparable<Task>, Serializable {
     }
 
 
-    //package visibility
+    // package visibility
     void setId(Integer taskId) {
         this.id = taskId;
     }
@@ -69,11 +74,16 @@ public class Task implements Comparable<Task>, Serializable {
         return title;
     }
 
-
+    // package visibility
     void setTitle(String title) {
         this.title = validateTitle(title);
     }
     
+    /*
+     * @param title representing the title to validate
+     * @return String object type representing the title validated and trimmed
+     * @see String#trim()
+     */
     public static String validateTitle(String title) {
         if(title == null) {
             throw new BusinessModelException("The Task Title can not be null");
@@ -98,7 +108,7 @@ public class Task implements Comparable<Task>, Serializable {
         return isDone;
     }
 
-
+    // package visibility
     void setStatus(boolean status) {
         isDone = status;
     }
@@ -108,7 +118,7 @@ public class Task implements Comparable<Task>, Serializable {
         return project;
     }
 
-
+    // package visibility
     void setProject(Project project) {
         this.project = project;
     }
@@ -116,14 +126,6 @@ public class Task implements Comparable<Task>, Serializable {
 
     @Override
     public String toString() {  
-        // The next code commented it's a different Task displaying format 
-        
-//      return  "Task [" + id + "]    " +
-//              "Due Date: " + dueDate + "    " +
-//              "Title: " + title + "    " +
-//              "Status: " + (isDone? "Done": "To do") + "    " +
-//              "Project: " + project;
-        
         return  "Task [" + id + "] " + 
                 title + "\n" +
                 "\t Due Date: " + dueDate + 
