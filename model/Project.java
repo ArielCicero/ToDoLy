@@ -20,6 +20,9 @@ import todoly.util.IsNumeric;
  * a file.
  * The <code>Project</code> class throws <code>BusinessModelException</code>.
  *
+ * @see Serializable
+ * @see Comparable
+ * 
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */

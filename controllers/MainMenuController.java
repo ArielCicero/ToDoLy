@@ -2,7 +2,6 @@ package todoly.controllers;
 
 import java.util.Scanner;
 
-import todoly.app.MenuOption;
 import todoly.model.TaskListInterface;
 import todoly.views.MainMenuView;
 
@@ -11,12 +10,21 @@ import todoly.views.MainMenuView;
  * abstract class and implements the functionality related to showing the
  * Main Menu of the <code>ToDoLy</code> text based App and getting the user
  * input.
- *
+ * @see Controller
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
 public class MainMenuController extends Controller {
 
+    /**
+     * Since this class has the specific purpose of displaying the main menu of
+     * the application, the constructor initialise the parameters needed for that
+     * purpose and works as a template that perform the process intended.
+     * @param taskList
+     * @param scanner
+     * @see TaskListInterface
+     * @see Scanner
+     */
     public MainMenuController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
         super(new MainMenuView(), scanner);

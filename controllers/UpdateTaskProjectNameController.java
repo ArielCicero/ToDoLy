@@ -15,11 +15,21 @@ import todoly.views.View;
  * with that name is created and the task is moved to it.
  * If the project name decided by the user is equal to a pre-existing one, the task is moved
  * to that project only if that project does not have a task with the same title already.
- *
+ * @see Controller
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
 public class UpdateTaskProjectNameController extends Controller {
+    
+    /**
+     * Since this class has the specific purpose of updating the project name of a task in
+     * the application, the constructor initialise the parameters needed for that purpose
+     * and works as a template that perform the process intended.
+     * @param taskList
+     * @param scanner
+     * @see TaskListInterface
+     * @see Scanner
+     */
     public UpdateTaskProjectNameController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
         super(new View(), scanner);

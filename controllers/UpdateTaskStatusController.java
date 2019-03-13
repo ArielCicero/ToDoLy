@@ -10,12 +10,21 @@ import todoly.views.View;
  * The <code>UpdateTaskStatusController</code> class extends <code>Controller</code>
  * abstract class and implements the functionality needed to update the status of a
  * task in the <code>ToDoLy</code> text based App.
- *
+ * @see Controller
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
 public class UpdateTaskStatusController extends Controller {
 
+    /**
+     * Since this class has the specific purpose of updating the status of a task in
+     * the application, the constructor initialise the parameters needed for that purpose
+     * and works as a template that perform the process intended.
+     * @param taskList
+     * @param scanner
+     * @see TaskListInterface
+     * @see Scanner
+     */
     public UpdateTaskStatusController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
         super(new View(), scanner);

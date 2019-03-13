@@ -14,12 +14,21 @@ import todoly.views.View;
  * The <code>ListTasksByDueDateController</code> class extends <code>Controller</code>
  * abstract class and implements the functionality to process the listing of the tasks
  * ordered by its due date in the <code>ToDoLy</code> text based App.
- *
+ * @see Controller
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
 public class ListTasksByDueDateController extends Controller {
 
+    /**
+     * Since this class has the specific purpose of listing the task in the application
+     * ordered by its due date, the constructor initialise the parameters needed for that
+     * purpose and works as a template that perform the process intended.
+     * @param taskList
+     * @param scanner
+     * @see TaskListInterface
+     * @see Scanner
+     */
     public ListTasksByDueDateController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
         super(new View(), scanner);

@@ -4,7 +4,7 @@ package todoly.views;
  * The <code>ListingMenuView</code> class extends <code>View</code> class and
  * overrides its printMenu method offering options related with listing the
  * tasks of the <code>ToDoLy</code> text based App.
- *
+ * @see View
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */

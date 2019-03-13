@@ -8,6 +8,7 @@ import java.time.LocalDate;
  * The <code>Date</code> class belongs to the model of the <code>ToDoLy</code>
  * App, and it's a wraping of the <code>LocalDate</code> class with the goal of
  * implementing the functionality needed by the task's due date in this application.
+ * The Date can not be before at the current day of the creation.
  * 
  * The <code>Date</code> class implements the <code>Comparable</code> interface
  * in order to be possible for the <code>ToDoLy</code> App to order its tasks by
@@ -17,6 +18,9 @@ import java.time.LocalDate;
  * a file.
  * The <code>Date</code> class throws <code>BusinessModelException</code>.
  *
+ * @see Serializable
+ * @see Comparable
+ * 
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
@@ -34,12 +38,22 @@ public class Date implements Comparable<Date>, Serializable {
 
     public void set(String date) throws BusinessModelException {
         int[] YearMonthDay = parseDate(date);
-        
+        LocalDate newDate = null;
         try {
-            this.date = LocalDate.of(YearMonthDay[0], YearMonthDay[1], YearMonthDay[2]);
+            newDate = LocalDate.of(YearMonthDay[0], YearMonthDay[1], YearMonthDay[2]);
+            if(isPastDate(newDate)) {
+                throw new BusinessModelException("The Date must be equal to today or a future date");
+            }
+            else {
+                this.date = newDate;
+            }
         } catch (DateTimeException e) {
             throw new BusinessModelException(e.getMessage());
         }
+    }
+    
+    private boolean isPastDate(LocalDate date) {
+        return LocalDate.now().compareTo(date) > 0;
     }
 
     private int[] parseDate(String date) throws BusinessModelException {

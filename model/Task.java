@@ -16,6 +16,9 @@ import todoly.util.IsNumeric;
  * a file.
  * The <code>Task</code> class throws <code>BusinessModelException</code>.
  *
+ * @see Serializable
+ * @see Comparable
+ * 
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
@@ -31,7 +34,7 @@ public class Task implements Comparable<Task>, Serializable {
     Task(Integer id, String title, Date dueDate, Project project) {
         this.id = id;
         this.setTitle(title);
-        this.dueDate = dueDate;
+        this.setDueDate(dueDate);
         this.project = project;
     }
 

@@ -12,11 +12,21 @@ import todoly.views.View;
  * The <code>UpdateTaskDueDateController</code> class extends <code>Controller</code>
  * abstract class and implements the functionality needed to update the due date of a
  * task in the <code>ToDoLy</code> text based App.
- *
+ * @see Controller
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
 public class UpdateTaskDueDateController extends Controller {
+    
+    /**
+     * Since this class has the specific purpose of updating the due date of a task in
+     * the application, the constructor initialise the parameters needed for that purpose
+     * and works as a template that perform the process intended.
+     * @param taskList
+     * @param scanner
+     * @see TaskListInterface
+     * @see Scanner
+     */
     public UpdateTaskDueDateController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
         super(new View(), scanner);
@@ -33,7 +43,8 @@ public class UpdateTaskDueDateController extends Controller {
                 scanUserInput();
                 
                 try {
-                    // BusinessModelException if date is not valid
+                    // BusinessModelException if user write a non valid date (bad format)
+                    // BusinessModelException if user write past date
                     dueDate = new Date(userInput);
                 } catch (BusinessModelException e) {
                     errorMessage = e.getMessage();

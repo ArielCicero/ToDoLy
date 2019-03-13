@@ -20,7 +20,7 @@ public interface TaskListInterface {
     
     List<Project> getProjects();
     
-    Integer getTasksAmount();
+    Integer getTasksToDoAmount();
     
     Integer getTasksDoneAmount();
     

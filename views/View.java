@@ -11,7 +11,7 @@ import java.util.List;
  * @version 1.0, 14 Mar 2019
  */
 public class View {
-    public String tasksAmount;
+    public String tasksToDoAmount;
     public String tasksDoneAmount;
     
     protected void printLineSeparator() {
@@ -33,7 +33,7 @@ public class View {
     public void printMenu(String errorMessage) {
         printErrorMessage(errorMessage);
         printLineSeparator();
-        System.out.println(">> You have "+tasksAmount+" tasks todo and "+tasksDoneAmount+" tasks are done!");
+        System.out.println(">> You have "+tasksToDoAmount+" tasks todo and "+tasksDoneAmount+" tasks are done!");
         System.out.println(">> Pick an option:");
         System.out.println(">> (1) Show Task List Ordered by Due Date");
         System.out.println(">> (2) Show Task List Filtered by Project");
@@ -120,8 +120,8 @@ public class View {
         System.out.print(">> ");
     }
     
-    public void setTasksAmount(String tasksAmount) {
-        this.tasksAmount = tasksAmount;
+    public void setTasksToDoAmount(String tasksAmount) {
+        this.tasksToDoAmount = tasksAmount;
     }
 
     public void setTasksDoneAmount(String tasksDoneAmount) {

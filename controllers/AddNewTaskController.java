@@ -16,12 +16,21 @@ import todoly.views.View;
  * The <code>AddNewTaskController</code> class extends <code>Controller</code>
  * abstract class and implements the functionality to process the addition
  * of a new task in the <code>ToDoLy</code> text based App.
- *
+ * @see Controller
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
 public class AddNewTaskController extends Controller {
 
+    /**
+     * Since this class has the specific purpose of adding a new task in the application,
+     * the constructor initialise the parameters needed for that purpose and works as a
+     * template that perform the process intended.
+     * @param taskList
+     * @param scanner
+     * @see TaskListInterface
+     * @see Scanner
+     */
     public AddNewTaskController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
         super(new View(), scanner);
@@ -108,7 +117,8 @@ public class AddNewTaskController extends Controller {
             scanUserInput();
             try {
                 // right date format YYYY-MM-DD = "2012-7-1"
-                // BusinessModelException if user write a non valid date
+                // BusinessModelException if user write a non valid date (bad format)
+                // BusinessModelException if user write past date
                 date = new Date(userInput);
             } catch (BusinessModelException e) {
                 errorMessage = e.getMessage();

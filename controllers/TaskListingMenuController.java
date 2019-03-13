@@ -2,7 +2,6 @@ package todoly.controllers;
 
 import java.util.Scanner;
 
-import todoly.app.MenuOption;
 import todoly.model.TaskListInterface;
 import todoly.views.ListingMenuView;
 
@@ -11,12 +10,21 @@ import todoly.views.ListingMenuView;
  * abstract class and implements the functionality related to showing the menu
  * displayed when the user decides to list the tasks in the <code>ToDoLy</code> text
  * based App, and also the functionality needed to get the chosen user option.
- *
+ * @see Controller
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
 public class TaskListingMenuController extends Controller {
 
+    /**
+     * Since this class has the specific purpose of displaying a menu for listing
+     * the tasks in the application, the constructor initialise the parameters needed
+     * for that purpose and works as a template that perform the process intended.
+     * @param taskList
+     * @param scanner
+     * @see TaskListInterface
+     * @see Scanner
+     */
     public TaskListingMenuController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
         super(new ListingMenuView(), scanner);

@@ -15,12 +15,21 @@ import todoly.views.View;
  * <code>Controller</code> abstract class and implements the functionality
  * to process the filtering of the tasks by its project in the
  * <code>ToDoLy</code> text based App.
- *
+ * @see Controller
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
 public class ListTasksFilteredByProjectController extends Controller {
 
+    /**
+     * Since this class has the specific purpose of filtering the task in the application
+     * by its project name, the constructor initialise the parameters needed for that
+     * purpose and works as a template that perform the process intended.
+     * @param taskList
+     * @param scanner
+     * @see TaskListInterface
+     * @see Scanner
+     */
     public ListTasksFilteredByProjectController(TaskListInterface taskList, Scanner scanner) {
         // controller initialisation
         super(new View(), scanner);

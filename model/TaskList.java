@@ -19,6 +19,9 @@ import java.util.stream.Collectors;
  * a file.
  * The <code>TaskList</code> class throws <code>BusinessModelException</code>.
  *
+ * @see TaskListInterface
+ * @see Serializable
+ * 
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
@@ -117,7 +120,7 @@ public class TaskList implements TaskListInterface, Serializable {
     }
 
     @Override
-    public Integer getTasksAmount() {
+    public Integer getTasksToDoAmount() {
         return tasks.values()
                 .stream()
                 .filter(x->!x.isDone())

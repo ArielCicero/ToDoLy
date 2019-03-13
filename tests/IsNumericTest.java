@@ -1,14 +1,23 @@
 package todoly.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import todoly.util.IsNumeric;
 
 class IsNumericTest {
 
     @Test
-    void test() {
-        fail("Not yet implemented");
+    void checkIsTrueForStringWithJustAnInteger() {
+        // Act, Assert
+        assertTrue(IsNumeric.check("2"));
+    }
+    
+    @Test
+    void checkIsTrueForStringWithAnIntegerWithSpaces() {
+        // Act, Assert
+        assertTrue(IsNumeric.check("2 "));
     }
 
 }
