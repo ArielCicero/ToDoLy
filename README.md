@@ -7,7 +7,7 @@ Short Project Description:
 
 The ToDoLy App is a text based todo list application that allows a user to create
 new tasks, assign them a title and due date, and choose a project for that task to
-belong to. The user is also able to also edit, mark as done or remove tasks.
+belong to. The user is also able to edit, mark as done or remove tasks.
 When the user quits the App, its status is saved in a file, so the application will
 restart with the former state restored.
 
