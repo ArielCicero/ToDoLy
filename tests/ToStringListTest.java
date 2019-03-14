@@ -18,7 +18,7 @@ import todoly.model.TaskList;
 import todoly.util.ToStringList;
 
 /**
- * Test class for IsNumeric
+ * Test class for ToStringListTest
  * 
  * @author Ariel Cicero
  * @version 1.0, 14 Mar 2019
@@ -27,6 +27,10 @@ class ToStringListTest {
     
     private static TaskList taskList;
     
+    /**
+     * Setting up the ToStringListTest class creating a task list object and
+     * initialising it with tasks and projects.
+     */
     @BeforeAll
     public static void setUp() {
         taskList = new TaskList();
@@ -98,11 +102,11 @@ class ToStringListTest {
      */
     @Test
     void sizeIsTheSameOfListSentAsParameter() {
-        List<Task> listOfOTasks = taskList.getTasks();
+        List<Task> listOfTasks = taskList.getTasks();
         
-        List<String> listConverted = ToStringList.convert(listOfOTasks);
+        List<String> listConverted = ToStringList.convert(listOfTasks);
         
-        assertEquals(listOfOTasks.size(), listConverted.size());
+        assertEquals(listOfTasks.size(), listConverted.size());
     }
     
     /**
@@ -112,12 +116,12 @@ class ToStringListTest {
      */
     @Test
     void taskListToStringList() {
-        List<Task> listOfOTasks = taskList.getTasks();
+        List<Task> listOfTasks = taskList.getTasks();
         
-        List<String> listConverted = ToStringList.convert(listOfOTasks);
+        List<String> listConverted = ToStringList.convert(listOfTasks);
         
         for (int index = 0; index < listConverted.size(); index++) {
-            Task task = listOfOTasks.get(index);
+            Task task = listOfTasks.get(index);
             String taskToString = listConverted.get(index);
             assertTrue(task.toString().equals(taskToString));
         }
