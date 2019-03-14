@@ -3,7 +3,7 @@ KTH Individual Project for the Software Development Academy
 
 
 
-Short description of project:
+Short Project Description:
 
 The ToDoLy App is a text based todo list application that allows a user to create
 new tasks, assign them a title and due date, and choose a project for that task to
