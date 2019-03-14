@@ -12,7 +12,7 @@ public class IsNumeric {
     /**
      * This method checks if a string sent as a parameter is a number or not.
      * @param str String
-     * @return boolean flag
+     * @return boolean flag, true if the string represents a number, false otherwise
      */
     public static boolean check(String str) {
         if(isDouble(str) || isInteger(str) || isFloat(str)) {
@@ -21,6 +21,11 @@ public class IsNumeric {
         return false;
     }
 
+    /**
+     * Checks if the string parameter is a representation of a float number.
+     * @param String to be checked
+     * @return boolean flag, true if the string represents a float, false otherwise
+     */
     private static boolean isFloat(String str) {
         try {  
             Float.parseFloat(str);  
@@ -30,6 +35,11 @@ public class IsNumeric {
         }
     }
 
+    /**
+     * Checks if the string parameter is a representation of an integer number.
+     * @param String to be checked
+     * @return boolean flag, true if the string represents an integer, false otherwise
+     */
     private static boolean isInteger(String str) {
         try {  
             Integer.parseInt(str);  
@@ -39,6 +49,11 @@ public class IsNumeric {
         }
     }
 
+    /**
+     * Checks if the string parameter is a representation of a double number.
+     * @param String to be checked
+     * @return boolean flag, true if the string represents a double, false otherwise
+     */
     private static boolean isDouble(String str) {
         try {  
             Double.parseDouble(str);  

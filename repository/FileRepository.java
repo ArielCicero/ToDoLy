@@ -27,11 +27,14 @@ public class FileRepository implements TaskListRepositoryInterface {
         this.path = path;
     }
 
-    /*
+    /**
      * Logic implemented to perform the loading of an object that implements
      * the TaskListInterface, from a file.
+     * @return TaskListInterface object implementation
+     * @throws RepositoryException with the corresponding error message for the case.
      * @see TaskListRepositoryInterface#loadTaskList()
      * @see TaskListInterface
+     * @see RepositoryException
      */
     @Override
     public TaskListInterface loadTaskList() {
@@ -49,11 +52,14 @@ public class FileRepository implements TaskListRepositoryInterface {
         return taskList;
     }
 
-    /*
+    /**
      * Logic implemented to perform the saving of an object that implements
      * the TaskListInterface, in a file.
-     * @see TaskListRepositoryInterface#loadTaskList()
+     * @param TaskListInterface object implementation
+     * @throws RepositoryException with the corresponding error message for the case.
+     * @see TaskListRepositoryInterface#saveTaskList()
      * @see TaskListInterface
+     * @see RepositoryException
      */
     @Override
     public void saveTaskList(TaskListInterface taskList) {

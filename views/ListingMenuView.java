@@ -9,6 +9,10 @@ package todoly.views;
  * @version 1.0, 14 Mar 2019
  */
 public class ListingMenuView extends View {
+    /**
+     * Prints the menu related with the options to list tasks (ordering by due date
+     * or filtering by project)
+     */
     @Override
     public void printMenu(String errorMessage) {
         printErrorMessage(errorMessage);

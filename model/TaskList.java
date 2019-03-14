@@ -33,21 +33,39 @@ public class TaskList implements TaskListInterface, Serializable {
     private Integer projectId = 0;
     private Integer taskId = 0;
 
+    /**
+     * @return List<Task> representing a list of tasks
+     */
     @Override
     public List<Task> getTasks() {
         return  new ArrayList<Task>(tasks.values());
     }
 
+    /**
+     * @return List<Project> representing a list of projects
+     */
     @Override
     public List<Project> getProjects() {
         return new ArrayList<Project>(projects.values());
     }
     
+    /**
+     * @param Integer (the project ID)
+     * @return the project corresponding to the specified ID,
+     * or {@code null} if this id is not valid.
+     * @see Project
+     */
     @Override
     public Project getProject(Integer projectId) {
         return projects.get(projectId);
     }
     
+    /**
+     * @param Integer (the project name)
+     * @return the project corresponding to the specified project name,
+     * or {@code null} if this id is not valid.
+     * @see Project
+     */
     @Override
     public Project getProject(String projectName) {
         Project found = null;
@@ -60,6 +78,15 @@ public class TaskList implements TaskListInterface, Serializable {
         return found;
     }
     
+    /**
+     * Adds a new task to the specified project if the title of the task is unique.
+     * @throws BusinessModelException with the corresponding message when a task
+     * can not be added.
+     * @param project (the project of the task)
+     * @param dueDate (the due date of the task)
+     * @param taskTitle (the title of the task)
+     * @return the task added
+     */
     @Override
     public Task addTask(Project project, Date dueDate, String taskTitle) {
         Task newTask = null;
@@ -91,6 +118,13 @@ public class TaskList implements TaskListInterface, Serializable {
         return newTask;
     }
 
+    /**
+     * Removes a task from list of tasks.
+     * If the project to which the task belongs to end ups empty after removing the task,
+     * the project is also removed. It's not possible in this App to have empty projects.
+     * @param task object type Task to be removed
+     * @return the task removed
+     */
     @Override
     public Task removeTask(Task task) {
         Task removedTask = tasks.remove(task.getId());
@@ -106,11 +140,20 @@ public class TaskList implements TaskListInterface, Serializable {
         return removedTask;
     }
     
+    /**
+     * @param Integer (the task ID)
+     * @return the task corresponding to the specified ID,
+     * or {@code null} if this id is not valid.
+     * @see Task
+     */
     @Override
     public Task getTask(Integer taskId) {
         return tasks.get(taskId);
     }
 
+    /**
+     * @return Integer representing the amount of tasks to do
+     */
     @Override
     public Integer getTasksToDoAmount() {
         return tasks.values()
@@ -120,6 +163,9 @@ public class TaskList implements TaskListInterface, Serializable {
                 .size();
     }
 
+    /**
+     * @return Integer representing the amount of tasks done
+     */
     @Override
     public Integer getTasksDoneAmount() {
         return tasks.values()
@@ -129,8 +175,15 @@ public class TaskList implements TaskListInterface, Serializable {
                     .size();
     }
 
-    // in case the new name is the same of an existing project,
-    // the task will be moved to the new project
+    /**
+     * Updates the project name of a task. In case the new name is the same of an existing
+     * project, the task will be moved to the new project if this one has not a task with
+     * the same title.
+     * @throws BusinessModelException with the corresponding error message for the case.
+     * @param task object type Task to be updated
+     * @param String representing the new project name
+     * @return the task updated
+     */
     @Override
     public Task updateTaskProjectName(Task task , String newProjectName) {
         if(task != null) {
@@ -172,6 +225,12 @@ public class TaskList implements TaskListInterface, Serializable {
         return task;
     }
 
+    /**
+     * Updates the due date of the task.
+     * @param task object type Task to be updated
+     * @param Date representing the new due date for the task
+     * @return the task updated
+     */
     @Override
     public Task updateTaskDueDate(Task task, Date dueDate) {
         if(task != null) {
@@ -180,6 +239,13 @@ public class TaskList implements TaskListInterface, Serializable {
         return task;
     }
 
+    /**
+     * Updates the due date of the task.
+     * @param task object type Task to be updated
+     * @param boolean representing the new status for the task.
+     * true = the task is done, false = to do
+     * @return the task updated
+     */
     @Override
     public Task updateTaskStatus(Task task, boolean status) {
         if(task != null) {
@@ -188,6 +254,14 @@ public class TaskList implements TaskListInterface, Serializable {
         return task;
     }
 
+    /**
+     * Updates the title of the task.
+     * @param task object type Task to be updated
+     * @param String representing the new title for the task
+     * @return the task updated
+     * @throws BusinessModelException if the project to which this task belongs already
+     * has a task with that title.
+     */
     @Override
     public Task updateTaskTitle(Task task, String title) {
         if(task != null) {

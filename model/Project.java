@@ -35,53 +35,94 @@ public class Project implements Comparable<Project>, Serializable {
     private String name;
     private Map<Integer, Task> tasks = new HashMap<>();
     
+    /**
+     * Project class constructor that initialise the project object with a name
+     * @param String representing the project name
+     */
     public Project(String name) {
         setName(name);
     }
     
+    /**
+     * @return List<Task> representing a list of tasks
+     */
     public List<Task> getTasks(){
         return new ArrayList<Task>(tasks.values());
     }
     
-    // package visibility
+    /**
+     * Adds the specified task to the project.
+     * It has package visibility to restrict the access only for the TaskList class
+     * @param task type Task
+     */
     void addTask(Task task) {
         tasks.put(task.getId(), task);
     }
     
-    // package visibility
+    /**
+     * Removes the specified task from the project.
+     * It has package visibility to restrict the access only for the TaskList class.
+     * @param task type Task
+     */
     void removeTask(Task task) {
         tasks.remove(task.getId());
     }
 
+    /**
+     * Compares this project to another project.
+     * @param otherProject
+     * @return int representing the comparator value, negative if less,
+     * positive if greater
+     */
     @Override
     public int compareTo(Project otherProject) {
         return -1 * name.compareTo(otherProject.getName());
     }
 
+    /**
+     * @return Integer representing the project ID.
+     */
     public Integer getId() {
         return id;
     }
 
-    // package visibility
+    /**
+     * Sets the project ID.
+     * It has package visibility to restrict the access only for the TaskList class.
+     * @param Integer projectId
+     */
     void setId(Integer projectId) {
         this.id = projectId;
     }
 
+    /**
+     * @return String representing the project name.
+     */
     public String getName() {
         return name;
     }
 
-    // package visibility
+    /**
+     * Sets the project name.
+     * It has package visibility to restrict the access only for the TaskList class.
+     * @param String representing the project name
+     */
     void setName(String name) {
         this.name = validateName(name);
     }
 
+    /**
+     * Outputs this project as a String.
+     * @return String representing the project
+     */
     @Override
     public String toString() {
         return "[" + id + "] " + name;
     }
     
-
+    /**
+     * @return a hash code value for the project object
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -90,6 +131,11 @@ public class Project implements Comparable<Project>, Serializable {
         return result;
     }
 
+    /**
+     * Indicates whether some other project is "equal to" this one.
+     * @param obj the reference object with which to compare.
+     * @return true if this project is the same as the obj argument; false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -107,7 +153,7 @@ public class Project implements Comparable<Project>, Serializable {
         return true;
     }
 
-    /*
+    /**
      * @param name representing the name to validate
      * @return String object type representing the name validated and trimmed
      * @see String#trim()
@@ -132,6 +178,11 @@ public class Project implements Comparable<Project>, Serializable {
         return name;
     }
 
+    /**
+     * @param taskTitle
+     * @return boolean flag indicating if this project has the specified title
+     * true if this project has a task with the specified title; false otherwise.
+     */
     public boolean hasTaskTitle(String taskTitle) {
         return tasks.values().stream().anyMatch(t->t.getTitle().equals(taskTitle));
     }

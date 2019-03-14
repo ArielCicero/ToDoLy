@@ -9,6 +9,11 @@ package todoly.views;
  * @version 1.0, 14 Mar 2019
  */
 public class TaskEditionMenuView extends View {
+    /**
+     * Prints the menu related with the options to edit tasks.
+     * Remove a task or Update the next attribues of a task:
+     * Status, Title, Due Date, Project Name.
+     */
     @Override
     public void printMenu(String errorMessage) {
         printErrorMessage(errorMessage);
@@ -17,7 +22,7 @@ public class TaskEditionMenuView extends View {
         System.out.println(">> (1) Update Task Status");
         System.out.println(">> (2) Update Task Title");
         System.out.println(">> (3) Update Task Due Date");
-        System.out.println(">> (4) Update Task's project Name");
+        System.out.println(">> (4) Update Task's Project Name");
         System.out.println(">> (5) Remove Task");
         System.out.print(">> ");
     }

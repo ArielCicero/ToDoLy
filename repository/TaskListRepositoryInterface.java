@@ -18,7 +18,7 @@ public interface TaskListRepositoryInterface {
      * implement a functionality load an object with TaskListInterface implementation
      * or the data needed to create one with the same status that it had when saved.
      * @see TaskListInterface
-     * @return TaskListInterface
+     * @return TaskListInterface object implementation
      */
     TaskListInterface loadTaskList();
     
@@ -28,7 +28,7 @@ public interface TaskListRepositoryInterface {
      * implement a functionality to save an object with TaskListInterface implementation
      * or to save the data needed to create one with the same status when loaded.
      * @see TaskListInterface
-     * @param TaskListInterface taskList
+     * @param TaskListInterface object implementation
      */
     void saveTaskList(TaskListInterface taskList);
     

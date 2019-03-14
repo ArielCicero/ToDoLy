@@ -66,10 +66,17 @@ public abstract class Controller {
         return false;
     }
     
+    /**
+     * @return MenuOption representing the option chosen by the user
+     */
     public MenuOption getMenuOption() {
         return chosenMenuOption;
     }
     
+    /**
+     * Sets the MenuOption field depending the input by the user.
+     * @param userInput
+     */
     protected void setChosenMenuOption(String userInput) {
         chosenMenuOption = validOptions.get(userInput);
     }
@@ -121,6 +128,9 @@ public abstract class Controller {
         }
     }
     
+    /**
+     * Sets the valid menu options for the menu that will be displayed by the view
+     */
     protected void setValidMenuOptions() {
         validOptions.put("1", MenuOption.LIST_TASKS_BY_DUE_DATE);
         validOptions.put("2", MenuOption.LIST_TASKS_FILTERED_BY_PROJECT);
@@ -174,5 +184,12 @@ public abstract class Controller {
             }while(errorMessage != null);
         }
         return task;
+    }
+    
+    /**
+     * Calling to the view to display a message when clossing the application.
+     */
+    public static void farewell() {
+        View.goodbyeMessage();
     }
 }

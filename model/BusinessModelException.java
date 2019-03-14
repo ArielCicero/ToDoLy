@@ -11,6 +11,10 @@ package todoly.model;
 public class BusinessModelException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Constructor for the BusinessModelException class
+     * @param message representing the info causing the exception
+     */
     public BusinessModelException(String message) {
         super(message);
     }

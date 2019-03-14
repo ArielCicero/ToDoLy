@@ -15,6 +15,12 @@ import todoly.model.Task;
  * @version 1.0, 14 Mar 2019
  */
 public class SortByDueDate implements Comparator<Task> {
+    /**
+     * Compares its two arguments for order. Returns a negative integer, zero,
+     * or a positive integer as the first argument is less than, equal to, or
+     * greater than the second.
+     * @return int representing the result of the comparison
+     */
     @Override
     public int compare(Task t1, Task t2) { 
         return t1.getDueDate().compareTo(t2.getDueDate()); 

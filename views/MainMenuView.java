@@ -9,6 +9,9 @@ package todoly.views;
  * @version 1.0, 14 Mar 2019
  */
 public class MainMenuView extends View {
+    /**
+     * Prints the main menu of the App. The first one to be displayed.
+     */
     @Override
     public void printMenu(String errorMessage) {
         printErrorMessage(errorMessage);

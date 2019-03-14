@@ -14,6 +14,11 @@ import java.util.stream.Collectors;
  * @version 1.0, 14 Mar 2019
  */
 public class ToStringList {
+    /**
+     * @param List<T> representing a list of objects to be converted to a list of strings
+     * @return List<String> representing the list of strings after aplaying to each element
+     * the toString() method.
+     */
     public static <T> List<String> convert(List<T> list){
         if(list != null)
             return list.stream().map(x->x.toString()).collect(Collectors.toList());

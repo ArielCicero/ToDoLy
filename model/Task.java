@@ -35,7 +35,14 @@ public class Task implements Comparable<Task>, Serializable {
     private boolean isDone = false;
     private Project project;
     
-    // package visibility
+    /**
+     * Constructor of the Task class.
+     * It has package visibility to restrict the access only for the TaskList class.
+     * @param id
+     * @param title
+     * @param dueDate
+     * @param project
+     */
     Task(Integer id, String title, Date dueDate, Project project) {
         this.id = id;
         this.setTitle(title);
@@ -43,43 +50,66 @@ public class Task implements Comparable<Task>, Serializable {
         this.project = project;
     }
 
+    /**
+     * Compares this project to another project.
+     * @param otherTask
+     * @return int representing the comparator value, negative if less,
+     * positive if greater
+     */
     @Override
     public int compareTo(Task otherTask) {
         return -1 * title.compareTo(otherTask.title);
     }
 
-
+    /**
+     * @return Date object type representing the task due date.
+     */
     public Date getDueDate() {
         return dueDate;
     }
 
-    // package visibility
+    /**
+     * Sets the task due date.
+     * It has package visibility to restrict the access only for the TaskList class.
+     * @param dueDate
+     */
     void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
-
+    /**
+     * @return Integer representing the task ID
+     */
     public Integer getId() {
         return id;
     }
 
-
-    // package visibility
+    /**
+     * Sets the task ID.
+     * It has package visibility to restrict the access only for the TaskList class.
+     * @param Integer taskId
+     */
     void setId(Integer taskId) {
         this.id = taskId;
     }
 
-
+    /**
+     * @return String representing the title of the task
+     */
     public String getTitle() {
         return title;
     }
 
-    // package visibility
+    /**
+     * Sets the task title.
+     * It has package visibility to restrict the access only for the TaskList class.
+     * @param String representing the task title
+     */
     void setTitle(String title) {
         this.title = validateTitle(title);
     }
     
-    /*
+    /**
      * @param title representing the title to validate
      * @return String object type representing the title validated and trimmed
      * @see String#trim()
@@ -104,26 +134,43 @@ public class Task implements Comparable<Task>, Serializable {
         return title;
     }
 
+    /**
+     * @return true if this task is done; false otherwise.
+     */
     public boolean isDone() {
         return isDone;
     }
 
-    // package visibility
+    /**
+     * Sets the status of the task.
+     * True if this task is done; false otherwise.
+     * It has package visibility to restrict the access only for the TaskList class.
+     * @param boolean status
+     */
     void setStatus(boolean status) {
         isDone = status;
     }
 
-
+    /**
+     * @return Project type object representing the project to which the task belongs.
+     */
     public Project getProject() {
         return project;
     }
 
-    // package visibility
+    /**
+     * Sets the project for the task.
+     * It has package visibility to restrict the access only for the TaskList class.
+     * @param project object type Project representing the project to which the task belongs.
+     */
     void setProject(Project project) {
         this.project = project;
     }
 
-
+    /**
+     * Outputs this task as a String.
+     * @return String representing this task
+     */
     @Override
     public String toString() {  
         return  "Task [" + id + "] " + 
@@ -133,6 +180,9 @@ public class Task implements Comparable<Task>, Serializable {
                 "\t Project: " + project;
     }
 
+    /**
+     * @return a hash code value for the task object
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -142,6 +192,11 @@ public class Task implements Comparable<Task>, Serializable {
         return result;
     }
 
+    /**
+     * Indicates whether some other task is "equal to" this one.
+     * @param obj the reference object with which to compare.
+     * @return true if this task is the same as the obj argument; false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

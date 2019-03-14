@@ -261,5 +261,6 @@ public class TextBasedAppController implements ToDoLyAPI, Runnable{
     public void saveAndQuit() {
         scanner.close();
         fileRepository.saveTaskList(taskList);
+        Controller.farewell();
     }
 }

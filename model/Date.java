@@ -8,7 +8,8 @@ import java.time.LocalDate;
  * The <code>Date</code> class belongs to the model of the <code>ToDoLy</code>
  * App, and it's a wraping of the <code>LocalDate</code> class with the goal of
  * implementing the functionality needed by the task's due date in this application.
- * The Date can not be before at the current day of the creation.
+ * The Date can not be before at the current from the system clock in the default
+ * time-zone.
  * 
  * The <code>Date</code> class implements the <code>Comparable</code> interface
  * in order to be possible for the <code>ToDoLy</code> App to order its tasks by
@@ -37,13 +38,18 @@ public class Date implements Comparable<Date>, Serializable {
         set(date.trim());
     }
 
+    /**
+     * Setter of the LocalDate field
+     * @return LocalDate object type
+     */
     public LocalDate get() {
         return date;
     }
 
     /**
      * @param String date formated as YYYY-MM-DD
-     * @throws BusinessModelException when the year, the month or the day are not valid or in case
+     * @throws BusinessModelException when the year, the month or the
+     * day are not valid or in case
      * the user insert a date before than the current one.
      * @see LocalDate
      */
@@ -63,12 +69,20 @@ public class Date implements Comparable<Date>, Serializable {
         }
     }
     
+    /**
+     * @param LocalDate to compare with the the current date 
+     * from the system clock in the default time-zone.
+     * @return boolean flag indicating the result of the comparison.
+     * true if this date belongs to the past; false otherwise.
+     * @see LocalDate
+     */
     private boolean isPastDate(LocalDate date) {
         return LocalDate.now().compareTo(date) > 0;
     }
     
     /**
      * @param String date formated as YYYY-MM-DD
+     * @return int[] size 3. Indexes: [0]YYYY [1]MM [2]DD
      * @throws BusinessModelException when the year, the month or the day are not valid.
      */
     private int[] parseDate(String date) throws BusinessModelException {
@@ -103,13 +117,23 @@ public class Date implements Comparable<Date>, Serializable {
         }
     }
 
+    /**
+     * Outputs this date as a String.
+     * @return String representing the date
+     */
     @Override
     public String toString() {
         return date.toString();
     }
 
+    /**
+     * Compares this date to another date.
+     * @param otherDate
+     * @return int representing the comparator value, negative if less,
+     * positive if greater
+     */
     @Override
-    public int compareTo(Date other) {
-        return date.compareTo(other.date);
+    public int compareTo(Date otherDate) {
+        return date.compareTo(otherDate.date);
     }
 }

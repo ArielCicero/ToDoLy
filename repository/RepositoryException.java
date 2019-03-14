@@ -17,6 +17,10 @@ import java.io.IOException;
 public class RepositoryException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Constructor for the RepositoryException class
+     * @param message representing the info causing the exception
+     */
     public RepositoryException(String message) {
         super(message);
     }

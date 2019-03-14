@@ -1,6 +1,10 @@
 # ToDoLy
 KTH Individual Project for the Software Development Academy
 
+
+
+Short description of project:
+
 The ToDoLy App is a text based todo list application that allows a user to create
 new tasks, assign them a title and due date, and choose a project for that task to
 belong to. The user is also able to also edit, mark as done or remove tasks.
@@ -16,3 +20,5 @@ restart with the former state restored.
 	cd bin
 	java todoly/ToDoLy
 ```
+
+![View](https://github.com/ArielCicero/ToDoLy/blob/master/ClassDiagram.png)

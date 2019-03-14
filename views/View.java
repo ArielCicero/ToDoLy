@@ -14,11 +14,18 @@ public class View {
     public String tasksToDoAmount;
     public String tasksDoneAmount;
     
+    /**
+     * Prints a line to separate content displayed.
+     */
     protected void printLineSeparator() {
         System.out.println("###########################################" +
                            "############################################");
     }
     
+    /**
+     * Prints the error message when occurs.
+     * @param errorMessage
+     */
     protected void printErrorMessage(String errorMessage) {
         if(errorMessage != null) {
             System.out.println("* * * * * * * * * * * * * * * * * * * * * *" +
@@ -30,10 +37,15 @@ public class View {
         }
     }
     
+    /**
+     * Prints a menu which has all the possible options to be performed by the App.
+     * @param errorMessage
+     */
     public void printMenu(String errorMessage) {
         printErrorMessage(errorMessage);
         printLineSeparator();
-        System.out.println(">> You have "+tasksToDoAmount+" tasks todo and "+tasksDoneAmount+" tasks are done!");
+        System.out.println(">> You have " + tasksToDoAmount + " tasks todo and " + tasksDoneAmount +
+                           " tasks are done!");
         System.out.println(">> Pick an option:");
         System.out.println(">> (1) Show Task List Ordered by Due Date");
         System.out.println(">> (2) Show Task List Filtered by Project");
@@ -47,6 +59,10 @@ public class View {
         System.out.print(">> ");
     }
     
+    /**
+     * Prints a list of strings.
+     * @param List<String> object type representing the list to be displayed
+     */
     public void printList(List<String> list) {
         printLineSeparator();
         if(list != null && !list.isEmpty()) {
@@ -60,6 +76,11 @@ public class View {
         }
     }
 
+    /**
+     * Prints a message to the user asking for a task ID
+     * @param errorMessage
+     * @param List<String> object type representing the list to be displayed
+     */
     public void askForTaskId(String errorMessage, List<String> list) {
         printErrorMessage(errorMessage);
         printLineSeparator();
@@ -67,6 +88,10 @@ public class View {
         System.out.print(">> ");
     }
     
+    /**
+     * Prints a message to the user asking for a project ID
+     * @param errorMessage
+     */
     public void askForProjectId(String errorMessage) {
         printErrorMessage(errorMessage);
         printLineSeparator();
@@ -74,6 +99,11 @@ public class View {
         System.out.print(">> ");
     }
     
+    /**
+     * Prints a confirmation to the user to inform the result of an operation.
+     * @param message to display
+     * @param element used in the performed operation.
+     */
     public void printConfirmation(String message, String element) {
         printLineSeparator();
         System.out.println("!! " + message);
@@ -82,7 +112,12 @@ public class View {
             System.out.println(element);
         }
     }
-        
+       
+    /**
+     * Prints a message to the user asking for a project ID and giving the option
+     * to insert 0 if the user prefers to write a project name instead.
+     * @param errorMessage
+     */
     public void askForProjectIdOrZero(String errorMessage) {
         printErrorMessage(errorMessage);
         printLineSeparator();
@@ -92,6 +127,10 @@ public class View {
         
     }
 
+    /**
+     * Prints a message to the user asking for a project name.
+     * @param errorMessage
+     */
     public void askForProjectName(String errorMessage) {
         printErrorMessage(errorMessage);
         printLineSeparator();
@@ -99,6 +138,10 @@ public class View {
         System.out.print(">> ");
     }
 
+    /**
+     * Prints a message to the user asking for the due date of a task.
+     * @param errorMessage
+     */
     public void askForDueDate(String errorMessage) {
         printErrorMessage(errorMessage);
         printLineSeparator();
@@ -106,6 +149,10 @@ public class View {
         System.out.print(">> ");
     }
 
+    /**
+     * Prints a message to the user asking for the title of a task.
+     * @param errorMessage
+     */
     public void askForTaskTitle(String errorMessage) {
         printErrorMessage(errorMessage);
         printLineSeparator();
@@ -113,6 +160,10 @@ public class View {
         System.out.print(">> ");
     }
 
+    /**
+     * Prints a message to the user asking for the status of a task.
+     * @param errorMessage
+     */
     public void askForNewStatus(String errorMessage) {
         printErrorMessage(errorMessage);
         printLineSeparator();
@@ -120,11 +171,31 @@ public class View {
         System.out.print(">> ");
     }
     
-    public void setTasksToDoAmount(String tasksAmount) {
-        this.tasksToDoAmount = tasksAmount;
+    /**
+     * Sets the a amount of task to do that will be displayed by the printMenu method
+     * @param String representing the amount of tasks to do
+     */
+    public void setTasksToDoAmount(String tasksToDoAmount) {
+        this.tasksToDoAmount = tasksToDoAmount;
     }
 
+    /**
+     * Sets the a amount of task done that will be displayed by the printMenu method
+     * @param String representing the amount of tasks done
+     */
     public void setTasksDoneAmount(String tasksDoneAmount) {
         this.tasksDoneAmount = tasksDoneAmount;
+    }
+    
+    /**
+     * Message displayed when closing the application.
+     */
+
+    public static void goodbyeMessage() {
+        System.out.println("===========================================" +
+                           "============================================");
+        System.out.println(">> Thanks For Ussing The ToDoLy App :)");
+        System.out.println("===========================================" +
+                           "============================================");  
     }
 }

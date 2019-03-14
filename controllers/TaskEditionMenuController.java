@@ -33,6 +33,9 @@ public class TaskEditionMenuController extends Controller {
         displayMenu(taskList);
     }
     
+    /**
+     * Sets the valid menu options for the menu that will be displayed by the view
+     */
     @Override
     protected void setValidMenuOptions() {
         validOptions.put("1", MenuOption.UPDATE_TASK_STATUS);
