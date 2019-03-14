@@ -3,16 +3,18 @@ package todoly.util;
 /**
  * The <code>IsNumeric</code> class is a helper class used by the 
  * <code>ToDoLy</code> App.
- * The <code>IsNumeric</code> class checks if a string is a number or not.
- *
+ * The <code>IsNumeric</code> class checks if a string is a number in base-ten or not.
+ * Inputs parameters like 0.379d or -0.24D, 15d are considered as doubles.
+ * Inputs parameters like 3.8f, -3.87F, 32f are considered as floats.
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
 public class IsNumeric {
     /**
-     * This method checks if a string sent as a parameter is a number or not.
+     * This method checks if a string sent as a parameter is a number in base-ten or not.
+     * 
      * @param str String
-     * @return boolean flag, true if the string represents a number, false otherwise
+     * @return boolean flag, true if the string represents a number in base-ten, false otherwise
      */
     public static boolean check(String str) {
         if(isDouble(str) || isInteger(str) || isFloat(str)) {

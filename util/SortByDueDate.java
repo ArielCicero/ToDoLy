@@ -10,7 +10,6 @@ import todoly.model.Task;
  * The <code>SortByDueDate</code> class implements <code>Comparator</code>
  * interface with the goal of give the <code>ToDoLy</code> App the ability
  * to sort tasks by their due date.
- *
  * @author  Ariel Cicero
  * @version 1.0, 14 Mar 2019
  */
