@@ -21,4 +21,4 @@ restart with the former state restored.
 	java todoly/ToDoLy
 ```
 
-![View](https://github.com/ArielCicero/ToDoLy/blob/master/ClassDiagram.png)
+![View](https://github.com/ArielCicero/ToDoLy/blob/master/UMLClassDiagram.png)
